@@ -31,13 +31,13 @@
      <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
              <i class="fas fa-fw fa-cog"></i>
-             <span>Products</span>
+             <span>Types</span>
          </a>
          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  <h6 class="collapse-header">Product Contains:</h6>
                  <a class="collapse-item" href="/categories">Categories</a>
-                 <a class="collapse-item" href="/items">Items</a>
+                 <a class="collapse-item" href="/items">Products</a>
              </div>
          </div>
      </li>
@@ -51,17 +51,32 @@
              <i class="fas fa-fw fa-shopping-cart"></i>
              <span>Order</span></a>
      </li>
+     <!-- Nav Item - Tables -->
+     <li class="nav-item">
+         <a class="nav-link" href="/users">
+             <i class="fas fa-fw fa-users"></i>
+             <span>Users</span></a>
+     </li>
+     
      <li class="nav-item">
          <a class="nav-link" href="/reports">
              <i class="fas fa-fw fa-chart-area"></i>
              <span>Reports</span></a>
      </li>
 
-     <!-- Nav Item - Tables -->
+
+     <!-- Nav Item - Expired -->
      <li class="nav-item">
          <a class="nav-link" href="/users">
-             <i class="fas fa-fw fa-users"></i>
-             <span>Users</span></a>
+             <i class="fas fa-fw fa-ban"></i>
+             <span>Expired</span></a>
+     </li>
+
+     <!-- Nav Item - logout -->
+     <li class="nav-item">
+         <a class="nav-link" href="/users">
+             <i class="fas fa-fw fa fa-sign-out" aria-hidden="true"></i>
+             <span>Logout</span></a>
      </li>
 
      <!-- Divider -->
@@ -87,18 +102,6 @@
              <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                  <i class="fa fa-bars"></i>
              </button>
-
-             <!-- Topbar Search -->
-             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                 <div class="input-group">
-                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                     <div class="input-group-append">
-                         <button class="btn btn-primary" type="button">
-                             <i class="fas fa-search fa-sm"></i>
-                         </button>
-                     </div>
-                 </div>
-             </form>
 
              <!-- Topbar Navbar -->
              <ul class="navbar-nav ml-auto">
