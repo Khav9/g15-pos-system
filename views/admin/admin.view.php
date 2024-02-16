@@ -1,3 +1,14 @@
+<?php 
+if (!isset($_SESSION['user'])) {
+
+    header('Location: /login');
+    die();
+}
+require "layouts/header.php";
+require "layouts/navbar.php";
+
+
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -211,3 +222,6 @@
 
 </div>
 <!-- End of Main Content -->
+<?php
+require "layouts/footer.php";
+?>
