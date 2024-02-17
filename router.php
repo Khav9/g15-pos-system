@@ -17,7 +17,10 @@ $routes = [
     '/reports' => 'controllers/reports/report.controller.php',
     '/users' => 'controllers/users/user.controller.php',
     //
-    '/profile' => 'controllers/profile/profile.controller.php'
+    '/profile' => 'controllers/profile/profile.controller.php',
+     //user
+     '/userCreate' => 'controllers/users/user.create.controller.php',
+     '/userUpdate' => 'controllers/users/user.edit.controller.php',
 ];
 
 if (array_key_exists($uri, $routes)) {

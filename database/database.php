@@ -1,7 +1,7 @@
 <?php
 
 $hostname = "localhost";
-$database = "canteen_db";
+$database = "pos_db";
 $username = "root";
 $password = "";
 
