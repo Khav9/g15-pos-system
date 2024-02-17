@@ -224,7 +224,7 @@ $user = $_SESSION['user'];
                                                       <label>Phone</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                      <p><?= $user[3] ?></p>
+                                                      <p><?= $user[7] ?></p>
                                                 </div>
                                           </div>
                                           <div class="row">
