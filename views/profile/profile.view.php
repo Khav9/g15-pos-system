@@ -243,3 +243,6 @@ $user = $_SESSION['user'];
             </form>
       </div>
 </div>
+<?php
+require "layouts/footer.php";
+?>
