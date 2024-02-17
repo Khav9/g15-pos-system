@@ -24,7 +24,7 @@ function createCategory(string $categoryName, string $description) : bool
 function getCategories() : array
 {
     global $connection;
-    $statement = $connection->prepare("select * from category");
+    $statement = $connection->prepare("select * from category where isDelete = 0");
     $statement->execute();
     return $statement->fetchAll();
 }
@@ -43,10 +43,15 @@ function getCategories() : array
 //     return $statement->rowCount() > 0;
 // }
 
-// function deletePost(int $id) : bool
-// {
-//     global $connection;
-//     $statement = $connection->prepare("delete from posts where id = :id");
-//     $statement->execute([':id' => $id]);
-//     return $statement->rowCount() > 0;
-// }
+
+function deleteCategory(int $id) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("update category set isDelete = :isDelete where id = :id");
+    $statement->execute([
+        ':isDelete' => 1,
+        ':id' => $id
+    ]);
+
+    return $statement->rowCount() > 0;
+}
