@@ -13,13 +13,13 @@ function createCategory(string $categoryName, string $description) : bool
     
     return $statement->rowCount() > 0;
 }
-// function getPost(int $id) : array
-// {
-//     global $connection;
-//     $statement = $connection->prepare("select * from posts where id = :id");
-//     $statement->execute([':id' => $id]);
-//     return $statement->fetch();
-// }
+function getCategory(int $id) : array
+{
+    global $connection;
+    $statement = $connection->prepare("select * from category where id = :id");
+    $statement->execute([':id' => $id]);
+    return $statement->fetch();
+}
 
 function getCategories() : array
 {
@@ -29,19 +29,19 @@ function getCategories() : array
     return $statement->fetchAll();
 }
 
-// function updatePost(string $title, string $description, int $id) : bool
-// {
-//     global $connection;
-//     $statement = $connection->prepare("update posts set title = :title, description = :description where id = :id");
-//     $statement->execute([
-//         ':title' => $title,
-//         ':description' => $description,
-//         ':id' => $id
+function updateCategory(string $categoryName, string $description, int $id) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("update category set categoryName = :categoryName, description = :description where id = :id");
+    $statement->execute([
+        ':categoryName' => $categoryName,
+        ':description' => $description,
+        ':id' => $id
 
-//     ]);
+    ]);
 
-//     return $statement->rowCount() > 0;
-// }
+    return $statement->rowCount() > 0;
+}
 
 
 function deleteCategory(int $id) : bool

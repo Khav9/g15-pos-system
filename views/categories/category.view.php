@@ -47,7 +47,7 @@ $user = $_SESSION['user'];
                                 <td><?=$category['categoryName']?></td>
                                 <td><?=$category['description']?></td>
                                 <td class="d-flex justify-content-between">
-                                    <a href="?id=<?= $category['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
+                                    <a href="/categoryUpdate?id=<?= $category['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
                                     <a href="controllers/categories/category.delete.controller.php?id=<?= $category['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
