@@ -1,18 +1,18 @@
 <?php
 
-// function createPost(string $title, string $description) : bool
-// {
-//     global $connection;
-//     $statement = $connection->prepare("insert into posts (title, description) values (:title, :description)");
-//     $statement->execute([
-//         ':title' => $title,
-//         ':description' => $description
-
-//     ]);
-
-//     return $statement->rowCount() > 0;
-// }
-
+function createCategory(string $categoryName, string $description) : bool
+{
+    global $connection;
+    $defaultRole = 'user';
+    $statement = $connection->prepare("insert into category (categoryName, description, isDelete) values (:categoryName, :description, :isDelete)");
+    $statement->execute([
+        ':categoryName' => $categoryName,
+        ':description' => $description,
+        ':isDelete' => 0,
+    ]);
+    
+    return $statement->rowCount() > 0;
+}
 // function getPost(int $id) : array
 // {
 //     global $connection;

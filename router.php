@@ -21,6 +21,8 @@ $routes = [
      //user
      '/userCreate' => 'controllers/users/user.create.controller.php',
      '/userUpdate' => 'controllers/users/user.edit.controller.php',
+     //category
+     '/categoryCreate'=> 'controllers/categories/category.create.controller.php',
 ];
 
 if (array_key_exists($uri, $routes)) {

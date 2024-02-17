@@ -19,12 +19,12 @@ $user = $_SESSION['user'];
         <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1> -->
         <div class="d-flex justify-content-between m-4">
             <input type="search" >
-            <a href="/userCreate" class="btn btn-primary">Create New User</a>
+            <a href="/categoryCreate" class="btn btn-primary">Create New User</a>
         </div>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                <h6 class="m-0 font-weight-bold text-primary">DataTables Category</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -44,11 +44,11 @@ $user = $_SESSION['user'];
                             ?>
                             <tr>
                                 <td><?=$key+1?></td>
-                                <td><?=$category['name']?></td>
+                                <td><?=$category['categoryName']?></td>
                                 <td><?=$category['description']?></td>
                                 <td class="d-flex justify-content-between">
-                                    <a href="?id=<?= $user['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
-                                    <a href="?id=<?= $user['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
+                                    <a href="?id=<?= $category['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
+                                    <a href="?id=<?= $category['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             <?php
