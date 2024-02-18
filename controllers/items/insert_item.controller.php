@@ -9,14 +9,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
      $category = $_POST['category'];
      $asign = $_POST['asign'];
      $date = $_POST['date'];
-     echo $name.$price.$quantity.$category.$asign.$date;
+     if (!empty($name) and !empty($price) and !empty($quantity) and !empty($category) and !empty($asign) and !empty($date)){
+         $isCreate = createProduct($name,$price,$quantity,$category,$asign,$date);
 
-     // $isCreate = createItem($name,$price,$quantity,$category,$asign,$date);
-     // //it return true or false
+         if ($isCreate){
+          header ("location: /items");
+         }else{
+          header ("location: /productCreate");
+         };
+     }else{
+        header('location: /productCreate');
+     };
 
-     // if ($isCreate){
-     //  header ("location: /items");
-     // }else{
-     //  header ("location: /create_item");
-     // }
+     //it return true or false
+
 }

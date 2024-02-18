@@ -23,6 +23,9 @@ $routes = [
      //category
      '/categoryCreate'=> 'controllers/categories/category.create.controller.php',
      '/categoryUpdate'=> 'controllers/categories/category.edit.controller.php',
+
+     //product
+     '/productCreate' => 'controllers/items/form_create.controller.php',
 ];
 
 if (array_key_exists($uri, $routes)) {
