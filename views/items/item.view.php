@@ -13,81 +13,51 @@ require "layouts/navbar.php";
     <!-- DataTales Example -->
     <div class="card shadow ">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <a href="/create_product" class="btn btn-primary">Create Product</a>
+            <div class="input-group">
+                <div class="form-outline" data-mdb-input-init>
+                    <input type="search" id="form1" class="form-control mt-4" placeholder= "Search Product" />
+    
+                </div>
+                <button type="button" class="btn btn-primary mt-4" data-mdb-ripple-init>
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+                    <thead class="bg-primary text-white">
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>ID</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Category</th>
+                            <th>Asign User</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                        </tr>
-                        <tr>
-                            <td>Brielle Williamson</td>
-                            <td>Integration Specialist</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2012/12/02</td>
-                            <td>$372,000</td>
-                        </tr>
-                    </tbody>
+                        <?php
+                        $products = getProducts(); // set it here it's okay. if set it on product.controller.php it's okay
+                        foreach ($products as $key => $product) {
+                        ?>
+                            <tr>
+                                <td><?= $key + 1 ?></td>
+                                <td><?= $product['name'] ?></td>
+                                <td><?= $product['price'] ?></td>
+                                <td><?= $product['qty'] ?></td>
+                                <td><?= $product['categoryName'] ?></td>
+                                <td><?= $product['userName'] ?></td>
+                                <td class="d-5">
+                                    <a href="/editItem?id=<?= $item['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
+                                    <a href="controllers/items/item.delete.controller.php?id=<?= $item['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
                 </table>
             </div>
         </div>
@@ -96,4 +66,3 @@ require "layouts/navbar.php";
 </div>
 </div>
 <!-- /.container-fluid -->
-<?php require "layouts/footer.php"; ?>
