@@ -13,7 +13,7 @@ require "layouts/navbar.php";
     <!-- DataTales Example -->
     <div class="card shadow ">
         <div class="card-header py-3">
-            <a href="/create_product" class="btn btn-primary">Create Product</a>
+            <a href="/productCreate" class="btn btn-primary">Create Product</a>
             <div class="input-group">
                 <div class="form-outline" data-mdb-input-init>
                     <input type="search" id="form1" class="form-control mt-4" placeholder= "Search Product" />
