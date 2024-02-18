@@ -46,7 +46,7 @@ $user = $_SESSION['user'];
                             ?>
                             <tr>
                                 <td><?=$key+1?></td>
-                                <td><?=$user['name']?></td>
+                                <td><?=$user['userName']?></td>
                                 <td><?=$user['email']?></td>
                                 <td>...</td>
                                 <td><?=$user['role']?></td>

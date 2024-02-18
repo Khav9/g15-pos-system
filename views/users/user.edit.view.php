@@ -17,7 +17,7 @@ $user = $_SESSION['user'];
                         <input type="hidden" value="<?=$userUpdate['id']?>" name="id">
                         <div class="form-group">
                               <label for="inputAddress">User Name</label>
-                              <input type="text" class="form-control" id="inputAddress" Name="name" value="<?= $userUpdate['name'] ?>">
+                              <input type="text" class="form-control" id="inputAddress" Name="name" value="<?= $userUpdate['userName'] ?>">
                         </div>
                         <div class="form-row">
                               <div class="form-group col-md-6">

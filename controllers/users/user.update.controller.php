@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $isUpdate = updateUser($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['role'], $_POST['id']);
 
             header('location: /users');
+      }else{
+            header('location: /users');
       }
 }
-

@@ -3,9 +3,9 @@
 function createUser(string $name, string $email, string $password, string $role,string $image, string $phone) : bool
 {
     global $connection;
-    $statement = $connection->prepare("insert into users (name, email,password,role,isDelete,image,phone) values (:name, :email, :password, :role, :isDelete, :image, :phone)");
+    $statement = $connection->prepare("insert into users (userName, email,password,role,isDelete,image,phone) values (:userName, :email, :password, :role, :isDelete, :image, :phone)");
     $statement->execute([
-        ':name' => $name,
+        ':userName' => $name,
         ':email' => $email,
         ':password' => $password,
         ':role' => $role,
@@ -35,9 +35,9 @@ function getUser(int $id) : array
 function updateUser(string $name, string $email, string $phone, string $role, int $id) : bool
 {
     global $connection;
-    $statement = $connection->prepare("update users set name = :name, email = :email, phone = :phone, role = :role where id = :id");
+    $statement = $connection->prepare("update users set userName = :userName, email = :email, phone = :phone, role = :role where id = :id");
     $statement->execute([
-        ':name' => $name,
+        ':userName' => $name,
         ':email' => $email,
         ':phone' => $phone,
         ':role' => $role,
