@@ -15,7 +15,7 @@ require "layouts/navbar.php";
     <!-- DataTales Example -->
     <div class="card shadow ">
         <div class="card-header py-3">
-            <a href="/create_product" class="btn btn-primary">Create Product</a>
+            <a href="/productCreate" class="btn btn-primary">Create Product</a>
         </div>
         <div class="d-flex justify-content-between">
             <form id="searchForm" class="d-flex ml-4">
@@ -26,7 +26,8 @@ require "layouts/navbar.php";
                     <button type="button" class="btn btn-primary mt-4" data-mdb-ripple-init>
                         <i class="fas fa-search"></i>
                     </button>
-                </div>
+            <div class="input-group">
+    
             </form>
             <form action="#">
                 <div class="col-md-12 d-flex mt-4">

@@ -1,16 +1,17 @@
 <?php
 
-function createProduct(string $name, int $price, int $quantity, string $category, string $asign) : bool
+function createProduct(string $name, int $price, int $quantity, string $category, string $asign, $date) : bool
 {
     global $connection;
-    $statement = $connection->prepare("insert into  products(name, price, quantity, category, asign, date) values (:name, :price, :quantity, :category, :asign, :date)");
+    $statement = $connection->prepare("insert into  products(name, price, qty, categoryID, userID, expire, isDelete) values (:name, :price, :qty, :categoryID, :userID, :expire , :isDelete)");
     $statement->execute([
         ':name' => $name,
         ':price' => $price,
-        ':quantity' => $quantity,
-        ':category' => $category,
-        ':asign' => $asign,
-        ':date' => $date,
+        ':qty' => $quantity,
+        ':categoryID' => $category,
+        ':userID' => $asign,
+        ':expire' => $date,
+        ':isDelete' => 0,
 
     ]);
 

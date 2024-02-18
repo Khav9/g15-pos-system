@@ -1,3 +1,7 @@
+<?php
+require "layouts/header.php";
+require "layouts/navbar.php";
+?>
 <div class="m-4 ">
     <form action = "controllers/items/insert_item.controller.php" method = "post">
         <h1 class="bg-blue">Create Product</h1>
@@ -21,23 +25,29 @@
                 </div>
             </div>
             <select class="form-select form-select-sm" name = "category" aria-label=".form-select-sm example">
-                <option selected>Categories</option>
+                <option selected disabled>Categories</option>
                <?php foreach ($categories as $key => $category):?>
                     <option value="<?=$category['id']?>"><?=$category['categoryName']?></option>
                 <?php endforeach?>
             </select>
             <select class="form-select form-select-sm" name = "asign" aria-label=".form-select-sm example">
-                <option selected>Asign Users</option>
-                <?php foreach ($categories as $key => $category):?>
-                    <option value="<?=$category['id']?>"><?=$category['categoryName']?></option>
+                <option selected disabled>Asign Users</option>
+                <?php foreach ($users as $key => $user):?>
+                    <option value="<?=$user['id']?>"><?=$user['userName']?></option>
                 <?php endforeach?>
             </select> <br>
 
             <label for="datemin" class="mt-4">Date of Product</label>
             <input type="date" id="datemin" name="date" min="2024-01-01"><br>
-            <button type="submit" class="btn btn-danger">Create</button>
+            <div class="form-group d-flex justify-content-between mt-5">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a href="/items" class="btn btn-danger">Cancel</a>
+
+            </div>
         </div>
     </form>
 
 </div>
 
+<?php
+require "layouts/footer.php";
