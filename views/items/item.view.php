@@ -6,6 +6,8 @@ if (!isset($_SESSION['user'])) {
 require "layouts/header.php";
 require "layouts/navbar.php";
 ?>
+<script src="/vendor/search_product/search_product_vendor.js" defer></script>
+
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -14,15 +16,30 @@ require "layouts/navbar.php";
     <div class="card shadow ">
         <div class="card-header py-3">
             <a href="/create_product" class="btn btn-primary">Create Product</a>
-            <div class="input-group">
-                <div class="form-outline" data-mdb-input-init>
-                    <input type="search" id="form1" class="form-control mt-4" placeholder= "Search Product" />
-    
+        </div>
+        <div class="d-flex justify-content-between">
+            <form id="searchForm" class="d-flex ml-4">
+                <div class="input-group">
+                    <div class="form-outline" data-mdb-input-init>
+                        <input type="search" id="searchInput" class="form-control mt-4" placeholder="Search Product" />
+                    </div>
+                    <button type="button" class="btn btn-primary mt-4" data-mdb-ripple-init>
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
-                <button type="button" class="btn btn-primary mt-4" data-mdb-ripple-init>
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+            </form>
+            <form action="#">
+                <div class="col-md-12 d-flex mt-4">
+                    <label class="d-flex pr-5">Fitter Product</label>
+                    <select name="product" id="category">
+                        <option value="All">All</option>
+                        <?php foreach ($categories as $key => $category) : ?>
+                            <option value="<?= $category['categoryName'] ?>"><?= $category['categoryName'] ?></option>
+                        <?php endforeach; ?>
+
+                    </select>
+                </div>
+            </form>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -65,4 +82,8 @@ require "layouts/navbar.php";
 
 </div>
 </div>
+
 <!-- /.container-fluid -->
+<?php 
+require 'layouts/footer.php';
+?>
