@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (!isset($_SESSION['user'])) {
 
     header('Location: /');
@@ -9,9 +9,18 @@ require "layouts/navbar.php";
 
 
 ?>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
+    <?php if (isset($_SESSION['success'])) : ?>
+        <div class="alert alert-success alert-dismissible fade show" id="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?= $_SESSION['success'] ?>
+        </div>
+    <?php
+        unset($_SESSION['success']);
+    endif;
+    ?>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
