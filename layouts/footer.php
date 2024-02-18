@@ -38,6 +38,9 @@
     <script src="vendor/custom/js/demo/chart-area-demo.js"></script>
     <script src="vendor/custom/js/demo/chart-pie-demo.js"></script>
 
+    <!-- alert  -->
+    <script src="vendor/alerts/main.js"></script>
+
 </body>
 
 </html>

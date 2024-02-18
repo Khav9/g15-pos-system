@@ -6,6 +6,7 @@ if (isset($_SESSION['user'])) {
 
 require "layouts/header.php";
 ?>
+
 <body class="bg-gradient-primary">
 
     <div class="container">
@@ -27,13 +28,42 @@ require "layouts/header.php";
                                     </div>
                                     <form class="user" action="controllers/login/checkLogin.controller.php" method="post">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..." >
+                                            <input type="email" name="email" class="form-control form-control-user <?php if (isset($_SESSION['borderEmail'])){echo $_SESSION['borderEmail'];}elseif(isset($_SESSION['isNotFill'])){echo 'is-invalid';}; unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <small class="ml-3 text-danger">
+                                                <?php
+                                                if (isset($_SESSION['notFound'])) {
+                                                    echo $_SESSION['notFound'];
+                                                }
+                                                elseif (isset($_SESSION['isNotFill'])){
+                                                    echo $_SESSION['isNotFill'].' email';
+                                                }
+                                                unset($_SESSION['notFound']);
+                                                ?>
+                                            </small>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" name="password">
+                                            <input type="password" class="form-control form-control-user 
+                                            <?php
+                                            if (isset($_SESSION['borderPassword'])){
+                                                echo $_SESSION['borderPassword'];
+                                            }elseif (isset($_SESSION['isNotFill'])){
+                                                echo 'is-invalid';
+                                            }
+                                            unset($_SESSION['borderPassword']);
+                                            ?>"
+                                            id="exampleInputPassword" placeholder="Password" name="password">
+                                            <small class="ml-3 text-danger">
+                                                <?php
+                                                if (isset($_SESSION['error'])) {
+                                                    echo $_SESSION['error'];
+                                                }
+                                                 elseif (isset($_SESSION['isNotFill'])){
+                                                    echo $_SESSION['isNotFill'].' password';
+                                                }
+                                                unset($_SESSION['isNotFill']);
+                                                unset($_SESSION['error']);
+                                                ?>
+                                            </small>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -42,9 +72,6 @@ require "layouts/header.php";
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <!-- <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a> -->
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">

@@ -18,7 +18,7 @@ require "layouts/navbar.php";
             <a href="/productCreate" class="btn btn-primary">Create Product</a>
         </div>
         <div class="d-flex justify-content-between">
-            <form id="searchForm" class="d-flex ml-4">
+            <form id="searchForm" class=" ml-4">
                 <div class="input-group">
                     <div class="form-outline" data-mdb-input-init>
                         <input type="search" id="searchInput" class="form-control mt-4" placeholder="Search Product" />
@@ -26,8 +26,9 @@ require "layouts/navbar.php";
                     <button type="button" class="btn btn-primary mt-4" data-mdb-ripple-init>
                         <i class="fas fa-search"></i>
                     </button>
-            <div class="input-group">
-    
+                    <div class="input-group">
+                    </div>
+                </div>
             </form>
             <form action="#">
                 <div class="col-md-12 d-flex mt-4">
@@ -85,6 +86,6 @@ require "layouts/navbar.php";
 </div>
 
 <!-- /.container-fluid -->
-<?php 
+<?php
 require 'layouts/footer.php';
 ?>
