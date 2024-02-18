@@ -1,6 +1,9 @@
 
 <?php
-
+if (isset($_SESSION['user'])) {
+    header('Location: /admin');
+    die();
+}
 require "layouts/header.php";
 
 ?>

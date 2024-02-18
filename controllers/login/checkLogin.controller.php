@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: /admin');
         } else {
             // echo "Password is incorrect";
-            header('location: /login');
+            header('location: /');
         }
     } else {
         echo "No user found";
