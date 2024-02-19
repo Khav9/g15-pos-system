@@ -11,8 +11,11 @@ $routes = [
 
     '/admin' => 'controllers/admin/admin.controller.php',
     '/categories' => 'controllers/categories/category.controller.php',
+    //order
     '/items' => 'controllers/items/item.controller.php',
+    
     '/orders' => 'controllers/orders/order.controller.php',
+    '/order_form' => 'controllers/orders/create.form.order.controller.php',
     '/reports' => 'controllers/reports/report.controller.php',
     '/users' => 'controllers/users/user.controller.php',
     //

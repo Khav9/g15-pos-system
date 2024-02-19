@@ -47,7 +47,7 @@
 
      <!-- Nav Item - Charts -->
      <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" >
              <i class="fas fa-fw fa-shopping-cart"></i>
              <span>Order</span>
          </a>
@@ -65,7 +65,7 @@
              <i class="fas fa-fw fa-users"></i>
              <span>Users</span></a>
      </li>
-
+     
      <li class="nav-item">
          <a class="nav-link" href="/reports">
              <i class="fas fa-fw fa-chart-area"></i>
@@ -248,10 +248,10 @@
                  <!-- Nav Item - User Information -->
                  <li class="nav-item dropdown no-arrow">
                      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <?php
-                            $user = $_SESSION['user'];
-                            ?>
-                         <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['2'] ?></span>
+                        <?php
+                        $user = $_SESSION['user'];
+                        ?>
+                         <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$user['2']?></span>
                          <img class="img-profile rounded-circle" src="assets/images/undraw_profile.svg">
                      </a>
                      <!-- Dropdown - User Information -->
