@@ -70,7 +70,7 @@ require "layouts/navbar.php";
                                 <td><?= $product['categoryName'] ?></td>
                                 <td><?= $product['userName'] ?></td>
                                 <td class="d-5">
-                                    <a href="/editItem?id=<?= $item['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
+                                    <a href="/productUpdate?id=<?=$product['id']?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
                                     <a href="controllers/items/item.delete.controller.php?id=<?= $item['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>

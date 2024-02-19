@@ -21,7 +21,7 @@ function createProduct(string $name, int $price, int $quantity, string $category
 function getProduct(int $id) : array
 {
     global $connection;
-    $statement = $connection->prepare("select * from posts where id = :id");
+    $statement = $connection->prepare("select products.id, products.name, products.price, products.qty,products.expire, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.id = :id");
     $statement->execute([':id' => $id]);
     return $statement->fetch();
 }
@@ -29,7 +29,7 @@ function getProduct(int $id) : array
 function getProducts() : array
 {
     global $connection;
-    $statement = $connection->prepare("select products.name, products.price, products.qty, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id");
+    $statement = $connection->prepare("select products.id, products.name, products.price, products.qty, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id");
     $statement->execute();
     return $statement->fetchAll();
 }
@@ -37,7 +37,7 @@ function getProducts() : array
 function updateProduct(string $name, int $price, int $quantity, string $category, string $asign, string $date, int $id) : bool
 {
     global $connection;
-    $statement = $connection->prepare("update posts set name = :name, price = :price, quantity = :quantity, category = :category, asign = :asign, date = :date, action = :action where id = :id");
+    $statement = $connection->prepare("update products set name = :name, price = :price, qty = :quantity, categoryID = :category, userID = :asign, expire = :date where id = :id");
     $statement->execute([
         ':name' => $name,
         ':price' => $price,
@@ -45,7 +45,6 @@ function updateProduct(string $name, int $price, int $quantity, string $category
         ':category' => $category,
         ':asign' => $asign,
         ':date' => $date,
-        ':action' => $action,
         ':id' => $id
 
     ]);
