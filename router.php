@@ -26,6 +26,7 @@ $routes = [
 
      //product
      '/productCreate' => 'controllers/items/form_create.controller.php',
+     '/productUpdate' => 'controllers/items/product.edit.controller.php',
 ];
 
 if (array_key_exists($uri, $routes)) {
