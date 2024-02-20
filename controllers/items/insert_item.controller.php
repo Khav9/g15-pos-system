@@ -14,11 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
          if ($isCreate){
           header ("location: /items");
-         }else{
-          header ("location: /productCreate");
-         };
+         }
      }else{
-        header('location: /productCreate');
+        header('location: /items');
      };
 
      //it return true or false
