@@ -37,10 +37,16 @@ require "layouts/navbar.php";
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Product In Stock</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">3000</div>
+                                Product In Stock
+                            </div>
+
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                echo "$productInStock";
+                                ?>
+                            </div>
                         </div>
-                        <div class="col-auto">
+                        <div class=" col-auto">
                             <i class="fa fa-cart-arrow-down fa-2x text-gray-300" aria-hidden="true"></i>
                         </div>
                     </div>
@@ -76,7 +82,11 @@ require "layouts/navbar.php";
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">60</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                        <?php
+                                        echo "$categoryInStock";
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +106,12 @@ require "layouts/navbar.php";
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Users</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                               
+                                echo "$amounUsers";
+                                ?>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <!-- <i class="fas fa-comments fa-2x text-gray-300"></i> -->
