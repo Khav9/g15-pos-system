@@ -18,7 +18,7 @@ function createAccount(string $name, string $email, string $phone, string $passw
 
 function getUsers(): array {
     global $connection;
-    $statement = $connection->prepare("SELECT * FROM users WHERE role = :role ORDER BY id ASC ");
+    $statement = $connection->prepare("SELECT * FROM users WHERE role = :role ORDER BY id DESC ");
     $statement->execute([
         ':role' => 'user'
     ]);

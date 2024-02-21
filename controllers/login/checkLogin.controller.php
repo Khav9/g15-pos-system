@@ -3,10 +3,10 @@ session_start();
 require_once '../../database/database.php';
 require_once '../../models/userManage.model.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!empty($_POST['email']) and !empty($_POST['email'])) {
+    if (!empty($_POST['email']) and !empty($_POST['password'])) {
         // Escape the query string to prevent SQL injection.
         $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']); //123
+        $password = htmlspecialchars($_POST['password']); 
 
         // Get data from database
         $user = accountExist($email);

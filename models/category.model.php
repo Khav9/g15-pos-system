@@ -24,7 +24,7 @@ function getCategory(int $id) : array
 function getCategories() : array
 {
     global $connection;
-    $statement = $connection->prepare("select * from category where isDelete = 0");
+    $statement = $connection->prepare("select * from category where isDelete = 0 order by id desc");
     $statement->execute();
     return $statement->fetchAll();
 }

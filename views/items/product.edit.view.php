@@ -64,9 +64,8 @@ require "layouts/navbar.php";
                 <?php endforeach?>
             </select> <br>
             <div class="form-group d-flex justify-content-between mt-5">
-                <button type="submit" class="btn btn-success">Update</button>
                 <a href="/items" class="btn btn-danger">Cancel</a>
-
+                <button type="submit" class="btn btn-success">Update</button>
             </div>
 
 
