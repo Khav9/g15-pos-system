@@ -7,11 +7,8 @@ require "layouts/navbar.php";
     <div class="card shadow p-4">
         <form action="controllers/orders/create.order.controller.php" method="post">
             <div class="mb-3 d-flex justify-content-end">
-                <input type="text" class="border-0" placeholder="Search product" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
+                    <button class="btn btn-primary" type="submit">Scan Barcord</button>
                 </div>
             </div>
             <div class="form-group row">
