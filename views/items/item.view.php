@@ -33,14 +33,15 @@ require "layouts/navbar.php";
                     <select name="product" id="category">
                         <option value="All">All</option>
                         <?php foreach ($categories as $key => $category) : ?>
-                            <option value="<?= $category['categoryName'] ?>"><?= $category['categoryName'] ?></option>
+                        <option value="<?= $category['categoryName'] ?>"><?= $category['categoryName'] ?></option>
                         <?php endforeach; ?>
 
                     </select>
                 </div>
             </form>
             <div class="mr-4 mt-4">
-                <a href="/productCreate" class="btn btn-primary" data-toggle="modal" data-target="#createProduct"><i class="fa fa-plus-square mr-3"></i>Create Product</a>
+                <a href="/productCreate" class="btn btn-primary" data-toggle="modal" data-target="#createProduct"><i
+                        class="fa fa-plus-square mr-3"></i>Create Product</a>
             </div>
         </div>
         <div class="card-body">
@@ -62,18 +63,20 @@ require "layouts/navbar.php";
                         $products = getProducts(); // set it here it's okay. if set it on product.controller.php it's okay
                         foreach ($products as $key => $product) {
                         ?>
-                            <tr>
-                                <td><?= $key + 1 ?></td>
-                                <td><?= $product['name'] ?></td>
-                                <td><?= $product['price'] ?></td>
-                                <td><?= $product['qty'] ?></td>
-                                <td><?= $product['categoryName'] ?></td>
-                                <td><?= $product['userName'] ?></td>
-                                <td class="d-5">
-                                    <a href="/productUpdate?id=<?= $product['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
-                                    <a href="controllers/items/item.delete.controller.php?id=<?= $product['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td><?= $key + 1 ?></td>
+                            <td><?= $product['name'] ?></td>
+                            <td><?= $product['price'] ?></td>
+                            <td><?= $product['qty'] ?></td>
+                            <td><?= $product['categoryName'] ?></td>
+                            <td><?= $product['userName'] ?></td>
+                            <td class="d-5">
+                                <a href="/productUpdate?id=<?= $product['id'] ?>" class="text-info p-2"><i
+                                        class="fa fa-pen"></i></a>
+                                <a href="controllers/items/item.delete.controller.php?id=<?= $product['id'] ?>"
+                                    class="text-danger p-2"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
                         <?php
                         }
                         ?>
@@ -81,13 +84,13 @@ require "layouts/navbar.php";
             </div>
         </div>
         <!-- The Modal create-->
-        <div class="modal" id="createProduct">
+        <div class="modal ml-5" id="createProduct">
             <div class="modal-dialog">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title text-info">Create New Product</h4>
+                        <h4 class="bg-blue m-0 font-weight-bold text-primary text-center mb-3">Create New Product</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
@@ -95,42 +98,71 @@ require "layouts/navbar.php";
                     <div class="modal-body">
                         <form action="controllers/items/insert_item.controller.php" method="post">
                             <div>
-                                <div class="form-group">
-                                    <label>Product Name:</label>
+                                <div class="form-row ml-2">
+                                    <div class="form-group">
+                                        <label>Product Name:</label>
+                                        <div>
+                                            <input class="form-control col-md-11 mb-3 " type="text" name="name"
+                                                placeholder="name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text">Code of Product:</label>
+                                        <div>
+                                            <input class="form-control row-md-5 mb-3 mr-1" type="text" name="code"
+                                                placeholder="$" value="<?=$product['price']?>">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group d-flex">
+                                    <div class="form-group ml-2">
+                                        <label>Price:</label>
+                                        <div>
+                                            <input class="form-control col-md-16" type="text" name="price" placeholder="$">
+                                        </div>
+                                    </div>
                                     <div>
-                                        <input class="form-control " type="text" name="name" placeholder="name">
+                                        <label class="ml-5">Chose Image:</label>
+                                        <input class="form-control  ml-5 col-md-9" type="file" name="image"
+                                            placeholder="image" value="<?=$product['price']?>">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row ml-2">
+                                    <div class="form-group">
+                                        <label class="ml-1 mt-4">Quantity:</label>
+                                        <div>
+                                            <input class="form-control col-md-11" type="text" name="qty" placeholder="quantity">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="datemin" class="mt-4 ml-2">Date of Product</label>
+                                        <input class="form-control col-md-20 mb-18 ml-1 pb-30" type="date" id="datemin" name="date" min="2024-01-01"><br>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Price:</label>
-                                    <div>
-                                        <input class="form-control" type="text" name="price" placeholder="$">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Quantity:</label>
-                                    <div>
-                                        <input class="form-control" type="text" name="qty" placeholder="quantity">
-                                    </div>
-                                </div>
-                                <select class="form-select form-select-sm" name="category" aria-label=".form-select-sm example">
+                                <select class="form-select form-select-sm ml-2" name="category"
+                                    aria-label=".form-select-sm example">
                                     <option selected disabled>Categories</option>
                                     <?php foreach ($categories as $key => $category) : ?>
-                                        <option value="<?= $category['id'] ?>"><?= $category['categoryName'] ?></option>
+                                    <option value="<?= $category['id'] ?>"><?= $category['categoryName'] ?></option>
                                     <?php endforeach ?>
                                 </select>
-                                <select class="form-select form-select-sm" name="asign" aria-label=".form-select-sm example">
+                                <select class="form-select form-select-sm" name="asign"
+                                    aria-label=".form-select-sm example">
                                     <option selected disabled>Asign Users</option>
                                     <?php foreach ($users as $key => $user) : ?>
-                                        <option value="<?= $user['id'] ?>"><?= $user['userName'] ?></option>
+                                    <option value="<?= $user['id'] ?>"><?= $user['userName'] ?></option>
                                     <?php endforeach ?>
                                 </select> <br>
 
-                                <label for="datemin" class="mt-4">Date of Product</label>
-                                <input type="date" id="datemin" name="date" min="2024-01-01"><br>
+
                                 <div class="form-group d-flex justify-content-between mt-5">
-                                    <a href="/items" class="btn btn-danger">Cancel</a>
                                     <button type="submit" class="btn btn-primary">Create</button>
+                                    <a href="/items" class="btn btn-danger">Cancel</a>
 
                                 </div>
                             </div>
