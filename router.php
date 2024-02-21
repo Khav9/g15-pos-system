@@ -43,3 +43,6 @@ if (array_key_exists($uri, $routes)) {
     require $page;
     require "layouts/footer.php";
 }
+
+
+

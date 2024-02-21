@@ -8,8 +8,7 @@ require "layouts/navbar.php";
 $user = $_SESSION['user'];
 ?>
 <!-- Begin Page Content -->
-<link rel="stylesheet" href="//cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
-<link rel="stylesheet" href="//cdn.datatables.net/2.0.0/js/dataTables.min.js">
+
 <script src="/vendor/search_categorye/search_vendor.js"></script>
 <div class="container-fluid">
     <!-- Begin Page Content -->

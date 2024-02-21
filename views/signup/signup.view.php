@@ -1,4 +1,3 @@
-
 <?php
 if (isset($_SESSION['user'])) {
     header('Location: /admin');
@@ -7,6 +6,7 @@ if (isset($_SESSION['user'])) {
 require "layouts/header.php";
 
 ?>
+
 <body class="bg-gradient-primary">
 
     <div class="container">
@@ -21,28 +21,45 @@ require "layouts/header.php";
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user" action="controllers/signup/createUser.controller.php" method="post">
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="User Name" name="username">
+                            <!-- form here -->
+                            <form action="controllers/users/insert.user.controller.php" method="post" enctype="multipart/form-data">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="inputAddress">User Name</label>
+                                            <input type="text" class="form-control" id="inputAddress" Name="name">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="inputCity">Phone / Tell :</label>
+                                            <input type="text" class="form-control" id="inputCity" name="phone">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address" name="email">
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Email</label>
+                                        <input type="email" class="form-control" id="inputEmail4" name="email">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Password</label>
+                                        <input type="password" class="form-control" id="inputPassword4" name="password">
+                                    </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Create Your Password" name="password">
+                                    <label for="inputZip">Profile Pictcre</label>
+                                    <input type="file" class="form-control" id="inputFile" name="image">
                                 </div>
-                  
-                                <!-- <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a> -->
-                                <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
-                                <hr>
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
+
+                                <div class="form-row d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">Create</button>
+                                    <button class="btn btn-google btn-user btn-block">
+                                        <i class="fab fa-google fa-fw"></i> Register with Google
+                                    </button>
+                                </div>
                             </form>
                             <hr>
                             <div class="text-center">

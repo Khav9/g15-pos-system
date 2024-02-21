@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../../database/database.php';
-require_once '../../models/user.model.php';
+require_once '../../models/userManage.model.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_POST['email']) and !empty($_POST['email'])) {
         // Escape the query string to prevent SQL injection.
@@ -9,11 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = htmlspecialchars($_POST['password']); //123
 
         // Get data from database
-        $user = getUser($email);
+        $user = accountExist($email);
+        echo $user[4];
         // Check if user exists
         if (count($user) > 0) {
             // Check if password is correct
-            if (password_verify($password, $user[3])) {
+            if (password_verify($password, $user[4])) {
                 $_SESSION['user'] = $user;
                 $_SESSION['success'] = "Login successful";
                 header('Location: /admin');

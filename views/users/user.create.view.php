@@ -13,7 +13,7 @@ $user = $_SESSION['user'];
                   <h2 class="m-0 font-weight-bold text-primary text-center">Create New User</h2>
             </div>
             <div class="card-body">
-                  <form action="controllers/users/insert.user.controller.php" method="post">
+                  <form action="controllers/users/insert.user.controller.php" method="post"  enctype="multipart/form-data">
                         <div class="form-group">
                               <label for="inputAddress">User Name</label>
                               <input type="text" class="form-control" id="inputAddress" Name="name">
@@ -35,15 +35,7 @@ $user = $_SESSION['user'];
                               </div>
                               <div class="form-group col-md-2">
                                     <label for="inputZip">Profile Pictcre</label>
-                                    <input type="file" class="form-control" id="inputFile" name="profile">
-                              </div>
-                              <div class="form-group col-md-4">
-                                    <label for="inputState">Role</label>
-                                    <select id="inputState" class="form-control" name="role">
-                                          <option selected>Choose user role</option>
-                                          <option>Admin</option>
-                                          <option>User</option>
-                                    </select>
+                                    <input type="file" class="form-control" id="inputFile" name="image">
                               </div>
                         </div>
                         <div class="form-row d-flex justify-content-between">

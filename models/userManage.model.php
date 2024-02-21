@@ -1,26 +1,27 @@
 <?php
 
-function createUser(string $name, string $email, string $password, string $role,string $image, string $phone) : bool
-{
+function createAccount(string $name, string $email, string $phone, string $password, string $image): bool {
     global $connection;
-    $statement = $connection->prepare("insert into users (userName, email,password,role,isDelete,image,phone) values (:userName, :email, :password, :role, :isDelete, :image, :phone)");
+    $statement = $connection->prepare("INSERT INTO users (userName, email, phone, password, role, image) 
+    VALUES (:userName, :email,:phone, :password, :role, :image)");
     $statement->execute([
         ':userName' => $name,
         ':email' => $email,
-        ':password' => $password,
-        ':role' => $role,
-        ':isDelete' => 0,
-        ':image' => $image,
         ':phone' => $phone,
+        ':password' => $password,
+        ':role' => 'user',
+        ':image' => $image
     ]);
 
     return $statement->rowCount() > 0;
 }
-function getUsers() : array
-{
+
+function getUsers(): array {
     global $connection;
-    $statement = $connection->prepare("select * from users");
-    $statement->execute();
+    $statement = $connection->prepare("SELECT * FROM users WHERE role = :role ORDER BY id ASC ");
+    $statement->execute([
+        ':role' => 'user'
+    ]);
     return $statement->fetchAll();
 }
 
@@ -55,4 +56,19 @@ function deleteUser(int $id) : bool
     $statement = $connection->prepare("delete from users where id = :id");
     $statement->execute([':id' => $id]);
     return $statement->rowCount() > 0;
+}
+
+
+//for login
+
+function accountExist(string $email): array
+{
+    global $connection;
+    $statement = $connection->prepare("select * from users where email = :email");
+    $statement->execute([':email' => $email]);
+    if ($statement->rowCount() > 0) {
+        return $statement->fetch();
+    } else {
+        return [];
+    }
 }
