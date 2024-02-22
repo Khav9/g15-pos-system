@@ -31,7 +31,9 @@ $user = $_SESSION['user'];
                             <input type="text" name="search" id="searchInput" class="form-control" placeholder="Searh " aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                     </form>
+                    <?php if($user[5] === 'admin'):?>
                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square mr-3"></i>Create Category</a>
+                    <?php endif;?>
                 </div>
             </div>
             <div class="card-body">
@@ -42,7 +44,11 @@ $user = $_SESSION['user'];
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>Action</th>
+                                <?php if($user[5] === 'admin'){
+                                    echo '
+                                    <th>Action</th>
+                                    ';
+                                }; ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,10 +60,12 @@ $user = $_SESSION['user'];
                                     <td><?= $key + 1 ?></td>
                                     <td><?= $category['categoryName'] ?></td>
                                     <td><?= $category['description'] ?></td>
+                                    <?php if($user[5] === 'admin'):?>
                                     <td class="d-flex justify-content-between align-items-center pt-0 pb-1">
                                         <a href="/categoryUpdate?id=<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
                                         <a href="delete" class="text-danger p-2" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a>
                                     </td>
+                                    <?php endif; ?>
                                 </tr>
                             <?php
                             };

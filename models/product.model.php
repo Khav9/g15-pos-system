@@ -23,7 +23,7 @@ function createProduct(string $name, string $code, int $price, int $quantity, st
 function getProduct(int $id) : array
 {
     global $connection;
-    $statement = $connection->prepare("select products.id, products.name, products.price, products.qty,products.expire, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.id = :id");
+    $statement = $connection->prepare("select products.id, products.name,products.code, products.price, products.qty,products.expire, products.image, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.id = :id");
     $statement->execute([':id' => $id]);
     return $statement->fetch();
 }
@@ -31,12 +31,31 @@ function getProduct(int $id) : array
 function getProducts() : array
 {
     global $connection;
-    $statement = $connection->prepare("select products.id, products.name, products.price, products.qty, products.image, products.code, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id order by products.id desc");
+    $statement = $connection->prepare("select products.id, products.name, products.price, products.qty, products.image, products.code, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.isDelete = 0 order by products.id desc");
     $statement->execute();
     return $statement->fetchAll();
 }
 
-function updateProduct(string $name, int $price, int $quantity, string $category, string $asign, string $date, int $id) : bool
+function updateProduct(string $name, int $price, int $quantity, string $category, string $asign, string $date, string $image, int $id) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("update products set name = :name, price = :price, qty = :quantity, categoryID = :category, userID = :asign, image = :image, expire = :date where id = :id");
+    $statement->execute([
+        ':name' => $name,
+        ':price' => $price,
+        ':quantity' => $quantity,
+        ':category' => $category,
+        ':asign' => $asign,
+        ':date' => $date,
+        ':image' => $image,
+        ':id' => $id
+    ]);
+
+    return $statement->rowCount() > 0;
+}
+
+// by don't update image
+function updateProNotImage(string $name, int $price, int $quantity, string $category, string $asign, string $date, int $id) : bool
 {
     global $connection;
     $statement = $connection->prepare("update products set name = :name, price = :price, qty = :quantity, categoryID = :category, userID = :asign, expire = :date where id = :id");
@@ -47,8 +66,7 @@ function updateProduct(string $name, int $price, int $quantity, string $category
         ':category' => $category,
         ':asign' => $asign,
         ':date' => $date,
-        ':id' => $id
-
+        ':id' => $id,
     ]);
 
     return $statement->rowCount() > 0;
@@ -57,7 +75,10 @@ function updateProduct(string $name, int $price, int $quantity, string $category
 function deleteProduct(int $id) : bool
 {
     global $connection;
-    $statement = $connection->prepare("delete from products where id = :id");
-    $statement->execute([':id' => $id]);
+    $statement = $connection->prepare("UPDATE products SET isDelete = :isDelete  where id = :id");
+    $statement->execute([
+        'isDelete' => 1,
+        ':id' => $id
+    ]);
     return $statement->rowCount() > 0;
 }

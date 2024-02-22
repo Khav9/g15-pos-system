@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         for (let row of rows) {
             
-            let categoryCellText = row.children[4].textContent.trim();
-            console.log(categoryCellText);
+            let categoryCellText = row.children[5].textContent.trim();
 
             if (selectedCity !== 'All') {
                 if (categoryCellText === selectedCity) {

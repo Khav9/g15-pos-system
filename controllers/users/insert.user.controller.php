@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       if (!empty($name) && !empty($email) && !empty($password)) {
             $encryptPassword = password_hash($password, PASSWORD_BCRYPT);
-
+            
             // Image upload
             $directory = "../../assets/profiles/";
             $target_file = $directory . '.' . basename($_FILES['image']['name']);

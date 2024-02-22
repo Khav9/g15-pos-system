@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (password_verify($password, $user[4])) {
                 $_SESSION['user'] = $user;
                 $_SESSION['success'] = "Login successful";
+
                 header('Location: /admin');
             } else {
                 // echo "Password is incorrect";

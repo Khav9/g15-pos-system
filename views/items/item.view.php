@@ -39,9 +39,11 @@ require "layouts/navbar.php";
                     </select>
                 </div>
             </form>
+            <?php if($user[5] === 'admin'): ?>
             <div class="mr-4 mt-4">
                 <a href="/productCreate" class="btn btn-primary" data-toggle="modal" data-target="#createProduct"><i class="fa fa-plus-square mr-3"></i>Create Product</a>
             </div>
+            <?php endif;?>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -55,7 +57,11 @@ require "layouts/navbar.php";
                             <th>Quantity</th>
                             <th>Category</th>
                             <th>Asign User</th>
-                            <th>Action</th>
+                            <?php if($user[5] === 'admin'){
+                                echo '
+                                <th>Action</th>
+                                ';
+                            }; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,10 +77,12 @@ require "layouts/navbar.php";
                                 <td><?= $product['qty'] ?></td>
                                 <td><?= $product['categoryName'] ?></td>
                                 <td><?= $product['userName'] ?></td>
+                                <?php if($user[5] === 'admin'): ?>
                                 <td class="d-5">
                                     <a href="/productUpdate?id=<?= $product['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
                                     <a href="/deleteProduct?id=<?= $product['id'] ?>" class="text-danger p-2"  data-toggle="modal" data-target="#deleteProduct"><i class="fa fa-trash"></i></a>
                                 </td>
+                                <?php endif;?>
                             </tr>
                         <?php
                         }
@@ -176,7 +184,7 @@ require "layouts/navbar.php";
             <div class="modal-dialog ">
                 <div class="modal-content border-bottom-danger">
                     <div class="modal-header">
-                        <h5 class="modal-title text-danger">Delete Category</h5>
+                        <h5 class="modal-title text-danger">Delete Product</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

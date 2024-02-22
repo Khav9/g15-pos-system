@@ -63,12 +63,15 @@ $user = $_SESSION['user'];
         </div>
     </li>
     <!-- Nav Item - Tables -->
+    <?php
+    if ($user[5] === 'admin'):
+    ?>
     <li class="nav-item">
         <a class="nav-link" href="/users">
             <i class="fas fa-fw fa-users"></i>
             <span>Users</span></a>
     </li>
-
+    <?php endif; ?>
     <li class="nav-item">
         <a class="nav-link" href="/reports">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -78,7 +81,7 @@ $user = $_SESSION['user'];
 
     <!-- Nav Item - Expired -->
     <li class="nav-item">
-        <a class="nav-link" href="/users">
+        <a class="nav-link" href="/expired">
             <i class="fas fa-fw fa-ban"></i>
             <span>Expired</span></a>
     </li>
@@ -252,7 +255,6 @@ $user = $_SESSION['user'];
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['2'] ?></span>
-                        <!-- <img class="img-profile rounded-circle" src="assets/images/undraw_profile.svg"> -->
                         <img width="54px" height="54px" class="rounded-circle" src="assets/profiles/<?= $user[6] ?>" alt="">
                     </a>
                     <!-- Dropdown - User Information -->
