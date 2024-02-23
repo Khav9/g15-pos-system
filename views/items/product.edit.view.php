@@ -17,7 +17,7 @@ require "layouts/navbar.php";
                             </div>
                             <div class="col">
                                 <label for="">Code of Product</label>
-                                <input type="text" class="form-control" placeholder="112233" name="code" value="<?=$product['code']?>">
+                                <input type="number" class="form-control" placeholder="112233" name="code" value="<?=$product['code']?>">
                             </div>
                         </div>
                         <div class="row">

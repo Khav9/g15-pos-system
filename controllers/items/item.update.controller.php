@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $asign = $_POST['asign'];
       $date = $_POST['date'];
       $id = $_POST['id'];
+      $code = $_POST['code'];
       
       if (!empty($_POST['name']) and !empty($_POST['price']) and !empty($_POST['qty']) and !empty($_POST['category']) and !empty($_POST['asign'])) {
             
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $nameInDB = $newFileName . '.' . $imageExtension;
                         move_uploaded_file($_FILES["image"]["tmp_name"], $nameInDirectory);
 
-                        $isUpdate = updateProduct($name, $price, $quantity, $category, $asign, $date, $nameInDB, $id);
+                        $isUpdate = updateProduct($name,$code, $price, $quantity, $category, $asign, $date, $nameInDB, $id);
 
                         header('Location: /items');
                   };
