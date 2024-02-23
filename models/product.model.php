@@ -56,22 +56,23 @@ function updateProduct(string $name, int $code, int $price, int $quantity, strin
 }
 
 // by don't update image
-// function updateProNotImage(string $name, int $price, int $quantity, string $category, string $asign, string $date, int $id) : bool
-// {
-//     global $connection;
-//     $statement = $connection->prepare("update products set name = :name, price = :price, qty = :quantity, categoryID = :category, userID = :asign, expire = :date where id = :id");
-//     $statement->execute([
-//         ':name' => $name,
-//         ':price' => $price,
-//         ':quantity' => $quantity,
-//         ':category' => $category,
-//         ':asign' => $asign,
-//         ':date' => $date,
-//         ':id' => $id,
-//     ]);
+function updateProNotImage(string $name,string $code, int $price, int $quantity, string $category, string $asign, string $date, int $id) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("update products set name = :name, code = :code, price = :price, qty = :quantity, categoryID = :category, userID = :asign, expire = :date where id = :id");
+    $statement->execute([
+        ':name' => $name,
+        ':code' => $code,
+        ':price' => $price,
+        ':quantity' => $quantity,
+        ':category' => $category,
+        ':asign' => $asign,
+        ':date' => $date,
+        ':id' => $id,
+    ]);
 
-//     return $statement->rowCount() > 0;
-// }
+    return $statement->rowCount() > 0;
+}
 
 function deleteProduct(int $id) : bool
 {

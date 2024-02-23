@@ -80,7 +80,7 @@ require "layouts/navbar.php";
                                 <?php if($user[5] === 'admin'): ?>
                                 <td class="d-5">
                                     <a href="/productUpdate?id=<?= $product['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
-                                    <a href="/deleteProduct?id=<?= $product['id'] ?>" class="text-danger p-2"  data-toggle="modal" data-target="#deleteProduct"><i class="fa fa-trash"></i></a>
+                                    <a href="/controllers/items/item.delete.controller.php?id=<?= $product['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
                                 </td>
                                 <?php endif;?>
                             </tr>
@@ -156,6 +156,7 @@ require "layouts/navbar.php";
                                         <div>
                                             <select class="form-select form-select-sm form-control" name="asign" aria-label=".form-select-sm example">
                                                 <option selected disabled>Asign Users</option>
+                                                <option value="0">Available</option>
                                                 <?php foreach ($users as $key => $user) : ?>
                                                     <option value="<?= $user['id'] ?>"><?= $user['userName'] ?></option>
                                                 <?php endforeach ?>
@@ -180,7 +181,7 @@ require "layouts/navbar.php";
             </div>
         </div>
         <!-- delete -->
-        <div class="modal" id="deleteProduct" tabindex="-1">
+        <!-- <div class="modal" id="deleteProduct" tabindex="-1">
             <div class="modal-dialog ">
                 <div class="modal-content border-bottom-danger">
                     <div class="modal-header">
@@ -203,7 +204,7 @@ require "layouts/navbar.php";
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 </div>

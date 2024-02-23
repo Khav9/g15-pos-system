@@ -31,9 +31,9 @@ $user = $_SESSION['user'];
                             <input type="text" name="search" id="searchInput" class="form-control" placeholder="Searh " aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                     </form>
-                    <?php if($user[5] === 'admin'):?>
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square mr-3"></i>Create Category</a>
-                    <?php endif;?>
+                    <?php if ($user[5] === 'admin') : ?>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square mr-3"></i>Create Category</a>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="card-body">
@@ -44,7 +44,7 @@ $user = $_SESSION['user'];
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <?php if($user[5] === 'admin'){
+                                <?php if ($user[5] === 'admin') {
                                     echo '
                                     <th>Action</th>
                                     ';
@@ -60,11 +60,11 @@ $user = $_SESSION['user'];
                                     <td><?= $key + 1 ?></td>
                                     <td><?= $category['categoryName'] ?></td>
                                     <td><?= $category['description'] ?></td>
-                                    <?php if($user[5] === 'admin'):?>
-                                    <td class="d-flex justify-content-between align-items-center pt-0 pb-1">
-                                        <a href="/categoryUpdate?id=<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
-                                        <a href="delete" class="text-danger p-2" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a>
-                                    </td>
+                                    <?php if ($user[5] === 'admin') : ?>
+                                        <td class="d-flex justify-content-between align-items-center pt-0 pb-1">
+                                            <a href="/categoryUpdate?id=<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
+                                            <a href="controllers/categories/category.delete.controller.php?id=<?=$category['id']?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
+                                        </td>
                                     <?php endif; ?>
                                 </tr>
                             <?php
@@ -110,34 +110,7 @@ $user = $_SESSION['user'];
                     </div>
                 </div>
             </div>
-
-            <!-- delete -->
-            <div class="modal" id="deleteModal" tabindex="-1">
-                <div class="modal-dialog ">
-                    <div class="modal-content border-bottom-danger">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-danger">Delete Category</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to delete this category ?</p>
-
-                        </div>
-                        <div class="modal-footer">
-                            <form action="controllers/categories/category.delete.controller.php?id=<?= $category['id'] ?>" method="post">
-                                <button type="button" class="btn btn-secondary btn-circle" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
-                                <input type="hidden" value="<?= $category['id'] ?>" name="id">
-                                <button type="submit" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
     </div>
 </div>
 <!-- /.container-fluid -->

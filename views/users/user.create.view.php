@@ -13,7 +13,7 @@ $user = $_SESSION['user'];
                   <h2 class="m-0 font-weight-bold text-primary text-center">Create New User</h2>
             </div>
             <div class="card-body">
-                  <form action="controllers/users/insert.user.controller.php" method="post"  enctype="multipart/form-data">
+                  <form action="controllers/users/insert.user.controller.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                               <label for="inputAddress">User Name</label>
                               <input type="text" class="form-control" id="inputAddress" Name="name">
@@ -46,6 +46,7 @@ $user = $_SESSION['user'];
             </div>
       </div>
       <!-- /.container-fluid -->
+     
       </body>
 
       </html>

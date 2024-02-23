@@ -33,15 +33,14 @@ function getUser(int $id) : array
     return $statement->fetch();
 }
 
-function updateUser(string $name, string $email, string $phone, string $role, int $id) : bool
+function updateUser(string $name, string $email, string $phone, int $id) : bool
 {
     global $connection;
-    $statement = $connection->prepare("update users set userName = :userName, email = :email, phone = :phone, role = :role where id = :id");
+    $statement = $connection->prepare("update users set userName = :userName, email = :email, phone = :phone where id = :id");
     $statement->execute([
         ':userName' => $name,
         ':email' => $email,
         ':phone' => $phone,
-        ':role' => $role,
         ':id' => $id
 
     ]);
