@@ -24,7 +24,6 @@ $routes = [
      '/userCreate' => 'controllers/users/user.create.controller.php',
      '/userUpdate' => 'controllers/users/user.edit.controller.php',
      //category
-     '/categoryCreate'=> 'controllers/categories/category.create.controller.php',
      '/categoryUpdate'=> 'controllers/categories/category.edit.controller.php',
 
      //product

@@ -10,7 +10,48 @@ $user = $_SESSION['user'];
 <!-- Begin Page Content -->
 
 <script src="/vendor/search_categorye/search_vendor.js"></script>
+<link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.css">
+<!-- <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.error.css"> -->
+<script src="/vendor/alerts.categoty/alerts.category.js" defer></script>
+
 <div class="container-fluid">
+
+    <!-- notification -->
+    <div class="notification">
+        <?php if (isset($_SESSION['success-category'])) : ?>
+            <div class="alert alert-success alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
+                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                <div class="d-felx justify-content-center">
+                    <!-- <h6>News</h6> -->
+                    <p><?= $_SESSION['success-category'] ?></p>
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+            unset($_SESSION['success-category']);
+        endif;
+        ?>
+        <?php if (isset($_SESSION['error-category'])) : ?>
+            <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.error.css">
+
+            <div class="alert alert-warning alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
+                <i class="fa fa-exclamation-triangle" id="catWarning" aria-hidden="true"></i>
+                <div class="d-felx justify-content-center">
+                    <!-- <h6>News</h6> -->
+                    <p class="text">Please fill all information !</p>
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+            unset($_SESSION['error-category']);
+        endif;
+        ?>
+    </div>
+
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
@@ -63,7 +104,7 @@ $user = $_SESSION['user'];
                                     <?php if ($user[5] === 'admin') : ?>
                                         <td class="d-flex justify-content-between align-items-center pt-0 pb-1">
                                             <a href="/categoryUpdate?id=<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
-                                            <a href="controllers/categories/category.delete.controller.php?id=<?=$category['id']?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
+                                            <a href="controllers/categories/category.delete.controller.php?id=<?= $category['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
                                         </td>
                                     <?php endif; ?>
                                 </tr>

@@ -1,0 +1,13 @@
+
+.toast{
+    --color: red;
+} 
+
+#catWarning{
+    font-size: 28px;
+    padding-right: 20px;
+    color: yellow;
+}
+.text{
+    color: wheat;
+}

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "../../models/category.model.php";
 require "../../database/database.php";
 
@@ -11,10 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //it return true or false
         if ($isCreate) {
             header("location: /categories");
+            $_SESSION['success-category'] = "Category created successfully";
         } else {
-            header("location: /categoryCreate");
+            header("location: /categories");
         }
     }else{
-        header("location: /categoryCreate");
+        $_SESSION['error-category'] = ".bg-gradient-warning";
+        header("location: /categories");
     }
 }
