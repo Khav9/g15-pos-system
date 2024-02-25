@@ -9,7 +9,7 @@ require "layouts/navbar.php";
 
 
 ?>
-
+<script src="vendor/chart.js/chat.test.js" defer></script>
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <?php if (isset($_SESSION['success'])) : ?>
@@ -153,11 +153,13 @@ require "layouts/navbar.php";
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
+                        <!-- <canvas id="myAreaChart"></canvas> -->
+                        <canvas id="myChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Pie Chart -->
         <div class="col-xl-4 col-lg-5">
@@ -181,7 +183,8 @@ require "layouts/navbar.php";
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
+                        <!-- <canvas id="myPieChart"></canvas> -->
+                        <canvas id="myPie" class="mh-400px"></canvas>
                     </div>
                     <div class="mt-4 text-center small">
                         <span class="mr-2">
@@ -198,6 +201,8 @@ require "layouts/navbar.php";
             </div>
         </div>
     </div>
+
+
 
     <!-- Content Row -->
     <div class="row">

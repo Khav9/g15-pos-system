@@ -64,7 +64,7 @@ $user = $_SESSION['user'];
                                     <td><?= $user['role'] ?></td>
                                     <td class="d-flex justify-content-between">
                                         <a href="/userUpdate?id=<?= $user['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
-                                        <a href="controllers/users/user.delete.controller.php?id=<?= $user['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>createUser
+                                        <a href="controllers/users/user.delete.controller.php?id=<?= $user['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php

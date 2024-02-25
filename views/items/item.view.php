@@ -39,11 +39,11 @@ require "layouts/navbar.php";
                     </select>
                 </div>
             </form>
-            <?php if($user[5] === 'admin'): ?>
-            <div class="mr-4 mt-4">
-                <a href="/productCreate" class="btn btn-primary" data-toggle="modal" data-target="#createProduct"><i class="fa fa-plus-square mr-3"></i>Create Product</a>
-            </div>
-            <?php endif;?>
+            <?php if ($user[5] === 'admin') : ?>
+                <div class="mr-4 mt-4">
+                    <a href="/productCreate" class="btn btn-primary" data-toggle="modal" data-target="#createProduct"><i class="fa fa-plus-square mr-3"></i>Create Product</a>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -56,9 +56,9 @@ require "layouts/navbar.php";
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Category</th>
-                            <th>Asign User</th>
-                            <?php if($user[5] === 'admin'){
+                            <?php if ($user[5] === 'admin') {
                                 echo '
+                                <th>Asign User</th>
                                 <th>Action</th>
                                 ';
                             }; ?>
@@ -66,7 +66,12 @@ require "layouts/navbar.php";
                     </thead>
                     <tbody>
                         <?php
-                        $products = getProducts(); // set it here it's okay. if set it on product.controller.php it's okay
+                        $products = null;
+                        if ($user[5] === 'admin') {
+                            $products = getProducts(); // set it here it's okay. if set it on product.controller.php it's okay
+                        } else {
+                            $products = getProductsByUser($user[0]);
+                        }
                         foreach ($products as $key => $product) {
                         ?>
                             <tr>
@@ -76,13 +81,13 @@ require "layouts/navbar.php";
                                 <td><?= $product['price'] ?></td>
                                 <td><?= $product['qty'] ?></td>
                                 <td><?= $product['categoryName'] ?></td>
-                                <td><?= $product['userName'] ?></td>
-                                <?php if($user[5] === 'admin'): ?>
-                                <td class="d-5">
-                                    <a href="/productUpdate?id=<?= $product['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
-                                    <a href="/controllers/items/item.delete.controller.php?id=<?= $product['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
-                                </td>
-                                <?php endif;?>
+                                <?php if ($user[5] === 'admin') : ?>
+                                    <td><?= $product['userName'] ?></td>
+                                    <td class="d-5">
+                                        <a href="/productUpdate?id=<?= $product['id'] ?>" class="text-info p-2"><i class="fa fa-pen"></i></a>
+                                        <a href="/controllers/items/item.delete.controller.php?id=<?= $product['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                <?php endif; ?>
                             </tr>
                         <?php
                         }
@@ -206,7 +211,7 @@ require "layouts/navbar.php";
         </div>
     </div> -->
 
-</div>
+    </div>
 </div>
 
 <!-- /.container-fluid -->
