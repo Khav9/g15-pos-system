@@ -103,11 +103,72 @@ $user = $_SESSION['user'];
                                     <td><?= $category['description'] ?></td>
                                     <?php if ($user[5] === 'admin') : ?>
                                         <td class="d-flex justify-content-between align-items-center pt-0 pb-1">
-                                            <a href="/categoryUpdate?id=<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
-                                            <a href="controllers/categories/category.delete.controller.php?id=<?= $category['id'] ?>" class="text-danger p-2"><i class="fa fa-trash"></i></a>
+                                            <a href="/categoryUpdate?id=<?= $category['id'] ?>" data-toggle="modal" data-target="#editCategory<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
+                                            <a href="controllers/categories/category.delete.controller.php?id=<?= $category['id'] ?>" class="text-danger p-2" data-toggle="modal" data-target="#deleteCategory<?= $category['id'] ?>"><i class="fa fa-trash"></i></a>
                                         </td>
                                     <?php endif; ?>
                                 </tr>
+                                <!-- The Modal edit-->
+                                <div class="modal" id="editCategory<?= $category['id'] ?>">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content bg-primary text-white">
+
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update Category</h4>
+                                                <button type="button" class="close text-danger" data-dismiss="modal">&times;</button>
+                                            </div>
+
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <form action="controllers/categories/category.update.controller.php" method="post">
+                                                    <input type="hidden" name="id" value="<?= $category['id'] ?>">
+                                                    <div class="form-group">
+                                                        <label for="inputAddress">Category Name</label>
+                                                        <input type="text" class="form-control" id="inputAddress" Name="name" value="<?= $category['categoryName'] ?>">
+                                                    </div>
+                                                    <div class="form-row">
+
+                                                        <label for="inputEmail4">Description</label>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"><?= $category['description'] ?></textarea>
+
+                                                    </div>
+                                                    <div class="form-row d-flex justify-content-between mt-3">
+                                                        <a href="/categories" class="btn btn-danger">Cancel</a>
+                                                        <button type="submit" class="btn btn-success">Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <!-- Modal footer -->
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal delete-->
+                                <div class="modal fade" id="deleteCategory<?= $category['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-danger" id="exampleModalLabel">Delete Category</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delet "<span class="text-primary"><?=$category['categoryName']?></span> " ?</p>
+                                            </div>
+                                            <form action="controllers/categories/category.delete.controller.php" class="modal-footer" method="post">
+                                                <input type="hidden" name="id" value="<?= $category['id'] ?>">
+                                                <div class="modal-footer">
+                                                    <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php
                             };
                             ?>
@@ -118,7 +179,7 @@ $user = $_SESSION['user'];
             <!-- The Modal create-->
             <div class="modal" id="myModal">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content bg-primary text-white">
 
                         <!-- Modal Header -->
                         <div class="modal-header">
@@ -141,7 +202,7 @@ $user = $_SESSION['user'];
                                 </div>
                                 <div class="form-row d-flex justify-content-between mt-3">
                                     <a href="/categories" class="btn btn-danger">Cancel</a>
-                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <button type="submit" class="btn btn-success">Create</button>
                                 </div>
                             </form>
                         </div>
@@ -151,6 +212,7 @@ $user = $_SESSION['user'];
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
