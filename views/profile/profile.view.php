@@ -23,10 +23,17 @@ $user = $_SESSION['user'];
                         </div>
                   </div>
                   <div class="col-md-6">
-                        <div class="profile-head">
-                              <h5>
-                                    POS SYSTEM
-                              </h5>
+                        <div class="profile-head ">
+                              <div class="edit d-flex justify-content-between">
+                                    <h5>
+                                          POS SYSTEM
+                                    </h5>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                                          Edit information
+                                    </button>
+                              </div>
+
+
                               <h6>
                                     <?= $user[1]; ?>
                               </h6>
@@ -146,7 +153,7 @@ $user = $_SESSION['user'];
                         <!-- Modal body -->
                         <div class="modal-body text-center">
                               <form action="controllers/profile/update.profile.controller.php" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="<?=$user['id']?>">
+                                    <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                     <h4 class="modal-title text-center">UPDATE PROFILE PHOTO</h4>
                                     <br>
 
@@ -167,7 +174,6 @@ $user = $_SESSION['user'];
                                           }
                                     </script>
 
-
                                     <div class="custom-file pmd-custom-file mb-3 mt-3">
                                           <input type="file" class="custom-file-input is-valid" name="imagePro" accept="image/*" onchange="readURL(this)">
                                           <label class="custom-file-label is-valid" for="validatecustomFile">Choose Photho</label>
@@ -182,6 +188,46 @@ $user = $_SESSION['user'];
 
                         <!-- Modal footer -->
 
+                  </div>
+            </div>
+      </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Welcome to edit information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                  <div class="modal-body">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                              <form action="controllers/profile/update.information.controller.php" method="post">
+                                    <div class="form-group">
+                                          <input type="hidden" value="<?= $user[0]; ?>" name="id">
+                                          <label for="exampleInputEmail1">Role</label>
+                                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $user[5]; ?>" name="role">
+
+                                    </div>
+                                    <div class="form-group">
+                                          <label for="exampleInputPassword1">Email</label>
+                                          <input type="email" class="form-control" id="exampleInputPassword1" value="<?= $user[2]; ?>" name="email">
+
+                                    </div>
+                                    <div class="form-group">
+                                          <label for="phonenumber ">Phone</label>
+                                          <input type="text" class="form-control" id="phonenumber" aria-describedby="emailHelp" value="<?= $user[3]; ?>" name="phone">
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                          <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                              </form>
+                        </div>
                   </div>
             </div>
       </div>

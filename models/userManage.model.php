@@ -47,6 +47,20 @@ function updateUser(string $name, string $email, string $phone, int $id) : bool
 
     return $statement->rowCount() > 0;
 }
+function updateInfoUser(string $name, string $email, string $phone ,$id) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("update users set role = :role, email = :email, phone = :phone where id = :id");
+    $statement->execute([
+        ':role' => $name,
+        ':email' => $email,
+        ':phone' => $phone,
+        ':id' => $id
+
+    ]);
+
+    return $statement->rowCount() > 0;
+}
 
 //update image photo (only for images)
 function updateImageUser(string $image, int $id) : bool
