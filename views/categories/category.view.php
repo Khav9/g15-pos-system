@@ -108,18 +108,16 @@ $user = $_SESSION['user'];
                                         </td>
                                     <?php endif; ?>
                                 </tr>
-                                <!-- The Modal edit-->
-                                <div class="modal" id="editCategory<?= $category['id'] ?>">
+                                <!-- The Modal create-->
+                                <div class="modal fade" id="editCategory<?= $category['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content bg-primary text-white">
-
-                                            <!-- Modal Header -->
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Update Category</h4>
-                                                <button type="button" class="close text-danger" data-dismiss="modal">&times;</button>
+                                                <h5 class="modal-title text-white" id="exampleModalLabel">Update Category</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-
-                                            <!-- Modal body -->
                                             <div class="modal-body">
                                                 <form action="controllers/categories/category.update.controller.php" method="post">
                                                     <input type="hidden" name="id" value="<?= $category['id'] ?>">
@@ -139,13 +137,9 @@ $user = $_SESSION['user'];
                                                     </div>
                                                 </form>
                                             </div>
-
-                                            <!-- Modal footer -->
-
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- Modal delete-->
                                 <div class="modal fade" id="deleteCategory<?= $category['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -157,7 +151,7 @@ $user = $_SESSION['user'];
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Are you sure you want to delet "<span class="text-primary"><?=$category['categoryName']?></span> " ?</p>
+                                                <p>Are you sure you want to delet "<span class="text-primary"><?= $category['categoryName'] ?></span> " ?</p>
                                             </div>
                                             <form action="controllers/categories/category.delete.controller.php" class="modal-footer" method="post">
                                                 <input type="hidden" name="id" value="<?= $category['id'] ?>">
@@ -177,17 +171,15 @@ $user = $_SESSION['user'];
                 </div>
             </div>
             <!-- The Modal create-->
-            <div class="modal" id="myModal">
+            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content bg-primary text-white">
-
-                        <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Create New Category</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h5 class="modal-title text-white" id="exampleModalLabel">Create New Category</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-
-                        <!-- Modal body -->
                         <div class="modal-body">
                             <form action="controllers/categories/insert.category.controller.php" method="post">
                                 <div class="form-group">
@@ -206,9 +198,6 @@ $user = $_SESSION['user'];
                                 </div>
                             </form>
                         </div>
-
-                        <!-- Modal footer -->
-
                     </div>
                 </div>
             </div>

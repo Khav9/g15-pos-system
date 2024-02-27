@@ -2,7 +2,7 @@
 
 require "../../database/database.php";
 
-$id = $_GET['id'] ? $_GET['id'] : null;
+$id = $_POST['id'] ? $_POST['id'] : null;
 if (isset($id))
 {
     require '../../models/userManage.model.php';

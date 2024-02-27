@@ -207,8 +207,8 @@ $user = $_SESSION['user'];
                               <form action="controllers/profile/update.information.controller.php" method="post">
                                     <div class="form-group">
                                           <input type="hidden" value="<?= $user[0]; ?>" name="id">
-                                          <label for="exampleInputEmail1">Role</label>
-                                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $user[5]; ?>" name="role">
+                                          <label for="exampleInputEmail1">Username</label>
+                                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $user[1]; ?>" name="role">
 
                                     </div>
                                     <div class="form-group">
