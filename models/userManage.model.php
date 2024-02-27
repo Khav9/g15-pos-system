@@ -50,9 +50,9 @@ function updateUser(string $name, string $email, string $phone, int $id) : bool
 function updateInfoUser(string $name, string $email, string $phone ,$id) : bool
 {
     global $connection;
-    $statement = $connection->prepare("update users set role = :role, email = :email, phone = :phone where id = :id");
+    $statement = $connection->prepare("update users set userName = :userName, email = :email, phone = :phone where id = :id");
     $statement->execute([
-        ':role' => $name,
+        ':userName' => $name,
         ':email' => $email,
         ':phone' => $phone,
         ':id' => $id

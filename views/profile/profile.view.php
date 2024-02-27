@@ -208,7 +208,7 @@ $user = $_SESSION['user'];
                                     <div class="form-group">
                                           <input type="hidden" value="<?= $user[0]; ?>" name="id">
                                           <label for="exampleInputEmail1">Username</label>
-                                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $user[1]; ?>" name="role">
+                                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $user[1]; ?>" name="userName">
 
                                     </div>
                                     <div class="form-group">
