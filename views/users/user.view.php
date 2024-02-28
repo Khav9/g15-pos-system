@@ -79,7 +79,7 @@ $user = $_SESSION['user'];
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Are you sure you want to delet "<span class="text-primary font-weight-bold"><?= $user['userName'] ?></span> " ?</p>
+                                                <p>Are you sure you want to delete "<span class="text-primary font-weight-bold"><?= $user['userName'] ?></span> " ?</p>
                                             </div>
                                             <form action="controllers/users/user.delete.controller.php" class="modal-footer" method="post">
                                                 <input type="hidden" name="id" value="<?= $user['id'] ?>">
@@ -119,8 +119,8 @@ $user = $_SESSION['user'];
                                                         </div>
                                                     </div>
                                                     <div class="form-row d-flex justify-content-between">
-                                                        <a href="/users" class="btn btn-danger">Cancel</a>
-                                                        <button type="submit" class="btn btn-success">Create</button>
+                                                        <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                                                        <button type="submit" class="btn btn-success">Update</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -173,7 +173,7 @@ $user = $_SESSION['user'];
                                 </div>
                             </div>
                             <div class="form-row d-flex justify-content-between">
-                                <a href="/users" class="btn btn-danger">Cancel</a>
+                                <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
                                 <button type="submit" class="btn btn-success">Create</button>
                             </div>
                         </form>

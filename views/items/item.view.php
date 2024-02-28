@@ -151,7 +151,7 @@ require "layouts/navbar.php";
                                                         </div>
 
                                                         <div class="col">
-                                                            <label for="">Category</label>
+                                                            <label for="">Asign User</label>
                                                             <div>
                                                                 <select class="form-select form-select-sm  form-control" name="asign" aria-label=".form-select-sm example">
                                                                     <option selected disabled>Categories</option>
@@ -165,7 +165,7 @@ require "layouts/navbar.php";
                                                         <!--  -->
                                                     </div>
                                                     <div class="form-group d-flex justify-content-between mt-5">
-                                                        <a href="/items" class="btn btn-danger">Cancel</a>
+                                                        <a class="btn btn-danger" data-dismiss="modal">Cancel</a>
                                                         <button type="submit" class="btn btn-success">Update</button>
                                                     </div>
                                                 </div>
@@ -215,7 +215,7 @@ require "layouts/navbar.php";
         <div class="modal-dialog">
             <div class="modal-content bg-primary text-white">
                 <div class="modal-header">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Create New User</h5>
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Create New Product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -284,7 +284,7 @@ require "layouts/navbar.php";
                             </div>
 
                             <div class="form-group d-flex justify-content-between mt-5">
-                                <a href="/items" class="btn btn-danger">Cancel</a>
+                                <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
                                 <button type="submit" class="btn btn-success">Create</button>
 
                             </div>

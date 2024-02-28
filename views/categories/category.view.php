@@ -132,7 +132,7 @@ $user = $_SESSION['user'];
 
                                                     </div>
                                                     <div class="form-row d-flex justify-content-between mt-3">
-                                                        <a href="/categories" class="btn btn-danger">Cancel</a>
+                                                        <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
                                                         <button type="submit" class="btn btn-success">Update</button>
                                                     </div>
                                                 </form>
@@ -151,7 +151,7 @@ $user = $_SESSION['user'];
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Are you sure you want to delet "<span class="text-primary"><?= $category['categoryName'] ?></span> " ?</p>
+                                                <p>Are you sure you want to delete "<span class="text-primary"><?= $category['categoryName'] ?></span> " ?</p>
                                             </div>
                                             <form action="controllers/categories/category.delete.controller.php" class="modal-footer" method="post">
                                                 <input type="hidden" name="id" value="<?= $category['id'] ?>">
@@ -193,7 +193,7 @@ $user = $_SESSION['user'];
 
                                 </div>
                                 <div class="form-row d-flex justify-content-between mt-3">
-                                    <a href="/categories" class="btn btn-danger">Cancel</a>
+                                    <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
                                     <button type="submit" class="btn btn-success">Create</button>
                                 </div>
                             </form>

@@ -22,11 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                   $checkImageSize = getimagesize($_FILES["image"]["tmp_name"]);
                   if ($checkImageSize) {
-                        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                              $_SESSION['error'] = "Wrong Image extension!";
-                              header('Location: /items');
-                        } else {
-
+                        // if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+                        //       header('Location: /items');
+                        // } 
+                        // else {
                               $imageExtension = explode('.', $target_file)[6];
                               $newFileName = uniqid();
                               $nameInDirectory = $directory . $newFileName . '.' . $imageExtension;
@@ -36,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               $isCreate = createProduct($name, $code, $price, $quantity, $category, $asign, $date, $nameInDB);
                               $_SESSION['success'] = "Account successfully created";
                               header('Location: /items');
-                        }
+                        // }
                   } else {
                         $_SESSION['error'] = "Not Image file!";
                         header('Location: /items');
