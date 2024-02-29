@@ -94,9 +94,9 @@ $user = $_SESSION['user'];
                                 <!-- Modal edit-->
                                 <div class="modal fade" id="editUser<?= $user['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <div class="modal-content bg-primary text-white">
+                                        <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title text-white" id="exampleModalLabel">Update User</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -104,6 +104,9 @@ $user = $_SESSION['user'];
                                             <div class="modal-body">
                                                 <form action="controllers/users/user.update.controller.php" method="post">
                                                     <input type="hidden" name="id" value="<?= $user[0] ?>">
+                                                    <div class="text-center">
+                                                        <img width="150px" height="150px" class="rounded-circle border border-success p-3 " src="assets/profiles/<?= $user['image'] ?>" alt="" id="img">
+                                                    </div>
                                                     <div class="form-group">
                                                         <label for="inputAddress">User Name</label>
                                                         <input type="text" class="form-control" id="inputAddress" Name="name" value="<?= $user[1] ?>">

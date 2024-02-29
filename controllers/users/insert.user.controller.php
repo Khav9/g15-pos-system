@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         header('Location: /users');
                   }
             } else {
-                  $imageUser = "image_user.png";
+                  $imageUser = "../../assets/profiles/65e017b766169.png";
                   createAccount($name, $email, $phone, $encryptPassword, $imageUser);
                   header('Location: /users');
             }

@@ -24,27 +24,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                   $checkImageSize = getimagesize($_FILES["image"]["tmp_name"]);
                   if ($checkImageSize) {
-                        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                              $_SESSION['error'] = "Wrong Image extension!";
-                              header('Location: /items');
-                        } else {
+                        $imageExtension = explode('.', $target_file)[6];
+                        $newFileName = uniqid();
+                        $nameInDirectory = $directory . $newFileName . '.' . $imageExtension;
+                        $nameInDB = $newFileName . '.' . $imageExtension;
+                        move_uploaded_file($_FILES["image"]["tmp_name"], $nameInDirectory);
 
-                              $imageExtension = explode('.', $target_file)[6];
-                              $newFileName = uniqid();
-                              $nameInDirectory = $directory . $newFileName . '.' . $imageExtension;
-                              $nameInDB = $newFileName . '.' . $imageExtension;
-                              move_uploaded_file($_FILES["image"]["tmp_name"], $nameInDirectory);
+                        $isUpdate = updateProduct($name, $code, $price, $quantity, $category, $asign, $date, $nameInDB, $id);
 
-                              $isUpdate = updateProduct($name, $code, $price, $quantity, $category, $asign, $date, $nameInDB, $id);
-
-                              header('Location: /items');
-                        };
+                        header('Location: /items');
                   };
             } else {
                   $isUpdate = updateProNotImage($name, $code, $price, $quantity, $category, $asign, $date, $id);
                   header('location: /items');
             }
-      }else{
+      } else {
             header('location: /items');
       }
 };
