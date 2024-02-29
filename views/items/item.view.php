@@ -28,9 +28,9 @@ require "layouts/navbar.php";
                 </div>
             </form>
             <form action="#">
-                <div class="col-md-12 d-flex mt-4">
-                    <label class="d-flex pr-5">Fitter Product</label>
-                    <select name="product" id="category">
+                <div class="col-md-12 d-flex mt-4 align-items-center">
+                    <label class="d-flex pr-5 col-7">Fitter Product</label>
+                    <select name="product" id="category" class="form-control">
                         <option value="All">All</option>
                         <?php foreach ($categories as $key => $category) : ?>
                             <option value="<?= $category['categoryName'] ?>"><?= $category['categoryName'] ?></option>
@@ -96,13 +96,13 @@ require "layouts/navbar.php";
                                 <div class="modal-dialog">
                                     <div class="modal-content bg-primary text-white">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-white" id="exampleModalLabel">Create New User</h5>
+                                            <h5 class="modal-title text-white" id="exampleModalLabel">Update product</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="controllers/items/item.update.controller.php" method="post">
+                                            <form action="controllers/items/item.update.controller.php" method="post" enctype="multipart/form-data">
                                                 <input type="hidden" name="id" value="<?= $product['id'] ?>">
                                                 <div>
                                                     <div class="row">
@@ -142,10 +142,14 @@ require "layouts/navbar.php";
                                                             <div>
                                                                 <select class="form-select form-select-sm  form-control" name="category" aria-label=".form-select-sm example">
                                                                     <option selected disabled>Categories</option>
-                                                                    <?php foreach ($categories as $key => $category) : ?>
-                                                                        <option value="<?= $category['id'] ?>">
-                                                                            <?= $category['categoryName'] ?></option>
-                                                                    <?php endforeach; ?>
+                                                                    <option value="<?= $product['categoryID'] ?>" selected><?= $product['categoryName'] ?></option>
+                                                                    <?php foreach ($categories as $key => $category) :
+                                                                        if ($category['categoryName'] != $product['categoryName']) : ?>
+                                                                            <option value="<?= $category['id'] ?>">
+                                                                                <?= $category['categoryName'] ?></option>
+                                                                    <?php
+                                                                        endif;
+                                                                    endforeach; ?>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -154,11 +158,15 @@ require "layouts/navbar.php";
                                                             <label for="">Asign User</label>
                                                             <div>
                                                                 <select class="form-select form-select-sm  form-control" name="asign" aria-label=".form-select-sm example">
-                                                                    <option selected disabled>Categories</option>
-                                                                    <?php foreach ($users as $key => $use) : ?>
-                                                                        <option value="<?= $use['id'] ?>">
-                                                                            <?= $use['userName'] ?></option>
-                                                                    <?php endforeach; ?>
+                                                                    <option selected disabled>Asign user</option>
+                                                                    <option value="<?= $product['userID'] ?>" selected><?= $product['userName'] ?></option>
+                                                                    <?php foreach ($users as $key => $use) :
+                                                                        if ($use['userName'] != $product['userName']) : ?>
+                                                                            <option value="<?= $use['id'] ?>">
+                                                                                <?= $use['userName'] ?></option>
+                                                                    <?php
+                                                                        endif;
+                                                                    endforeach; ?>
                                                                 </select>
                                                             </div>
                                                         </div>
