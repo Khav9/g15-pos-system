@@ -97,3 +97,13 @@ function getProductsByUser(int $id) : array
     ]);
     return $statement->fetchAll();
 }
+
+function sum(array $products) 
+{
+$total = 0;
+foreach ($products as $key => $product) {
+    $total += $product['qty'];
+}
+return $total;
+}
+
