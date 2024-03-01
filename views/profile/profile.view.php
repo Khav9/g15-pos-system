@@ -53,10 +53,23 @@ $user = $_SESSION['user'];
                                                 </div>
                                                 <div class="row">
                                                       <div class="col-md-5">
-                                                            <label>Create at:</label>
+                                                            <label>Create Date:</label>
                                                       </div>
                                                       <div class="col-md-6">
-                                                            <p><?= $user[7]; ?></p>
+                                                            <p class="badge badge-info"><?php
+                                                             echo date('F j, Y',strtotime($user[7]));
+                                                             ?></p>
+                                                      </div>
+                                                      <br>
+                                                </div>
+                                                <div class="row">
+                                                      <div class="col-md-5">
+                                                            <label>Create Time:</label>
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                            <p><?php
+                                                             echo date('g:i A',strtotime($user[7]));
+                                                             ?></p>
                                                       </div>
                                                       <br>
                                                 </div>
