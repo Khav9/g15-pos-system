@@ -64,6 +64,7 @@ $user = $_SESSION['user'];
                                     <td><?= $user['role'] ?></td>
                                     <td class="d-flex justify-content-between">
                                         <a href="/userUpdate?id=<?= $user['id'] ?>" class="text-info p-2" data-toggle="modal" data-target="#editUser<?= $user['id'] ?>"><i class="fa fa-pen"></i></a>
+                                        <a href="/user?id=<?= $user['id'] ?>" class="text-info p-2" data-toggle="modal" data-target="#detailInfo<?= $user['id'] ?>"><i class="fa fa-eye"></i></a>
                                         <a href="controllers/users/user.delete.controller.php?id=<?= $user['id'] ?>" class="text-danger p-2" data-toggle="modal" data-target="#deleteUser<?= $user['id'] ?>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -126,6 +127,53 @@ $user = $_SESSION['user'];
                                                         <button type="submit" class="btn btn-success">Update</button>
                                                     </div>
                                                 </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal detail-->
+                                <div class="modal fade" id="detailInfo<?= $user['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">User Information Summary</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="text-center">
+                                                    <img width="150px" height="150px" class="rounded-circle border border-success p-3 " src="assets/profiles/<?= $user['image'] ?>" alt="" id="img">
+                                                </div>
+                                                <br>
+                                                <div class="pl-4">
+                                                    <div class="pl-4 col-md-12">
+                                                        <div class="row">
+                                                            <label for="inputAddress">User Name :</label>
+                                                            <p class="pl-4 font-weight-bold"><?= $user['userName'] ?></p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <label for="inputAddress">User Role :</label>
+                                                            <p class="pl-4 font-weight-bold"><?= $user['role'] ?></p>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <label for="inputAddress">User's email:</label>
+                                                            <p class="pl-4 font-weight-bold"><?= $user['email'] ?></p>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <label for="inputAddress">Number Phone :</label>
+                                                            <p class="pl-4 font-weight-bold"><?= $user['phone'] ?></p>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <label for="inputAddress">Create At :</label>
+                                                            <p class="pl-4 font-weight-bold"><?= $user['createAt'] ?></p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
