@@ -10,12 +10,6 @@ require "layouts/navbar.php";
 
 <script src="/vendor/search_product/search_product_vendor.js" defer></script>
 
-<?php
-$numberOfExpire = 0;
-foreach ($productExpires as $key => $productExpire) {
-    $numberOfExpire += 1;
-}
-?>
 <form id="searchForm" class=" ml-3">
     <h2 class="ml-2">Expiration Notification</h2> 
     <div class="row-3 d-flex mr-2">
@@ -32,7 +26,11 @@ foreach ($productExpires as $key => $productExpire) {
 
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                <?php 
-                                echo $numberOfExpire;
+                               if ($user[5] === 'admin'){
+                                   echo $numberOfExpire;
+                               }else{
+                                echo $numberOfExpireTodayUser;
+                               }
                                ?>
                             </div>
                         </div>
@@ -53,7 +51,13 @@ foreach ($productExpires as $key => $productExpire) {
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Expire in 7 days</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                               0
+                               <?php 
+                               if ($user[5] === 'admin'){
+                                   echo $numberOfExpireSevenDay;
+                               }else{
+                                echo $numberOfExpireSevenDayUser;
+                               }
+                               ?>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -63,12 +67,7 @@ foreach ($productExpires as $key => $productExpire) {
                 </div>
             </div>
         </div>
-
-
         <!-- Pending Requests Card Example -->
-        <?php
-        if ($user[5] === 'admin') :
-        ?>
             <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
@@ -77,7 +76,13 @@ foreach ($productExpires as $key => $productExpire) {
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Expire in 1 months</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                   0
+                               <?php 
+                               if ($user[5] === 'admin'){
+                                   echo $numberOfExpireOneMonth;
+                               }else{
+                                echo $numberOfExpireOneMonthUser;
+                               }
+                               ?>
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -88,7 +93,6 @@ foreach ($productExpires as $key => $productExpire) {
                     </div>
                 </div>
             </div>
-        <?php endif; ?>
     </div>
 </form>
 <div class="container-fluid col-14 mt-4">
@@ -104,18 +108,9 @@ foreach ($productExpires as $key => $productExpire) {
             </tr>
         </thead>
         <tbody>
-            <?php
-            $expires = getExpires();
-            foreach ( $expires as $key => $expire) {
-            ?>
             <tr>
-                <td><?php $expire['productName'] ?></td>
-                <td><?php $expire['barCode'] ?></td>
-                <td><?php $expire['expired'] ?></td>
+                
             </tr>
-            <?php
-            }
-            ?>
         </tbody>
     </table>
 </div>

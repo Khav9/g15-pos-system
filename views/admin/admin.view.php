@@ -42,7 +42,11 @@ require "layouts/navbar.php";
 
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?php
-                                echo "$productInStock";
+                                if ($user[5] === 'admin'){
+                                    echo $productInStock;
+                                }else{
+                                    echo $productInStockUser;
+                                }
                                 ?>
                             </div>
                         </div>
