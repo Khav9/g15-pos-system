@@ -18,6 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user'] = $user;
                 $_SESSION['success'] = "Login successful";
 
+                date_default_timezone_get();
+                date_default_timezone_set('Asia/Phnom_Penh');
+                $today = date("Y-m-d H:i:s");
+                $_SESSION['today'] = $today;
+                
                 header('Location: /admin');
             } else {
                 // echo "Password is incorrect";
