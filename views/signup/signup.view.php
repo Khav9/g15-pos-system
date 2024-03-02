@@ -22,38 +22,69 @@ require "layouts/header.php";
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
                             <!-- form here -->
-                            <form action="controllers/users/insert.user.controller.php" method="post" enctype="multipart/form-data">
+                            <form action="controllers/signup/createUser.controller.php" method="post" enctype="multipart/form-data">
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="inputAddress">User Name</label>
-                                            <input type="text" class="form-control" id="inputAddress" Name="name">
+                                            <!-- <label for="inputAddress">User Name</label> -->
+                                            <input type="text" class="form-control
+                                            <?php if (isset($_SESSION['errors'])) {
+                                                echo $_SESSION['errors']['borderName'];
+                                            }
+                                            ?>
+                                            " id="inputAddress" Name="name" placeholder="Username">
+                                            <small class="text-danger">
+                                                <?php if (isset($_SESSION['errors']['username'])) {
+                                                    echo $_SESSION['errors']['username'];
+                                                } ?>
+                                            </small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="inputCity">Phone / Tell :</label>
-                                            <input type="text" class="form-control" id="inputCity" name="phone">
+                                            <!-- <label for="inputCity">Phone / Tell :</label> -->
+                                            <input type="text" class="form-control
+                                             <?php if (isset($_SESSION['errors'])) {
+                                                    echo $_SESSION['errors']['borderPhone'];
+                                                }; ?>
+                                                " id="inputCity" name="phone" placeholder="Phone number">
+                                            <small class="text-danger">
+                                                <?php if (isset($_SESSION['errors']['phone'])) {
+                                                    echo $_SESSION['errors']['phone'];
+                                                } ?>
+                                            </small>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail4" name="email">
+                                        <!-- <label for="inputEmail4">Email</label> -->
+                                        <input type="email" class="form-control
+                                        <?php if (isset($_SESSION['errors'])) {
+                                            echo $_SESSION['errors']['borderEmail'];
+                                        }; ?>
+                                        " id="inputEmail4" name="email" placeholder="Email">
+                                        <small class="text-danger">
+                                            <?php if (isset($_SESSION['errors']['email'])) {
+                                                echo $_SESSION['errors']['email'];
+                                            } ?>
+                                        </small>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Password</label>
-                                        <input type="password" class="form-control" id="inputPassword4" name="password">
+                                        <!-- <label for="inputPassword4">Password</label> -->
+                                        <input type="password" class="form-control 
+                                        <?php if (isset($_SESSION['errors'])) {
+                                            echo $_SESSION['errors']['borderPassword'];
+                                        }; ?>
+                                        " id="inputPassword4" name="password" placeholder="Password">
+                                        <small class="text-danger">
+                                            <?php if (isset($_SESSION['errors']['password'])) {
+                                                echo $_SESSION['errors']['password'];
+                                            } ?>
+                                        </small>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="inputZip">Profile Pictcre</label>
-                                    <input type="file" class="form-control" id="inputFile" name="image">
-                                </div>
-
                                 <div class="form-row d-flex justify-content-between">
                                     <button type="submit" class="btn btn-primary btn-user btn-block">Create</button>
                                     <button class="btn btn-google btn-user btn-block">
@@ -70,7 +101,6 @@ require "layouts/header.php";
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript-->
