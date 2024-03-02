@@ -40,7 +40,7 @@ $user = $_SESSION['user'];
                 <i class="fa fa-exclamation-triangle" id="catWarning" aria-hidden="true"></i>
                 <div class="d-felx justify-content-center">
                     <!-- <h6>News</h6> -->
-                    <p class="text">Please fill all information !</p>
+                    <p class="text"><?=$_SESSION['error-category']?></p>
                 </div>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
