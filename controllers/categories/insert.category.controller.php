@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("location: /categories");
         }
     }else{
-        $_SESSION['error-category'] = ".bg-gradient-warning";
+        $_SESSION['error-category'] = "Please fill all information !";
         header("location: /categories");
     }
 }

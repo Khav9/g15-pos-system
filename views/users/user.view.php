@@ -149,28 +149,29 @@ $user = $_SESSION['user'];
                                                 <div class="pl-4">
                                                     <div class="pl-4 col-md-12">
                                                         <div class="row">
-                                                            <label for="inputAddress">User Name :</label>
-                                                            <p class="pl-4 font-weight-bold"><?= $user['userName'] ?></p>
+                                                            <label for="inputAddress" class="font-weight-bold">User Name :</label>
+                                                            <p class="ml-4 font-weight-bold badge badge-info"><?= $user['userName'] ?></p>
                                                         </div>
                                                         <div class="row">
-                                                            <label for="inputAddress">User Role :</label>
-                                                            <p class="pl-4 font-weight-bold"><?= $user['role'] ?></p>
+                                                            <label for="inputAddress" class="font-weight-bold">User Role :</label>
+                                                            <p class="pl-4 "><?= $user['role'] ?></p>
 
                                                         </div>
                                                         <div class="row">
-                                                            <label for="inputAddress">User's email:</label>
-                                                            <p class="pl-4 font-weight-bold"><?= $user['email'] ?></p>
+                                                            <label for="inputAddress" class="font-weight-bold">User's email:</label>
+                                                            <p class="pl-4 "><?= $user['email'] ?></p>
 
                                                         </div>
                                                         <div class="row">
-                                                            <label for="inputAddress">Number Phone :</label>
-                                                            <p class="pl-4 font-weight-bold"><?= $user['phone'] ?></p>
+                                                            <label for="inputAddress" class="font-weight-bold">Number Phone :</label>
+                                                            <p class="pl-4 "><?= $user['phone'] ?></p>
 
                                                         </div>
                                                         <div class="row">
-                                                            <label for="inputAddress">Create At :</label>
-                                                            <p class="pl-4 font-weight-bold"><?= $user['createAt'] ?></p>
-
+                                                            <label for="inputAddress" class="font-weight-bold">Create At :</label>
+                                                            <p class="ml-4 "><?php
+                                                             echo date('j-F-Y',strtotime($user['createAt']));
+                                                             ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
