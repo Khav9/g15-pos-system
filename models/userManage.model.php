@@ -98,3 +98,10 @@ function accountExist(string $email): array
         return [];
     }
 }
+//securedata
+function secureData($data)
+{
+    $data = trim($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}

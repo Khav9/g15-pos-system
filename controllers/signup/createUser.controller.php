@@ -1,58 +1,89 @@
 <?php
-require '../../database/database.php';
-require '../../models/userMange.model.php';
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     // Escape the query string to prevent SQL injection.
-//     $name = htmlspecialchars($_POST['username']);
-//     $email = htmlspecialchars($_POST['email']);
-//     $password = htmlspecialchars($_POST['password']); // 123
-
-//     // Password encryption
-//     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-  
-//     $isCreated = createAccount($name, $email, $passwordHash);
-//     if ($isCreated) {
-//         header('Location: /login');
-//     } else {
-//         header('Location: /signup');
-//     }
-// }
-
-
-session_start();
 require_once '../../database/database.php';
 require_once '../../models/userManage.model.php';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!empty($_POST['email']) and !empty($_POST['email'])) {
-        // Escape the query string to prevent SQL injection.
-        $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']); //123
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $phone = htmlspecialchars($_POST['phone']);
 
-        // Get data from database
-        $user = accountExist($email);
-        // Check if user exists
-        if (count($user) > 0) {
-            // Check if password is correct
-            if (password_verify($password, $user[3])) {
-                $_SESSION['user'] = $user;
-                $_SESSION['success'] = "Login successful";
-                header('Location: /admin');
+    $_SESSION['errors'] = $errors = [
+        "username" => "",
+        "phone" => "",
+        "password" => "",
+        "email" => "",
+        "borderName" => "",
+        "borderPhone" => "",
+        "borderPassword" => "",
+        "borderEmail" => "",
+    ];
+
+    $regexPassword = "/^(?=.*[!@#$%&])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$%&]{8,}$/";
+    $regexPhone = "/^\(\d{3}\)\s?\d{3}-\d{3}-\d{3}$/";
+    $regexEmail = "/^[a-z]{1,10}\.[a-z]{1,10}\@[a-z]{1,10}\.[a-z]{1,3}$/";
+
+    $isPassword = false;
+    $isPhone = false;
+    $isEmail = false;
+
+    if (preg_match($regexPassword, secureData($_POST['password']))) {
+        $_SESSION['errors']['borderPassword'] = 'is-valid';
+        $isPassword = true;
+    } else {
+        $_SESSION['errors']['borderPassword'] = 'is-invalid';
+        $isPassword = false;
+        $_SESSION['errors']['password'] = 'Invalid password. Please try again !';
+    }
+
+    if (preg_match($regexPhone, secureData($_POST['phone']))) {
+        $_SESSION['errors']['borderPhone'] = 'is-valid';
+        $isPhone = true;
+    } else {
+        $_SESSION['errors']['borderPhone'] = 'is-invalid';
+        $isPhone = false;
+        $_SESSION['errors']['phone'] = 'Ex: (855) 010-250-337 ';
+    };
+
+    if (!empty($_POST['name'])) {
+        $_SESSION['errors']['borderName'] = 'is-valid';
+    } else {
+        $_SESSION['errors']['borderName'] = 'is-invalid';
+        $_SESSION['errors']['username'] = 'Please fill username !';
+    }
+
+    if (preg_match($regexEmail, secureData($_POST['email']))) {
+        $_SESSION['errors']['borderEmail'] = 'is-valid';
+        $isEmail = true;
+    } else {
+        $_SESSION['errors']['borderEmail'] = 'is-invalid';
+        $isEmail = false;
+        $_SESSION['errors']['email'] = 'Ex: khav.saroeun@gmail.org';
+    }
+
+    if (!empty($name) && !empty($email) && !empty($password) && !empty($phone)) {
+
+        if ($isPassword && $isPhone && $isEmail) {
+
+            $encryptPassword = password_hash($password, PASSWORD_BCRYPT);
+            $user = accountExist($email);
+            if (count($user) == 0) {
+                $image = "../../assets/profiles/65e26d8b9d3fb.png";
+                createAccount($name, $email, $phone, $encryptPassword, $image);
+                $_SESSION['success'] = "Account successfully created";
+                header('Location: /');
             } else {
-                // echo "Password is incorrect";
-                $_SESSION['error'] = "Wrong password";
-                $_SESSION['borderPassword'] = "is-invalid";
-                header('location: /');
+                $_SESSION['error'] = "Account already exists";
+                header('Location: /');
             }
         } else {
-            // echo "No user found";
-            $_SESSION['notFound'] = "No user found";
-            $_SESSION['borderEmail'] = "is-invalid";
-            $_SESSION['borderPassword'] = "is-invalid";
-
-            header('location: /');
+            header('Location: /signup');
         }
-    }else{
-        $_SESSION['isNotFill'] = "Please fill the";
-        header('location: /');
+    } else {
+        // unset($_SESSION['errors']);
+        header('location: /signup');
     }
+} else {
+
+    header('Location: /signup');
 }

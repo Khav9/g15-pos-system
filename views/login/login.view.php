@@ -28,7 +28,7 @@ require "layouts/header.php";
                                     </div>
                                     <form class="user" action="controllers/login/checkLogin.controller.php" method="post">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control form-control-user <?php if (isset($_SESSION['borderEmail'])){echo $_SESSION['borderEmail'];}elseif(isset($_SESSION['isNotFill'])){echo 'is-invalid';}; unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <input type="email" name="email" class="form-control <?php if (isset($_SESSION['borderEmail'])){echo $_SESSION['borderEmail'];}elseif(isset($_SESSION['isNotFill'])){echo 'is-invalid';}; unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                             <small class="ml-3 text-danger">
                                                 <?php
                                                 if (isset($_SESSION['notFound'])) {
@@ -42,7 +42,7 @@ require "layouts/header.php";
                                             </small>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user 
+                                            <input type="password" class="form-control 
                                             <?php
                                             if (isset($_SESSION['borderPassword'])){
                                                 echo $_SESSION['borderPassword'];
