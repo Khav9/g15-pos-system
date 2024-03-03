@@ -11,7 +11,6 @@ $user = $_SESSION['user'];
 
 <script src="/vendor/search_categorye/search_vendor.js"></script>
 <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.css">
-<!-- <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.error.css"> -->
 <script src="/vendor/alerts.categoty/alerts.category.js" defer></script>
 
 <div class="container-fluid">

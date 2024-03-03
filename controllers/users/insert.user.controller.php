@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require "../../database/database.php";
 require "../../models/userManage.model.php";
 
@@ -10,22 +10,72 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $password = htmlspecialchars($_POST['password']);
       $phone = htmlspecialchars($_POST['phone']);
 
+      $_SESSION['errors'] = $errors = [
+            "username" => "",
+            "phone" => "",
+            "password" => "",
+            "email" => "",
+            "borderName" => "",
+            "borderPhone" => "",
+            "borderPassword" => "",
+            "borderEmail" => "",
+      ];
+
+      $regexPassword = "/^(?=.*[!@#$%&])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$%&]{8,}$/";
+      $regexPhone = "/^\(\d{3}\)\s?\d{3}-\d{3}-\d{3}$/";
+      $regexEmail = "/^[a-z]{1,10}\.[a-z]{1,10}\@[a-z]{1,10}\.[a-z]{1,3}$/";
+
+      $isPassword = false;
+      $isPhone = false;
+      $isEmail = false;
+      $isName = false;
+
+      if (preg_match($regexPassword, secureData($_POST['password']))) {
+            $_SESSION['errors']['borderPassword'] = 'is-valid';
+            $isPassword = true;
+      } else {
+            $_SESSION['errors']['borderPassword'] = 'is-invalid';
+            $isPassword = false;
+            $_SESSION['errors']['password'] = 'Invalid password. Please try again !';
+      }
+
+      if (preg_match($regexPhone, secureData($_POST['phone']))) {
+            $_SESSION['errors']['borderPhone'] = 'is-valid';
+            $isPhone = true;
+      } else {
+            $_SESSION['errors']['borderPhone'] = 'is-invalid';
+            $isPhone = false;
+            $_SESSION['errors']['phone'] = 'Ex: (855) 010-250-337 ';
+      };
+
+      if (!empty($_POST['name'])) {
+            $_SESSION['errors']['borderName'] = 'is-valid';
+            $isName = true;
+      } else {
+            $_SESSION['errors']['borderName'] = 'is-invalid';
+            $_SESSION['errors']['username'] = 'Please fill username !';
+            $isName = false;
+      }
+
+      if (preg_match($regexEmail, secureData($_POST['email']))) {
+            $_SESSION['errors']['borderEmail'] = 'is-valid';
+            $isEmail = true;
+      } else {
+            $_SESSION['errors']['borderEmail'] = 'is-invalid';
+            $isEmail = false;
+            $_SESSION['errors']['email'] = 'Ex: khav.saroeun@gmail.org';
+      }
+
       if (!empty($name) && !empty($email) && !empty($password) && !empty($phone)) {
-            $encryptPassword = password_hash($password, PASSWORD_BCRYPT);
-            if (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
-
-
-                  // Image upload
-                  $directory = "../../assets/profiles/";
-                  $target_file = $directory . '.' . basename($_FILES['image']['name']);
-                  $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                  $checkImageSize = getimagesize($_FILES["image"]["tmp_name"]);
-                  if ($checkImageSize) {
-                        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                              $_SESSION['error'] = "Wrong Image extension!";
-                              header('Location: /userCreate');
-                        } else {
-
+            if ($isPassword && $isEmail && $isPhone && $isName) {
+                  $encryptPassword = password_hash($password, PASSWORD_BCRYPT);
+                  if (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
+                        // Image upload
+                        $directory = "../../assets/profiles/";
+                        $target_file = $directory . '.' . basename($_FILES['image']['name']);
+                        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                        $checkImageSize = getimagesize($_FILES["image"]["tmp_name"]);
+                        if ($checkImageSize) {
                               $imageExtension = explode('.', $target_file)[6];
                               $newFileName = uniqid();
                               $nameInDirectory = $directory . $newFileName . '.' . $imageExtension;
@@ -34,24 +84,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               $user = accountExist($email);
                               if (count($user) == 0) {
                                     createAccount($name, $email, $phone, $encryptPassword, $nameInDB);
+                                    unset($_SESSION['errors']);
                                     header('Location: /users');
-                                    $_SESSION['success'] = "Account successfully created";
+                                    $_SESSION['userSuccess'] = "Account successfully created";
                               } else {
-                                    $_SESSION['error'] = "Account already exists";
                                     header('Location: /users');
+                                    $_SESSION['userError'] = "Account already exists";
                               }
                         }
                   } else {
-                        $_SESSION['error'] = "Not Image file!";
+                        $imageUser = "../../assets/profiles/65e017b766169.png";
+                        createAccount($name, $email, $phone, $encryptPassword, $imageUser);
                         header('Location: /users');
+                        $_SESSION['userSuccess'] = "Account successfully created";
                   }
             } else {
-                  $imageUser = "../../assets/profiles/65e017b766169.png";
-                  createAccount($name, $email, $phone, $encryptPassword, $imageUser);
                   header('Location: /users');
+                  $_SESSION['userError'] = "something went wrong please try again !";
             }
       } else {
-            $_SESSION['error'] = "Please fill all the fields";
+            $_SESSION['userError'] = "Please fill all information !";
             header('Location: /users');
       }
+} else {
+      $_SESSION['userError'] = "Please fill all information !";
+      header('Location: /users');
 }
