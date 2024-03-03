@@ -18,71 +18,36 @@ $user = $_SESSION['user'];
 
         <!-- notification -->
         <div class="notification">
-            <?php if (!empty($_SESSION['userSuccess'])) : ?>
+            <?php if (!empty($_SESSION['errors']['success'])) : ?>
                 <div class="alert alert-success alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
                     <i class="fa fa-check-circle" aria-hidden="true"></i>
                     <div class="d-felx justify-content-center">
                         <!-- <h6>News</h6> -->
-                        <p><?= $_SESSION['userSuccess'] ?></p>
+                        <p><?= $_SESSION['errors']['success'] ?></p>
                     </div>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
             <?php
-                unset($_SESSION['userSuccess']);
+                unset($_SESSION['errors']['success']);
             endif;
             ?>
-            <?php if (!empty($_SESSION['userError'])) : ?>
+            <?php if (!empty($_SESSION['errors']['error'])) : ?>
                 <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.error.css">
 
                 <div class="alert alert-warning alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
                     <i class="fa fa-exclamation-triangle" id="catWarning" aria-hidden="true"></i>
                     <div class="d-felx justify-content-center">
                         <!-- <h6>News</h6> -->
-                        <p class="text"><?= $_SESSION['userError'] ?></p>
+                        <p class="text"><?= $_SESSION['errors']['error'] ?></p>
                     </div>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
             <?php
-                unset($_SESSION['userError']);
-            endif;
-            ?>
-        </div>
-        <!-- notification -->
-        <div class="notification">
-            <?php if (!empty($_SESSION['userUpdate']['success'])) : ?>
-                <div class="alert alert-success alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
-                    <i class="fa fa-check-circle" aria-hidden="true"></i>
-                    <div class="d-felx justify-content-center">
-                        <!-- <h6>News</h6> -->
-                        <p><?= $_SESSION['userUpdate']['success'] ?></p>
-                    </div>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <?php
-                unset($_SESSION['userUpdate']['success']);
-            endif;
-            ?>
-            <?php if (!empty($_SESSION['userUpdate']['error'])) : ?>
-                <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.error.css">
-
-                <div class="alert alert-warning alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
-                    <i class="fa fa-exclamation-triangle" id="catWarning" aria-hidden="true"></i>
-                    <div class="d-felx justify-content-center">
-                        <!-- <h6>News</h6> -->
-                        <p class="text"><?= $_SESSION['userUpdate']['error'] ?></p>
-                    </div>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <?php
-                unset($_SESSION['userUpdate']['error']);
+                unset($_SESSION['errors']['error']);
             endif;
             ?>
         </div>
