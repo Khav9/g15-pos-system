@@ -7,10 +7,46 @@ require "layouts/header.php";
 require "layouts/navbar.php";
 ?>
 <script src="/vendor/search_product/search_product_vendor.js" defer></script>
-
-
+<link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.css">
+<script src="/vendor/alerts.categoty/alerts.category.js" defer></script>
 <!-- Begin Page Content -->
+<!-- notification -->
+<div class="notification">
+    <?php if (!empty($_SESSION['products']['success'])) : ?>
+        <div class="alert alert-success alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+            <div class="d-felx justify-content-center">
+                <!-- <h6>News</h6> -->
+                <p><?= $_SESSION['products']['success']?></p>
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php
+        unset($_SESSION['products']['success']);
+    endif;
+    ?>
+    <?php if (!empty($_SESSION['products']['error'])) : ?>
+        <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.error.css">
+
+        <div class="alert alert-warning alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
+            <i class="fa fa-exclamation-triangle" id="catWarning" aria-hidden="true"></i>
+            <div class="d-felx justify-content-center">
+                <!-- <h6>News</h6> -->
+                <p class="text"><?= $_SESSION['products']['error']?></p>
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php
+        unset($_SESSION['products']['error']);
+    endif;
+    ?>
+</div>
 <div class="container-fluid">
+
 
     <!-- DataTales Example -->
     <div class="card shadow ">

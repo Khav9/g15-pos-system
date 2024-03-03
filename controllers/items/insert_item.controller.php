@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "../../database/database.php";
 require "../../models/product.model.php";
 
@@ -11,6 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $date = htmlspecialchars($_POST['date']);
       $code = htmlspecialchars($_POST['code']);
       $imgProduct = $_FILES['image'];
+
+      $_SESSION['products'] = [
+            "success" => "",
+            "error" => "",
+      ];
 
       date_default_timezone_get();
       date_default_timezone_set('Asia/Phnom_Penh');
@@ -35,22 +41,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               move_uploaded_file($_FILES["image"]["tmp_name"], $nameInDirectory);
 
                               $isCreate = createProduct($name, $code, $price, $quantity, $category, $asign, $date, $nameInDB);
-                              $_SESSION['success'] = "Account successfully created";
                               header('Location: /items');
-                        } else {
-                              $_SESSION['error'] = "Not Image file!";
-                              header('Location: /items');
+                              $_SESSION['products']['success'] = 'Product successfully created';
                         }
                   } else {
                         $imageProduct = '../../assets/products/65e01a704e423.png';
                         $isCreate = createProduct($name, $code, $price, $quantity, $category, $asign, $date, $imageProduct);
                         header('location: /items');
+                        $_SESSION['products']['success'] = 'Product successfully created';
                   }
             } else {
                   //can add alert date out of range
+                  $_SESSION['products']['error'] = 'Can not create product expire !';
                   header('location: /items');
             }
-      }else{
+      } else {
+            $_SESSION['products']['error'] = 'Please fill all information !';
             header('location: /items');
       }
 }

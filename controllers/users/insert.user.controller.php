@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             "borderPhone" => "",
             "borderPassword" => "",
             "borderEmail" => "",
+            "success" => "",
+            "error" => "",
       ];
 
       $regexPassword = "/^(?=.*[!@#$%&])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$%&]{8,}$/";
@@ -86,27 +88,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     createAccount($name, $email, $phone, $encryptPassword, $nameInDB);
                                     unset($_SESSION['errors']);
                                     header('Location: /users');
-                                    $_SESSION['userSuccess'] = "Account successfully created";
+                                    $_SESSION['errors']['success'] = "Account successfully created";
                               } else {
                                     header('Location: /users');
-                                    $_SESSION['userError'] = "Account already exists";
+                                    $_SESSION['errors']['error'] = "Account already exists";
                               }
                         }
                   } else {
                         $imageUser = "../../assets/profiles/65e017b766169.png";
                         createAccount($name, $email, $phone, $encryptPassword, $imageUser);
                         header('Location: /users');
-                        $_SESSION['userSuccess'] = "Account successfully created";
+                        $_SESSION['errors']['success'] = "Account successfully created";
                   }
             } else {
                   header('Location: /users');
-                  $_SESSION['userError'] = "something went wrong please try again !";
+                  $_SESSION['errors']['error'] = "something went wrong please try again !";
             }
       } else {
-            $_SESSION['userError'] = "Please fill all information !";
+            $_SESSION['errors']['error'] = "Please fill all information !";
             header('Location: /users');
       }
 } else {
-      $_SESSION['userError'] = "Please fill all information !";
+      $_SESSION['errors']['error'] = "Please fill all information !";
       header('Location: /users');
 }

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require "../../database/database.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -12,6 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $date = $_POST['date'];
       $id = $_POST['id'];
       $code = $_POST['code'];
+
+      $_SESSION['products'] = [
+            "success" => "",
+            "error" => "",
+      ];
 
       if (!empty($name) and !empty($price) and !empty($quantity) and !empty($category) and !empty($asign) and !empty($date) and !empty($code)) {
 
@@ -31,14 +36,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         move_uploaded_file($_FILES["image"]["tmp_name"], $nameInDirectory);
 
                         $isUpdate = updateProduct($name, $code, $price, $quantity, $category, $asign, $date, $nameInDB, $id);
-
                         header('Location: /items');
+                        $_SESSION['products']['success'] = 'Product successfully updated';
                   };
             } else {
                   $isUpdate = updateProNotImage($name, $code, $price, $quantity, $category, $asign, $date, $id);
                   header('location: /items');
+                  $_SESSION['products']['success'] = 'Product successfully updated';
             }
       } else {
             header('location: /items');
+            $_SESSION['products']['error'] = 'Can not update product !';
       }
 };
