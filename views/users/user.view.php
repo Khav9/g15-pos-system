@@ -10,10 +10,82 @@ $user = $_SESSION['user'];
 <!-- Begin Page Content -->
 
 <script src="/vendor/search_user/search_user_vendor.js"></script>
+<link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.css">
+<script src="/vendor/alerts.categoty/alerts.category.js" defer></script>
 <div class="container-fluid">
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
+        <!-- notification -->
+        <div class="notification">
+            <?php if (!empty($_SESSION['userSuccess'])) : ?>
+                <div class="alert alert-success alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <div class="d-felx justify-content-center">
+                        <!-- <h6>News</h6> -->
+                        <p><?= $_SESSION['userSuccess'] ?></p>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+                unset($_SESSION['userSuccess']);
+            endif;
+            ?>
+            <?php if (!empty($_SESSION['userError'])) : ?>
+                <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.error.css">
+
+                <div class="alert alert-warning alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
+                    <i class="fa fa-exclamation-triangle" id="catWarning" aria-hidden="true"></i>
+                    <div class="d-felx justify-content-center">
+                        <!-- <h6>News</h6> -->
+                        <p class="text"><?= $_SESSION['userError'] ?></p>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+                unset($_SESSION['userError']);
+            endif;
+            ?>
+        </div>
+        <!-- notification -->
+        <div class="notification">
+            <?php if (!empty($_SESSION['userUpdate']['success'])) : ?>
+                <div class="alert alert-success alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <div class="d-felx justify-content-center">
+                        <!-- <h6>News</h6> -->
+                        <p><?= $_SESSION['userUpdate']['success'] ?></p>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+                unset($_SESSION['userUpdate']['success']);
+            endif;
+            ?>
+            <?php if (!empty($_SESSION['userUpdate']['error'])) : ?>
+                <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.error.css">
+
+                <div class="alert alert-warning alert-dismissible fade show toast d-flex align-items-center" id="alertCategory" role="alert">
+                    <i class="fa fa-exclamation-triangle" id="catWarning" aria-hidden="true"></i>
+                    <div class="d-felx justify-content-center">
+                        <!-- <h6>News</h6> -->
+                        <p class="text"><?= $_SESSION['userUpdate']['error'] ?></p>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+                unset($_SESSION['userUpdate']['error']);
+            endif;
+            ?>
+        </div>
         <!-- Page Heading -->
         <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1> -->
 
@@ -169,9 +241,8 @@ $user = $_SESSION['user'];
                                                         </div>
                                                         <div class="row">
                                                             <label for="inputAddress" class="font-weight-bold">Create At :</label>
-                                                            <p class="ml-4 "><?php
-                                                             echo date('j-F-Y',strtotime($user['createAt']));
-                                                             ?></p>
+                                                            <p class="ml-4 "><?= date('j-F-Y', strtotime($user['createAt']));?></p>
+                                                            <p class="ml-4"><?=date('g:i A',strtotime($user['createAt']));?></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -201,26 +272,73 @@ $user = $_SESSION['user'];
                     <div class="modal-body">
                         <form action="controllers/users/insert.user.controller.php" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="inputAddress">User Name</label>
-                                <input type="text" class="form-control" id="inputAddress" Name="name">
+                                <input type="text" class="form-control
+                                <?php
+                                if (isset($_SESSION['errors']['username'])) {
+                                    echo $_SESSION['errors']['borderName'];
+                                }
+                                ?>
+                                " id="inputAddress" Name="name">
+                                <small class="text-danger">
+                                    <?php
+                                    if (isset($_SESSION['errors']['username'])) {
+                                        echo $_SESSION['errors']['username'];
+                                    }
+                                    ?>
+                                </small>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail4" name="email">
+                                    <input type="email" class="form-control
+                                    <?php
+                                    if (isset($_SESSION['errors']['email'])) {
+                                        echo $_SESSION['errors']['borderEmail'];
+                                    }
+                                    ?>
+                                    " id="inputEmail4" name="email">
+                                    <small class="text-danger">
+                                        <?php
+                                        if (isset($_SESSION['errors']['email'])) {
+                                            echo $_SESSION['errors']['email'];
+                                        }
+                                        ?>
+                                    </small>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputPassword4">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword4" name="password">
+                                    <input type="password" class="form-control
+                                    <?php
+                                    if (isset($_SESSION['errors']['password'])) {
+                                        echo $_SESSION['errors']['borderPassword'];
+                                    }
+                                    ?>
+                                    " id="inputPassword4" name="password">
+                                    <small class="text-danger">
+                                        <?php
+                                        if (isset($_SESSION['errors']['password'])) {
+                                            echo $_SESSION['errors']['password'];
+                                        }
+                                        ?>
+                                    </small>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputCity">Phone / Tell :</label>
-                                    <input type="text" class="form-control" id="inputCity" name="phone">
+                                    <input type="text" class="form-control
+                                    <?php
+                                    if (isset($_SESSION['errors']['phone'])) {
+                                        echo $_SESSION['errors']['borderPhone'];
+                                    }
+                                    ?>
+                                    " id="inputCity" name="phone">
+                                    <small class="text-danger">
+                                        <?php
+                                        if (isset($_SESSION['errors']['phone'])) {
+                                            echo $_SESSION['errors']['borderPhone'];
+                                        }
+                                        ?>
+                                    </small>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputZip">Profile Pictcre</label>
                                     <input type="file" class="form-control" id="inputFile" name="image">
                                 </div>
                             </div>
