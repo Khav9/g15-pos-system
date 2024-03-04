@@ -5,7 +5,7 @@ require "../../models/userManage.model.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-      $_SESSION['userUpdate'] = [
+      $_SESSION['errors'] = [
             "error" => "",
             "success" => "",
       ];
@@ -48,13 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($isEmail && $isPhone && $isName) {
                   $isUpdate = updateUser($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['id']);
                   header('location: /users');
-                  $_SESSION['userUpdate']['success'] = "Account successfully updated";
+                  $_SESSION['errors']['success'] = "Account successfully updated";
             } else {
                   header('location: /users');
-                  $_SESSION['userUpdate']['error'] = "Something went wrong please try again !";
+                  $_SESSION['errors']['error'] = "Something went wrong please try again !";
             }
       } else {
             header('location: /users');
-            $_SESSION['userUpdate']['error'] = "Please try again !";
+            $_SESSION['errors']['error'] = "Please try again !";
       }
 }

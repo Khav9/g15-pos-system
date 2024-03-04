@@ -316,8 +316,7 @@ require "layouts/navbar.php";
                                     <label for="">Asign User</label>
                                     <div>
                                         <select class="form-select form-select-sm form-control" name="asign" aria-label=".form-select-sm example">
-                                            <option selected disabled>Asign Users</option>
-                                            <option value="0">Available</option>
+                                            <option selected >Asign Users</option>
                                             <?php foreach ($users as $key => $user) : ?>
                                                 <option value="<?= $user['id'] ?>"><?= $user['userName'] ?></option>
                                             <?php endforeach ?>
