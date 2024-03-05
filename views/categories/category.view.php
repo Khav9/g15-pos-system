@@ -110,9 +110,9 @@ $user = $_SESSION['user'];
                                 <!-- The Modal create-->
                                 <div class="modal fade" id="editCategory<?= $category['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <div class="modal-content bg-primary text-white">
+                                        <div class="modal-content  ">
                                             <div class="modal-header">
-                                                <h5 class="modal-title text-white" id="exampleModalLabel">Update Category</h5>
+                                                <h5 class="modal-title " id="exampleModalLabel">Update Category</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -172,9 +172,9 @@ $user = $_SESSION['user'];
             <!-- The Modal create-->
             <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content bg-primary text-white">
+                    <div class="modal-content ">
                         <div class="modal-header">
-                            <h5 class="modal-title text-white" id="exampleModalLabel">Create New Category</h5>
+                            <h5 class="modal-title " id="exampleModalLabel">Create New Category</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

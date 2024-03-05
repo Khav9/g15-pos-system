@@ -70,7 +70,7 @@ $user = $_SESSION['user'];
                             </div>
                         </div>
                     </form>
-                    <a href="/userCreate" class="btn btn-primary" data-toggle="modal" data-target="#createUser">Create New User</a>
+                    <a href="/userCreate" class="btn btn-primary" data-toggle="modal" data-target="#createUser" ><i class="fa fa-plus-square mr-3" ></i>Create New User</a>
                 </div>
             </div>
             <div class="card-body">
@@ -227,9 +227,9 @@ $user = $_SESSION['user'];
 
         <div class="modal fade" id="createUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content bg-primary text-white">
+                <div class="modal-content ">
                     <div class="modal-header">
-                        <h5 class="modal-title text-white" id="exampleModalLabel">Create New User</h5>
+                        <h5 class="modal-title " id="exampleModalLabel">Create New User</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
