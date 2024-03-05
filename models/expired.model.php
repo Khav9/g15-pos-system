@@ -32,6 +32,17 @@ function getExpireTodayByUser(string $today,int $id) : array
     return $statement->fetchAll();
 }
 
+function deleteExpired(int $id) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("UPDATE products SET isDelete = :isDelete  where id = :id");
+    $statement->execute([
+        'isDelete' => 1,
+        ':id' => $id
+    ]);
+    return $statement->rowCount() > 0;
+}
+
 function getExpiresUser(string $today,string $limit, int $id) : array
 {
     global $connection;
