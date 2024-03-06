@@ -74,7 +74,7 @@ require "layouts/header.php";
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
+                                        <a href="index.html" class="btn btn-google btn-user btn-block btn-danger">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
                                     </form>

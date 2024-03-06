@@ -17,7 +17,7 @@ require "layouts/navbar.php";
             <i class="fa fa-check-circle" aria-hidden="true"></i>
             <div class="d-felx justify-content-center">
                 <!-- <h6>News</h6> -->
-                <p><?= $_SESSION['products']['success']?></p>
+                <p><?= $_SESSION['products']['success'] ?></p>
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -34,7 +34,7 @@ require "layouts/navbar.php";
             <i class="fa fa-exclamation-triangle" id="catWarning" aria-hidden="true"></i>
             <div class="d-felx justify-content-center">
                 <!-- <h6>News</h6> -->
-                <p class="text"><?= $_SESSION['products']['error']?></p>
+                <p class="text"><?= $_SESSION['products']['error'] ?></p>
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -53,20 +53,17 @@ require "layouts/navbar.php";
         <div class="d-flex justify-content-between align-items-center">
             <form id="searchForm" class=" ml-4">
                 <div class="input-group">
-                    <div class="form-outline" data-mdb-input-init>
-                        <input type="search" id="searchInput" class="form-control mt-4" placeholder="Search Product" />
-                    </div>
-                    <button type="button" class="btn btn-primary mt-4" data-mdb-ripple-init>
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <div class="input-group">
-                    </div>
+                    <?php if ($user[5] === 'admin') : ?>
+                        <div class="mr-4 mt-4">
+                            <a href="/productCreate" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#createProduct"><i class="fa fa-plus-square mr-3"></i>ADD</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </form>
             <form action="#">
                 <div class="col-md-12 d-flex mt-4 align-items-center">
                     <label class="d-flex pr-5 col-7">Fitter Product</label>
-                    <select name="product" id="category" class="form-control">
+                    <select name="product" id="category" class="form-control d-none d-sm-inline-block">
                         <option value="All">All</option>
                         <?php foreach ($categories as $key => $category) : ?>
                             <option value="<?= $category['categoryName'] ?>"><?= $category['categoryName'] ?></option>
@@ -75,15 +72,15 @@ require "layouts/navbar.php";
                     </select>
                 </div>
             </form>
-            <?php if ($user[5] === 'admin') : ?>
-                <div class="mr-4 mt-4">
-                    <a href="/productCreate" class="btn btn-primary" data-toggle="modal" data-target="#createProduct"><i class="fa fa-plus-square mr-3"></i>Create Product</a>
+            <div>
+                <div class="col-md-12 mt-4 mr-2">
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                 </div>
-            <?php endif; ?>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered mt-2 mb-2" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>Image</th>
@@ -130,9 +127,9 @@ require "layouts/navbar.php";
 
                             <div class="modal fade" id="updateProduct<?= $product['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <div class="modal-content bg-primary text-white">
+                                    <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-white" id="exampleModalLabel">Update product</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Update product</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -208,9 +205,9 @@ require "layouts/navbar.php";
                                                         </div>
                                                         <!--  -->
                                                     </div>
-                                                    <div class="form-group d-flex justify-content-between mt-5">
-                                                        <a class="btn btn-danger" data-dismiss="modal">Cancel</a>
-                                                        <button type="submit" class="btn btn-success">Update</button>
+                                                    <div class="form-group d-flex justify-content-between mt-3">
+                                                        <a class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</a>
+                                                        <button type="submit" class="btn btn-success btn-sm">Update</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -230,14 +227,13 @@ require "layouts/navbar.php";
                                         </div>
                                         <div class="modal-body">
                                             <p>Are you sure you want to delete "<span class="text-primary"><?= $product['name'] ?></span> " ?</p>
-                                        </div>
-                                        <form action="controllers/items/item.delete.controller.php" class="modal-footer" method="post">
-                                            <input type="hidden" name="id" value="<?= $product['id'] ?>">
                                             <div class="modal-footer">
-                                                <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <form action="controllers/items/item.delete.controller.php" class="d-felx justify-content-center" method="post">
+                                                    <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                                                    <button type="submit" class="btn btn-danger btn btn-sm">Delete</button>
+                                                </form>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +312,7 @@ require "layouts/navbar.php";
                                     <label for="">Asign User</label>
                                     <div>
                                         <select class="form-select form-select-sm form-control" name="asign" aria-label=".form-select-sm example">
-                                            <option selected >Asign Users</option>
+                                            <option selected>Asign Users</option>
                                             <?php foreach ($users as $key => $user) : ?>
                                                 <option value="<?= $user['id'] ?>"><?= $user['userName'] ?></option>
                                             <?php endforeach ?>
@@ -325,10 +321,9 @@ require "layouts/navbar.php";
 
                                 </div>
                             </div>
-
-                            <div class="form-group d-flex justify-content-between mt-5">
-                                <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
-                                <button type="submit" class="btn btn-success">Create</button>
+                            <div class="form-group d-flex justify-content-between mt-3">
+                                <a href="" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</a>
+                                <button type="submit" class="btn btn-success btn-sm">Create</button>
 
                             </div>
                         </div>

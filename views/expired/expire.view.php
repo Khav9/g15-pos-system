@@ -139,14 +139,13 @@ require "layouts/navbar.php";
                             <p>Are you sure you want to delete "<span
                                     class="text-primary font-weight-bold"><?= $productExpire['name'] ?></span> " ?</p>
                         </div>
-                        <form action="controllers/expired/expire.controller.delete.php" class="modal-footer"
-                            method="post">
-                            <input type="hidden" name="id" value="<?= $productExpire['id'] ?>">
-                            <div class="modal-footer">
-                                <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </div>
-                        </form>
+                        <div class="modal-footer">
+                            <form action="controllers/expired/expire.controller.delete.php" class="modal-footer"
+                                method="post">
+                                <input type="hidden" name="id" value="<?= $productExpire['id'] ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -19,6 +19,10 @@
 
     <!-- Custom styles for this template-->
     <link href="vendor/custom/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap4.css">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
