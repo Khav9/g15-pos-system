@@ -7,9 +7,11 @@ if (!isset($_SESSION['user'])) {
 require "layouts/header.php";
 require "layouts/navbar.php";
 
-
 ?>
+
+<!-- <script src="../../vendor/alerts/main.js" defer></script> -->
 <script src="vendor/chart.js/chat.test.js" defer></script>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <?php if (isset($_SESSION['success'])) : ?>
@@ -21,6 +23,15 @@ require "layouts/navbar.php";
         unset($_SESSION['success']);
     endif;
     ?>
+    <script>
+        const hideAlert = document.querySelector('#alert');
+
+        setTimeout(() => {
+            hideAlert.classList.remove('show');
+            hideAlert.classList.add('hide');
+            location.reload();
+        }, 2500);
+    </script>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -42,9 +53,9 @@ require "layouts/navbar.php";
 
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?php
-                                if ($user[5] === 'admin'){
+                                if ($user[5] === 'admin') {
                                     echo $productInStock;
-                                }else{
+                                } else {
                                     echo $productInStockUser;
                                 }
                                 ?>

@@ -9,7 +9,7 @@ $user = $_SESSION['user'];
 ?>
 <!-- Begin Page Content -->
 
-<script src="/vendor/search_categorye/search_vendor.js"></script>
+<!-- <script src="/vendor/search_categorye/search_vendor.js"></script> -->
 <link rel="stylesheet" href="/vendor/alerts.categoty/alerts.category.css">
 <script src="/vendor/alerts.categoty/alerts.category.js" defer></script>
 
@@ -39,7 +39,7 @@ $user = $_SESSION['user'];
                 <i class="fa fa-exclamation-triangle" id="catWarning" aria-hidden="true"></i>
                 <div class="d-felx justify-content-center">
                     <!-- <h6>News</h6> -->
-                    <p class="text"><?=$_SESSION['error-category']?></p>
+                    <p class="text"><?= $_SESSION['error-category'] ?></p>
                 </div>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -59,26 +59,22 @@ $user = $_SESSION['user'];
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <div class="d-flex justify-content-between m-0">
-                    <form id="searchForm" class="he">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-primary" id="basic-addon1">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                            </div>
-                            <input type="text" name="search" id="searchInput" class="form-control" placeholder="Searh " aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </form>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-4">
                     <?php if ($user[5] === 'admin') : ?>
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square mr-3"></i>Create Category</a>
+                        <div>
+                            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square mr-3"></i>Create Category</a>
+                        </div>
+                        <div>
+                            <div class="">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                            </div>
+                        </div>
                     <?php endif; ?>
                 </div>
-            </div>
-            <div class="card-body">
+
                 <div class="table-responsive">
-                    <table id="dataTable" class="table table-bordered">
+                    <table id="dataTable" class="table table-bordered mt-2 mb-2">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -101,7 +97,7 @@ $user = $_SESSION['user'];
                                     <td><?= $category['categoryName'] ?></td>
                                     <td><?= $category['description'] ?></td>
                                     <?php if ($user[5] === 'admin') : ?>
-                                        <td class="d-flex justify-content-between align-items-center pt-0 pb-1">
+                                        <td class="d-flex justify-content-between align-items-center pt-0">
                                             <a href="/categoryUpdate?id=<?= $category['id'] ?>" data-toggle="modal" data-target="#editCategory<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
                                             <a href="controllers/categories/category.delete.controller.php?id=<?= $category['id'] ?>" class="text-danger p-2" data-toggle="modal" data-target="#deleteCategory<?= $category['id'] ?>"><i class="fa fa-trash"></i></a>
                                         </td>
@@ -131,8 +127,8 @@ $user = $_SESSION['user'];
 
                                                     </div>
                                                     <div class="form-row d-flex justify-content-between mt-3">
-                                                        <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
-                                                        <button type="submit" class="btn btn-success">Update</button>
+                                                        <a href="" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</a>
+                                                        <button type="submit" class="btn btn-success btn-sm">Update</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -151,14 +147,13 @@ $user = $_SESSION['user'];
                                             </div>
                                             <div class="modal-body">
                                                 <p>Are you sure you want to delete "<span class="text-primary"><?= $category['categoryName'] ?></span> " ?</p>
-                                            </div>
-                                            <form action="controllers/categories/category.delete.controller.php" class="modal-footer" method="post">
-                                                <input type="hidden" name="id" value="<?= $category['id'] ?>">
                                                 <div class="modal-footer">
-                                                    <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <form action="controllers/categories/category.delete.controller.php" class="" method="post">
+                                                        <input type="hidden" name="id" value="<?= $category['id'] ?>">
+                                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -192,8 +187,8 @@ $user = $_SESSION['user'];
 
                                 </div>
                                 <div class="form-row d-flex justify-content-between mt-3">
-                                    <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
-                                    <button type="submit" class="btn btn-success">Create</button>
+                                    <a href="" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</a>
+                                    <button type="submit" class="btn btn-success btn-sm">Create</button>
                                 </div>
                             </form>
                         </div>

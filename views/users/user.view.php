@@ -58,24 +58,12 @@ $user = $_SESSION['user'];
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
-                    <form id="searchForm" class="he">
-                        <div class="input-group">
-                            <div class="form-outline" data-mdb-input-init>
-                                <input type="search" id="searchInput" class="form-control" placeholder="Search Product" />
-                            </div>
-                            <button type="button" class="btn btn-primary" data-mdb-ripple-init>
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <div class="input-group">
-                            </div>
-                        </div>
-                    </form>
-                    <a href="/userCreate" class="btn btn-primary" data-toggle="modal" data-target="#createUser" ><i class="fa fa-plus-square mr-3" ></i>Create New User</a>
+                    <a href="/userCreate" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createUser"><i class="fa fa-plus-square mr-3"></i>Create New User</a>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered mt-2 mb-2" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -118,14 +106,13 @@ $user = $_SESSION['user'];
                                             </div>
                                             <div class="modal-body">
                                                 <p>Are you sure you want to delete "<span class="text-primary font-weight-bold"><?= $user['userName'] ?></span> " ?</p>
-                                            </div>
-                                            <form action="controllers/users/user.delete.controller.php" class="modal-footer" method="post">
-                                                <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                                 <div class="modal-footer">
-                                                    <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <form action="controllers/users/user.delete.controller.php" class="" method="post">
+                                                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -160,8 +147,8 @@ $user = $_SESSION['user'];
                                                         </div>
                                                     </div>
                                                     <div class="form-row d-flex justify-content-between">
-                                                        <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
-                                                        <button type="submit" class="btn btn-success">Update</button>
+                                                        <a href="" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</a>
+                                                        <button type="submit" class="btn btn-success btn-sm">Update</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -206,8 +193,8 @@ $user = $_SESSION['user'];
                                                         </div>
                                                         <div class="row">
                                                             <label for="inputAddress" class="font-weight-bold">Create At :</label>
-                                                            <p class="ml-4 "><?= date('j-F-Y', strtotime($user['createAt']));?></p>
-                                                            <p class="ml-4"><?=date('g:i A',strtotime($user['createAt']));?></p>
+                                                            <p class="ml-4 "><?= date('j-F-Y', strtotime($user['createAt'])); ?></p>
+                                                            <p class="ml-4"><?= date('g:i A', strtotime($user['createAt'])); ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -308,8 +295,8 @@ $user = $_SESSION['user'];
                                 </div>
                             </div>
                             <div class="form-row d-flex justify-content-between">
-                                <a href="" class="btn btn-danger" data-dismiss="modal">Cancel</a>
-                                <button type="submit" class="btn btn-success">Create</button>
+                                <a href="" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</a>
+                                <button type="submit" class="btn btn-success btn-sm">Create</button>
                             </div>
                         </form>
                     </div>
