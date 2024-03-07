@@ -75,7 +75,7 @@ $user = $_SESSION['user'];
 
                 <div class="table-responsive">
                     <table id="dataTable" class="table table-bordered mt-2 mb-2">
-                        <thead>
+                        <thead class="bg-primary text-white">
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -95,7 +95,7 @@ $user = $_SESSION['user'];
                                 <tr>
                                     <td><?= $key + 1 ?></td>
                                     <td><?= $category['categoryName'] ?></td>
-                                    <td><?= $category['description'] ?></td>
+                                    <td><?= $category['description'];?></td>
                                     <?php if ($user[5] === 'admin') : ?>
                                         <td class="d-flex justify-content-between align-items-center pt-0">
                                             <a href="/categoryUpdate?id=<?= $category['id'] ?>" data-toggle="modal" data-target="#editCategory<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
@@ -150,7 +150,7 @@ $user = $_SESSION['user'];
                                                 <div class="modal-footer">
                                                     <form action="controllers/categories/category.delete.controller.php" class="" method="post">
                                                         <input type="hidden" name="id" value="<?= $category['id'] ?>">
-                                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -181,9 +181,17 @@ $user = $_SESSION['user'];
                                     <input type="text" class="form-control" id="inputAddress" Name="categoryName">
                                 </div>
                                 <div class="form-row">
+                                    <style>
+                                        .ck-editor__editable[role="textbox"] {
+                                            height: 200px;
+                                        }
 
+                                        #editor {
+                                            width: 40%;
+                                        }
+                                    </style>
                                     <label for="inputEmail4">Description</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                                    <textarea class="form-control" id="" rows="3" name="description"></textarea>
 
                                 </div>
                                 <div class="form-row d-flex justify-content-between mt-3">

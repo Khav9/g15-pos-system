@@ -8,7 +8,7 @@ require "layouts/navbar.php";
 
 ?>
 
-<script src="/vendor/search_product/search_product_vendor.js" defer></script>
+<!-- <script src="/vendor/search_product/search_product_vendor.js" defer></script> -->
 
 <form id="searchForm" class=" ml-3">
     <h2 class="ml-2">Expiration Notification</h2>
@@ -25,13 +25,13 @@ require "layouts/navbar.php";
                             </div>
 
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php 
-                               if ($user[5] === 'admin'){
-                                   echo $numberOfExpire;
-                               }else{
-                                echo $numberOfExpireTodayUser;
-                               }
-                               ?>
+                                <?php
+                                if ($user[5] === 'admin') {
+                                    echo $numberOfExpire;
+                                } else {
+                                    echo $numberOfExpireTodayUser;
+                                }
+                                ?>
                             </div>
                         </div>
                         <div class=" col-auto">
@@ -51,13 +51,13 @@ require "layouts/navbar.php";
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Expire in 7 days</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php 
-                               if ($user[5] === 'admin'){
-                                   echo $numberOfExpireSevenDay;
-                               }else{
-                                echo $numberOfExpireSevenDayUser;
-                               }
-                               ?>
+                                <?php
+                                if ($user[5] === 'admin') {
+                                    echo $numberOfExpireSevenDay;
+                                } else {
+                                    echo $numberOfExpireSevenDayUser;
+                                }
+                                ?>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -76,13 +76,13 @@ require "layouts/navbar.php";
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Expire in 1 months</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php 
-                               if ($user[5] === 'admin'){
-                                   echo $numberOfExpireOneMonth;
-                               }else{
-                                echo $numberOfExpireOneMonthUser;
-                               }
-                               ?>
+                                <?php
+                                if ($user[5] === 'admin') {
+                                    echo $numberOfExpireOneMonth;
+                                } else {
+                                    echo $numberOfExpireOneMonthUser;
+                                }
+                                ?>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -95,64 +95,65 @@ require "layouts/navbar.php";
         </div>
     </div>
 </form>
-<div class="container-fluid col-14 mt-4">
-    <h6>Expiration Details</h6>
-    <table class="table">
-        <thead class="bg-primary text-white">
-            <tr>
-                <th>Product</th>
-                <th>Stock QTY</th>
-                <th>Expiry Date</th>
-                <th>BarCode</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-                foreach ($productExpires as $key => $productExpire) {
-                    ?>
-            <tr>
-                <td><?= $productExpire['name']?></td>
-                <td><?= $productExpire['qty']?></td>
-                <td><?= $productExpire['expire']?></td>
-                <td><?= $productExpire['code']?></td>
-                <td>
-                    <?php if($user[5] === 'admin'): ?>
-                    <a href="/controllers/expired/expire.controller.delete.php?id=<?= $productExpire['id'] ?>"
-                        class="text-danger p-2" data-toggle="modal" data-target="#delete<?= $productExpire['id']?>"><i
-                            class="fa fa-trash ml-3"></i></a>
-                    <?php endif; ?>
-                </td>
-            </tr>
-            <!-- Modal delete-->
-            <div class="modal fade" id="delete<?= $productExpire['id'] ?>" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-danger" id="exampleModalLabel">Delete User</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to delete "<span
-                                    class="text-primary font-weight-bold"><?= $productExpire['name'] ?></span> " ?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <form action="controllers/expired/expire.controller.delete.php" class="modal-footer"
-                                method="post">
-                                <input type="hidden" name="id" value="<?= $productExpire['id'] ?>">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+<!-- DataTales Example -->
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered mt-2 mb-2" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th>Product</th>
+                            <th>Stock QTY</th>
+                            <th>Expiry Date</th>
+                            <th>BarCode</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($productExpires as $key => $productExpire) {
+                        ?>
+                            <tr class="table-danger">
+                                <td><?= $productExpire['name'] ?></td>
+                                <td><?= $productExpire['qty'] ?></td>
+                                <td><?= $productExpire['expire'] ?></td>
+                                <td><?= $productExpire['code'] ?></td>
+                                <td>
+                                    <?php if ($user[5] === 'admin') : ?>
+                                        <a href="/controllers/expired/expire.controller.delete.php?id=<?= $productExpire['id'] ?>" class="text-danger p-2" data-toggle="modal" data-target="#delete<?= $productExpire['id'] ?>"><i class="fa fa-trash ml-3"></i></a>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                            <!-- Modal delete-->
+                            <div class="modal fade" id="delete<?= $productExpire['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-danger" id="exampleModalLabel">Delete User</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to delete "<span class="text-primary font-weight-bold"><?= $productExpire['name'] ?></span> " ?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="controllers/expired/expire.controller.delete.php" class="modal-footer" method="post">
+                                                <input type="hidden" name="id" value="<?= $productExpire['id'] ?>">
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
-            <?php
-                }
-           ?>
-        </tbody>
-    </table>
+        </div>
+    </div>
 </div>
 <?php require "layouts/footer.php"; ?>

@@ -6,10 +6,12 @@ require 'models/product.model.php';
 require 'models/category.model.php';
 require 'models/userManage.model.php';
 $user = $_SESSION['user'];
-
+date_default_timezone_get();
+date_default_timezone_set('Asia/Phnom_Penh');
+$dateToday = date("Y-m-d H:i:s");
 
 //product in stock admin and user
-$products = getProducts();
+$products = getProducts($dateToday);
 $productInStock = 0;
 $productInStock += sum($products);
 

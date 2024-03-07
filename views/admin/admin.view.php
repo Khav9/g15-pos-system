@@ -217,23 +217,16 @@ require "layouts/navbar.php";
         </div>
     </div>
 
-
-
-    <!-- Content Row -->
-    <div class="row">
-
-        <!-- Content Column -->
+    <!-- <div class="row">
         <div class="col-lg-6 mb-4">
-
-            <!-- Project Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                 </div>
                 <div class="card-body">
-                    <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
+                    <h4 class="small font-weight-bold">Server Migration <span class="float-right">90%</span></h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
                     <div class="progress mb-4">
@@ -242,28 +235,8 @@ require "layouts/navbar.php";
 
                 </div>
             </div>
-
-
         </div>
-
-        <div class="col-lg-6 mb-4">
-
-            <!-- Approach -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                </div>
-                <div class="card-body">
-                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                        custom components and custom utility classes.</p>
-                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                        Bootstrap framework, especially the utility classes.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    </div> -->
 
 </div>
 <!-- /.container-fluid -->
