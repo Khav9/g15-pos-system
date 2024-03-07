@@ -80,7 +80,7 @@ require "layouts/navbar.php";
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered mt-2 mb-2" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered mt-2 mb-2 " id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>Image</th>
@@ -101,7 +101,7 @@ require "layouts/navbar.php";
                         <?php
                         $products = null;
                         if ($user[5] === 'admin') {
-                            $products = getProducts(); // set it here it's okay. if set it on product.controller.php it's okay
+                            $products = getProducts($dateToday); // set it here it's okay. if set it on product.controller.php it's okay
                         } else {
                             $products = getProductsByUser($user[0]);
                         }

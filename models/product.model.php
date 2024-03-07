@@ -28,11 +28,11 @@ function getProduct(int $id) : array
     return $statement->fetch();
 }
 
-function getProducts() : array
+function getProducts(string $date) : array
 {
     global $connection;
-    $statement = $connection->prepare("select products.id, products.name, products.price, products.qty, products.image, products.code,products.categoryID,products.userID, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.isDelete = 0 order by products.id desc");
-    $statement->execute();
+    $statement = $connection->prepare("select products.id, products.name, products.price, products.qty, products.image, products.code,products.categoryID,products.userID, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.isDelete = 0 and products.expire > :date order by products.id desc");
+    $statement->execute([':date' => $date]);
     return $statement->fetchAll();
 }
 
