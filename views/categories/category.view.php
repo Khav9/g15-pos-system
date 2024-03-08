@@ -67,7 +67,7 @@ $user = $_SESSION['user'];
                         </div>
                         <div>
                             <div class="">
-                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#importCategory"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -95,7 +95,7 @@ $user = $_SESSION['user'];
                                 <tr>
                                     <td><?= $key + 1 ?></td>
                                     <td><?= $category['categoryName'] ?></td>
-                                    <td><?= $category['description'];?></td>
+                                    <td><?= $category['description']; ?></td>
                                     <?php if ($user[5] === 'admin') : ?>
                                         <td class="d-flex justify-content-between align-items-center pt-0">
                                             <a href="/categoryUpdate?id=<?= $category['id'] ?>" data-toggle="modal" data-target="#editCategory<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
@@ -197,6 +197,29 @@ $user = $_SESSION['user'];
                                 <div class="form-row d-flex justify-content-between mt-3">
                                     <a href="" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</a>
                                     <button type="submit" class="btn btn-success btn-sm">Create</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal import data-->
+            <div class="modal fade" id="importCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-download fa-sm text-50 mr-3"></i>Import data to system</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="controllers/categories/import.category.controller.php" method="post" enctype="multipart/form-data">
+                                <input type="file" name="excel" class="form-control" required value="">
+                                <!-- <button type="submit" name="import">Import</button> -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success btn-sm">Import</button>
                                 </div>
                             </form>
                         </div>

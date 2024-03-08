@@ -74,7 +74,7 @@ require "layouts/navbar.php";
             </form>
             <div>
                 <div class="col-md-12 mt-4 mr-2">
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#importTo"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                 </div>
             </div>
         </div>
@@ -332,8 +332,30 @@ require "layouts/navbar.php";
             </div>
         </div>
     </div>
+    <!-- Modal import data-->
+    <div class="modal fade" id="importTo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-download fa-sm text-50 mr-3"></i>Import data to system</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <input type="file" name="excel" class="form-control" required value="" >
+                        <!-- <button type="submit" name="import">Import</button> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success btn-sm">Import</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 </div>
 
