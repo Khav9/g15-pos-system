@@ -3,7 +3,6 @@
 function createCategory(string $categoryName, string $description) : bool
 {
     global $connection;
-    $defaultRole = 'user';
     $statement = $connection->prepare("insert into category (categoryName, description, isDelete) values (:categoryName, :description, :isDelete)");
     $statement->execute([
         ':categoryName' => $categoryName,
