@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               }
                         }
                   } else {
-                        $imageUser = "../../assets/profiles/65e017b766169.png";
+                        $imageUser = "../../assets/profiles/65ed60412dbd7.png";
                         createAccount($name, $email, $phone, $encryptPassword, $imageUser);
                         header('Location: /users');
                         $_SESSION['errors']['success'] = "Account successfully created";

@@ -94,6 +94,7 @@ require "layouts/header.php";
                             </form>
                             <hr>
                             <div class="text-center">
+                                <a href="/forgotPassword" class="small">Forget Password</a><br>
                                 <a class="small" href="/">Already have an account? Login!</a>
                             </div>
                         </div>

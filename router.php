@@ -13,28 +13,34 @@ $routes = [
     '/categories' => 'controllers/categories/category.controller.php',
     //order
     '/items' => 'controllers/items/item.controller.php',
-    
+
     '/orders' => 'controllers/orders/order.controller.php',
     '/order_form' => 'controllers/orders/create.form.order.controller.php',
     '/reports' => 'controllers/reports/report.controller.php',
     '/users' => 'controllers/users/user.controller.php',
     //
     '/profile' => 'controllers/profile/profile.controller.php',
-     //user
-     '/userCreate' => 'controllers/users/user.create.controller.php',
-     '/userUpdate' => 'controllers/users/user.edit.controller.php',
-     //category
-     '/categoryUpdate'=> 'controllers/categories/category.edit.controller.php',
+    //user
+    '/userCreate' => 'controllers/users/user.create.controller.php',
+    '/userUpdate' => 'controllers/users/user.edit.controller.php',
+    //category
+    '/categoryUpdate' => 'controllers/categories/category.edit.controller.php',
 
-     //product
-     '/productCreate' => 'controllers/items/form_create.controller.php',
-     '/productUpdate' => 'controllers/items/product.edit.controller.php',
+    //product
+    '/productCreate' => 'controllers/items/form_create.controller.php',
+    '/productUpdate' => 'controllers/items/product.edit.controller.php',
 
-     //expire
-     '/expired' => 'controllers/expired/expire.controller.php',
-     //report
-     '/reportPrint' => 'controllers/reports/report_print.controller.php',
-     '/reportView' => 'controllers/reports/report_view.controller.php'
+    //expire
+    '/expired' => 'controllers/expired/expire.controller.php',
+
+    //forgot pass
+    '/forgotPassword' => 'controllers/forgot/forgotPassword.controller.php',
+    '/verifyPIN' => 'controllers/forgot/verifyPIin.controller.php',
+    '/newPassword' => 'controllers/forgot/resetPassword.controller.php',
+
+    //report
+    '/reportPrint' => 'controllers/reports/report_print.controller.php',
+    '/reportView' => 'controllers/reports/report_view.controller.php'
 ];
 
 if (array_key_exists($uri, $routes)) {
@@ -48,6 +54,3 @@ if (array_key_exists($uri, $routes)) {
     require $page;
     require "layouts/footer.php";
 }
-
-
-
