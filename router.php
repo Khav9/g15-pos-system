@@ -31,7 +31,10 @@ $routes = [
      '/productUpdate' => 'controllers/items/product.edit.controller.php',
 
      //expire
-     '/expired' => 'controllers/expired/expire.controller.php'
+     '/expired' => 'controllers/expired/expire.controller.php',
+     //report
+     '/reportPrint' => 'controllers/reports/report_print.controller.php',
+     '/reportView' => 'controllers/reports/report_view.controller.php'
 ];
 
 if (array_key_exists($uri, $routes)) {
