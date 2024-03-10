@@ -2,15 +2,16 @@
 
 function createAccount(string $name, string $email, string $phone, string $password, string $image): bool {
     global $connection;
-    $statement = $connection->prepare("INSERT INTO users (userName, email, phone, password, role, image) 
-    VALUES (:userName, :email,:phone, :password, :role, :image)");
+    $statement = $connection->prepare("INSERT INTO users (userName, email, phone, password, role, image,pin) 
+    VALUES (:userName, :email,:phone, :password, :role, :image, :pin)");
     $statement->execute([
         ':userName' => $name,
         ':email' => $email,
         ':phone' => $phone,
         ':password' => $password,
         ':role' => 'user',
-        ':image' => $image
+        ':image' => $image,
+        ':pin' => 0
     ]);
 
     return $statement->rowCount() > 0;
@@ -61,6 +62,19 @@ function updateInfoUser(string $name, string $email, string $phone ,$id) : bool
 
     return $statement->rowCount() > 0;
 }
+//update only password
+function updatePassword(string $email, string $password) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("update users set  password = :password where email = :email");
+    $statement->execute([
+        ':email' => $email,
+        ':password' => $password,
+    ]);
+
+    return $statement->rowCount() > 0;
+}
+
 
 //update image photo (only for images)
 function updateImageUser(string $image, int $id) : bool
@@ -76,6 +90,29 @@ function updateImageUser(string $image, int $id) : bool
     return $statement->rowCount() > 0;
 }
 
+//Add PIN code 
+
+function updatePin(string $email, int $pin){
+    global $connection;
+    $statement = $connection->prepare("update users set pin = :pin where email = :email");
+    $statement->execute([
+        ':email' => $email,
+        ':pin' => $pin
+
+    ]);
+
+    return $statement->rowCount() > 0;
+}
+function getPin(string $email) : array
+{
+    global $connection;
+    $statement = $connection->prepare("select pin from users where email = :email");
+    $statement->execute([':email' => $email]);
+    return $statement->fetch();
+}
+
+
+//
 function deleteUser(int $id) : bool
 {
     global $connection;

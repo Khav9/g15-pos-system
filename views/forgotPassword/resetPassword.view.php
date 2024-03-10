@@ -24,11 +24,11 @@ require "layouts/header.php";
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">New Password</h1>
                                     </div>
-                                    <form class="user" action="controllers/login/checkLogin.controller.php" method="post">
+                                    <form class="user" action="controllers/forgot/verifyPassword.controller.php" method="post">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control <?php if (isset($_SESSION['borderEmail'])){echo $_SESSION['borderEmail'];}elseif(isset($_SESSION['isNotFill'])){echo 'is-invalid';}; unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <input type="password" name="newPassword" class="form-control <?php if (isset($_SESSION['borderEmail'])){echo $_SESSION['borderEmail'];}elseif(isset($_SESSION['isNotFill'])){echo 'is-invalid';}; unset($_SESSION['borderEmail']); ?>" id="newPassword" aria-describedby="emailHelp" placeholder="New Password">
                                             <small class="ml-3 text-danger">
                                                 <?php
                                                 if (isset($_SESSION['notFound'])) {
@@ -51,7 +51,7 @@ require "layouts/header.php";
                                             }
                                             unset($_SESSION['borderPassword']);
                                             ?>"
-                                            id="exampleInputPassword" placeholder="Password" name="password">
+                                            id="confirmPassword" placeholder="Confirm Password" name="confirmPassword">
                                             <small class="ml-3 text-danger">
                                                 <?php
                                                 if (isset($_SESSION['error'])) {
@@ -65,24 +65,9 @@ require "layouts/header.php";
                                                 ?>
                                             </small>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
-                                        <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block btn-danger">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
+                                        <button type="submit" class="form-control btn btn-primary  btn-block">new ...</button>
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="/signup">Create an Account!</a><br>
-                                        <a href="/forgotPassword" class="small">Forgot Password</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
