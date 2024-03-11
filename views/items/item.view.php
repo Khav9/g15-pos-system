@@ -343,14 +343,14 @@ require "layouts/navbar.php";
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="controllers/items/import.item.controller.php" method="post" enctype="multipart/form-data">
                         <input type="file" name="excel" class="form-control" required value="" >
                         <!-- <button type="submit" name="import">Import</button> -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success btn-sm">Import</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success btn-sm">Import</button>
                 </div>
             </div>
         </div>

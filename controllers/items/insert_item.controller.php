@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               $_SESSION['products']['success'] = 'Product successfully created';
                         }
                   } else {
-                        $imageProduct = '../../assets/products/65e01a704e423.png';
+                        $imageProduct = '../../assets/products/65ee567c9ad28.png';
                         $isCreate = createProduct($name, $code, $price, $quantity, $category, $asign, $date, $imageProduct);
                         header('location: /items');
                         $_SESSION['products']['success'] = 'Product successfully created';
