@@ -46,8 +46,6 @@ $user = $_SESSION['user'];
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
-
-
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="/orders">
