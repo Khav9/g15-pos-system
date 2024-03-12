@@ -20,15 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         
         $totalPrice = 0;
+        $item = 0;
         foreach ($_SESSION['productData'] as $product) {
             $qty = $product['quantity'];
             $price = $product['price'];
-            
+            $item += 1;
             $totalPrice += $qty * $price;
             // Insert the order into the database
             
         }
-        $query = createOrder($customerOder, $totalPrice);
+        $query = createOrder($customerOder, $totalPrice,$item);
 
         $lastOrder = getOrder();
         $subprice=0;

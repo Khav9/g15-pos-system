@@ -1,11 +1,12 @@
 <?php
-function createOrder(int $cus_id ,int $totalPrice) : bool
+function createOrder(int $cus_id ,int $totalPrice, int $items) : bool
 {
     global $connection;
-    $statement = $connection->prepare("INSERT INTO orders(cus_id,totalPrice) values (:cus_id,:totalPrice)");
+    $statement = $connection->prepare("INSERT INTO orders(cus_id,totalPrice,qty) values (:cus_id,:totalPrice,:qty)");
     $statement->execute([
         ':cus_id' => $cus_id,
         ':totalPrice' => $totalPrice,
+        ':qty' => $items,
 
     ]);
 
@@ -18,5 +19,22 @@ function getOrder() : array
     global $connection;
     $statement = $connection->prepare("SELECT * FROM orders order by id desc limit 1");
     $statement->execute();
+    return $statement->fetch();
+}
+
+function getOrders() : array
+{
+    global $connection;
+    $statement = $connection->prepare("SELECT * FROM orders inner join customers on orders.cus_id = customers.cus_id order by orders.id desc");
+    $statement->execute();
+    return $statement->fetchAll();
+}
+
+function getOrderOne(int $id){
+    global $connection;
+    $statement = $connection->prepare("SELECT * FROM orders inner join customers on orders.cus_id = customers.cus_id where orders.id = :id order by orders.id desc limit 1");
+    $statement->execute([
+        ':id' => $id,
+    ]);
     return $statement->fetch();
 }

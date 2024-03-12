@@ -6,16 +6,9 @@ require "layouts/navbar.php";
       <div class="card-shadow ">
             <div class="card-header py-3 d-flex justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Reports</h6>
-                  <div class="calendar-date">
-                        <input type="date" name="date" id="date" />
-                  </div>
                   <div class="select-product ">
-                        <label for="product">Select Status:</label>
-                        <select id="pay" name="pay">
-                              <option>Status</option>
-                              <option>Onlinepayment</option>
-                              <option>Credit Card</option>
-                        </select>
+                  <input type="date" name="date" id="date" />
+                        
                         <div class="btn">
                               <a href="/reports" class="btn btn-primary">Filter</a>
                               <a href="/reports" class="btn btn-danger">Reset</a>
@@ -29,85 +22,29 @@ require "layouts/navbar.php";
                               <thead class="bg-primary text-white">
                                     <tr>
                                           <th>SI No.</th>
-                                          <th>Tracking</th>
-                                          <th>CusName</th>
-                                          <th>CusPhone</th>
-                                          <th>Date</th>
-                                          <th>Status</th>
-                                          <th>Payment</th>
+                                          <th>Customer</th>
+                                          <th>Items</th>
+                                          <th>Total</th>
                                           <th>Action</th>
                                     </tr>
                               </thead>
                               <tbody>
+                                    <?php
+                                    foreach ($orders as $key => $order):
+                                    ?>
                                     <tr>
-                                          <td>1</td>
-                                          <td>Laty</td>
-                                          <td>Apple</td>
-                                          <td>123456789</td>
-                                          <td>22 March 2024</td>
-                                          <td>12</td>
-                                          <td>150$</td>
+                                          <td><?=$key+1?></td>
+                                          <td><?php echo $order[6]. ' '. $order[7]; ?></td>
+                                          <td><?=$order[4]?></td>
+                                          <td><?=$order[2]?></td>
                                           <td>
-                                                <a href="/reportView" class="btn btn-primary">View</a>
-                                                <a href="/reportPrint" class="btn btn-primary">Print</a>
+                                                <a href="/reportView?id=<?=$order[0]?>" class="btn btn-primary">View</a>
+                                                <a href="/reportPrint?id=<?=$order[0]?>" class="btn btn-primary">Print</a>
                                           </td>
                                     </tr>
-                                    <tr>
-                                          <td>2</td>
-                                          <td>Thona</td>
-                                          <td>Orange</td>
-                                          <td>3456789</td>
-                                          <td>1 April 2024</td>
-                                          <td>10</td>
-                                          <td>1000$</td>
-
-                                          <td>
-                                                <a href="/reportView" class="btn btn-primary">View</a>
-                                                <a href="/reportPrint" class="btn btn-primary">Print</a>
-                                          </td>
-                                    </tr>
-                                    <tr>
-                                          <td>3</td>
-                                          <td>Thida</td>
-                                          <td>Fast food</td>
-                                          <td>98654232</td>
-                                          <td>Dec 30 2024</td>
-                                          <td>50</td>
-                                          <td>100$</td>
-
-                                          <td>
-                                                <a href="/reportView" class="btn btn-primary">View</a>
-                                                <a href="/reportPrint" class="btn btn-primary">Print</a>
-                                          </td>
-                                    </tr>
-                                    <tr>
-                                          <td>4</td>
-                                          <td>Sovanarith</td>
-                                          <td>Drinks</td>
-                                          <td>67854332</td>
-                                          <td>14 April 2024</td>
-                                          <td>15</td>
-                                          <td>50$</td>
-
-                                          <td>
-                                                <a href="/reportView" class="btn btn-primary">View</a>
-                                                <a href="/reportPrint" class="btn btn-primary">Print</a>
-                                          </td>
-                                    </tr>
-                                    <tr>
-                                          <td>5</td>
-                                          <td>Khav</td>
-                                          <td>Coffee</td>
-                                          <td>43217899</td>
-                                          <td>14 Feb 2024</td>
-                                          <td>1</td>
-                                          <td>5$</td>
-
-                                          <td>
-                                                <a href="/reportView" class="btn btn-primary">View</a>
-                                                <a href="/reportPrint" class="btn btn-primary">Print</a>
-                                          </td>
-                                    </tr>
+                                    <?php
+                                     endforeach;
+                                     ?>
                               </tbody>
 
                         </table>
