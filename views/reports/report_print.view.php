@@ -6,7 +6,7 @@ require "layouts/navbar.php";
 	<div class="card mt-4">
     <div class="card-header d-flex justify-content-between">
             <h4 class="">Invoice</h4>
-            <button type="" class="btn btn-danger btn-sm">Back</button>
+            <a href="/reports" type="" class="btn btn-danger btn-sm">Back</a>
 
         </div>
 		<div class="card-body">
@@ -66,7 +66,7 @@ require "layouts/navbar.php";
 					<h5 style="font-size:15px">Grand Total: 5000$</h5>
 				</div>
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary btn-sm ">Print</button>
+                    <button type="button" class="btn btn-primary btn-sm " onclick="GetPrint()">Print</button>
                 </div>
                 
 			</div>
