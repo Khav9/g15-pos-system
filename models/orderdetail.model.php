@@ -14,3 +14,12 @@ function createOrderDetail(int $orderID,string $productName,int $quantity,int $u
 
     return $statement->rowCount() > 0;
 }
+
+function getOrderDetails(int $orderID) : array{
+    global $connection;
+    $statement = $connection->prepare("SELECT * FROM orderDetails inner join orders on orderDetails.orderID = orders.id where orderDetails.orderID = :id");
+    $statement->execute([
+        ':id' => $orderID,
+    ]);
+    return $statement->fetchAll();
+}
