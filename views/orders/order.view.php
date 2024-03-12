@@ -190,7 +190,11 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
                         <td><?php echo $order['quantity']; ?></td>
                         <td><?php echo ($order['price']); ?></td>
                         <td><?php echo ($order['quantity'] * $order['price']); ?></td>
-                        
+                        <td>
+                            <a href="/order_delete?action=delete&id=<?php echo $key; ?>">
+                                <div class="btn bg-gradient-danger btn-danger"><i class="fas fa-fw fa-trash"></i></div>
+                            </a>
+                        </td>
                     </tr>
 
                 <?php endforeach; ?>
