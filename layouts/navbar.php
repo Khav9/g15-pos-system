@@ -71,7 +71,6 @@ $user = $_SESSION['user'];
             <span>Reports</span></a>
     </li>
 
-
     <!-- Nav Item - Expired -->
     <li class="nav-item">
         <a class="nav-link" href="/expired">
