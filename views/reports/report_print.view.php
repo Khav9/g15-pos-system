@@ -62,7 +62,7 @@ require "layouts/navbar.php";
                 <div style="text-align:left" class="">
 					<p>Payment by : OnlinePayment</p>
 				</div>
-				<div style="text-align:left;margin-left:70%; mt-5" class="">
+				<div style="text-align:left;margin-left:70%; " class="">
 					<h5 style="font-size:15px">Grand Total: 5000$</h5>
 				</div>
                 <div class="d-flex justify-content-end">

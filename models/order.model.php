@@ -1,32 +1,22 @@
 <?php
-require_once("../../database/database.php");
-function createOrder(string $customerName, string $product, int $price, int $quantity, int $discount, int $total) : bool
+function createOrder(int $cus_id ,int $totalPrice) : bool
 {
     global $connection;
-    $statement = $connection->prepare("INSERT INTO orders (customerName,product,price,quantity,discount,total ) values (:customerName, :product, :price,:quantity,:discount,:total)");
+    $statement = $connection->prepare("INSERT INTO orders(cus_id,totalPrice) values (:cus_id,:totalPrice)");
     $statement->execute([
-        ':customerName' => $customerName,
-        ':product' => $product,
-        ':price' => $price,
-        ':quantity' => $quantity,
-        ':discount' => $discount,
-        ':total' => $total,
+        ':cus_id' => $cus_id,
+        ':totalPrice' => $totalPrice,
 
     ]);
+
     return $statement->rowCount() > 0;
-   
 }
-function getorder() : array
+
+
+function getOrder() : array
 {
     global $connection;
-    $statement = $connection->prepare("select * from orders");
+    $statement = $connection->prepare("SELECT * FROM orders order by id desc limit 1");
     $statement->execute();
-    return $statement->fetchAll();
-}
-function deleteOrder(int $id) : bool
-{
-    global $connection;
-    $statement = $connection->prepare("DELETE from orders where id = :id");
-    $statement->execute([':id' => $id]);
-    return $statement->rowCount() > 0;
+    return $statement->fetch();
 }
