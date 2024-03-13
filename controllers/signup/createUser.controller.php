@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $regexPassword = "/^(?=.*[!@#$%&])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$%&]{8,}$/";
     $regexPhone = "/^\(\d{3}\)\s?\d{3}-\d{3}-\d{3}$/";
-    $regexEmail = "/^[a-z]{1,10}\.[a-z]{1,10}\@[a-z]{1,10}\.[a-z]{1,3}$/";
+    $regexEmail = "/^[a-z]{1,}\.[a-z]{1,}\@[a-z]{1,}\.[a-z]{1,}$/";
 
     $isPassword = false;
     $isPhone = false;

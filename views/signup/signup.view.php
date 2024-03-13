@@ -87,7 +87,7 @@ require "layouts/header.php";
                                 </div>
                                 <div class="form-row d-flex justify-content-between">
                                     <button type="submit" class="btn btn-primary btn-user btn-block">Create</button>
-                                    <button class="btn btn-google btn-user btn-block">
+                                    <button class="btn btn-google btn-user btn-block bg-danger">
                                         <i class="fab fa-google fa-fw"></i> Register with Google
                                     </button>
                                 </div>

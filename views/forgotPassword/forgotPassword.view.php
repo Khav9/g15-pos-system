@@ -5,54 +5,39 @@ if (isset($_SESSION['user'])) {
 }
 
 ?>
-<body class="bg-gradient-primary">
 
-    <div class="container">
-
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                                        <p class="mb-4">We get it, stuff happens. Just enter your email address below
-                                            and we'll send you a link to reset your password!</p>
-                                    </div>
-                                    <form class="user" action="controllers/forgot/sentMail.controller.php" method="post">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="email" aria-describedby="emailHelp" name="email"
-                                                placeholder="Enter Email Address...">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Sent Mail
-                                        </button>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="/signup">Create an Account!</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="/">Already have an account? Login!</a>
-                                    </div>
-                                </div>
-                            </div>
+<body class="card o-hidden border-0 shadow-lg my-4 pb-5 ">
+    <div class="card-body p-9 mt-5 ml-4 ">
+        <div class="row">
+            <img src="assets/images/pos.png" class="col-lg-6 d-none d-lg-block ml-4" alt="..."> 
+            <div class="col-lg-5 bg-light">
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h2 text-dark">Forgot Your Password?</h1>
+                        <p class="mb-4 text-dark">We get it, stuff happens. Just enter your email address below
+                            and we'll send you a link to reset your password!
+                        </p>
+                    </div>
+                    <hr>
+                    <form class="user" action="controllers/forgot/sentMail.controller.php" method="post">
+                        <div class="form-group">
+                            <input type="email" class="form-control form-control-user" id="email"
+                                aria-describedby="emailHelp" name="email" placeholder="Enter Email Address...">
                         </div>
+                        <button type="submit" class="btn btn-success btn-user btn-block">
+                            Sent Email
+                        </button>
+                        <hr>
+                    </form>
+                    <div class="text-center">
+                        <a class="small text-dark" href="/signup">Create an Account!</a>
+                    </div>
+                    <div class="text-center">
+                        <a class="small text-dark" href="/">Already have an account? Login!</a>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript-->
