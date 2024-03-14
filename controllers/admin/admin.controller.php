@@ -53,5 +53,5 @@ foreach ($users as $key => $user) {
 //count oders for admin
 // $ordersAdmin = sum(getOrders());
 $ordersAdmin = count(getOrderToday($yesterday));
-
+//commit test jira
 require "views/admin/admin.view.php";
