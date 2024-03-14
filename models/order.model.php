@@ -38,3 +38,12 @@ function getOrderOne(int $id){
     ]);
     return $statement->fetch();
 }
+
+//order in today
+function getOrderToday(string $yesterday) : array
+{
+    global $connection;
+    $statement = $connection->prepare("SELECT * FROM orders WHERE date > :yesterday");
+    $statement->execute([':yesterday' => $yesterday]);
+    return $statement->fetchAll();
+}

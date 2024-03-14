@@ -51,15 +51,15 @@ require "layouts/navbar.php";
     <!-- DataTales Example -->
     <div class="card shadow ">
         <div class="d-flex justify-content-between align-items-center">
+            <?php if ($user[5] === 'admin') : ?>
             <form id="searchForm" class=" ml-4">
                 <div class="input-group">
-                    <?php if ($user[5] === 'admin') : ?>
                         <div class="mr-4 mt-4">
                             <a href="/productCreate" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#createProduct"><i class="fa fa-plus-square mr-3"></i>ADD</a>
                         </div>
-                    <?php endif; ?>
-                </div>
-            </form>
+                    </div>
+                </form>
+                <?php endif; ?>
             <form action="#">
                 <div class="col-md-12 d-flex mt-4 align-items-center">
                     <label class="d-flex pr-5 col-7">Fitter Product</label>
@@ -73,9 +73,11 @@ require "layouts/navbar.php";
                 </div>
             </form>
             <div>
+                <?php if ($user[5] === 'admin') : ?>
                 <div class="col-md-12 mt-4 mr-2">
                     <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#importTo"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                 </div>
+                <?php endif ?>
             </div>
         </div>
         <div class="card-body">
@@ -103,7 +105,7 @@ require "layouts/navbar.php";
                         if ($user[5] === 'admin') {
                             $products = getProducts($dateToday); // set it here it's okay. if set it on product.controller.php it's okay
                         } else {
-                            $products = getProductsByUser($user[0]);
+                            $products = getProductsByUser($user[0],$dateToday);
                         }
 
                         foreach ($products as $key => $product) {

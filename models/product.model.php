@@ -88,12 +88,13 @@ function deleteProduct(int $id) : bool
 
 //get products by using name login
 
-function getProductsByUser(int $id) : array
+function getProductsByUser(int $id,string $date) : array
 {
     global $connection;
-    $statement = $connection->prepare("select products.id, products.name, products.price, products.qty, products.image, products.code, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.isDelete = 0 and users.id = :id order by products.id desc");
+    $statement = $connection->prepare("select products.id, products.name, products.price, products.qty, products.image, products.code, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.isDelete = 0 and products.expire > :date and users.id = :id order by products.id desc");
     $statement->execute([
-        ':id' => $id
+        ':id' => $id,
+        ':date' => $date,
     ]);
     return $statement->fetchAll();
 }

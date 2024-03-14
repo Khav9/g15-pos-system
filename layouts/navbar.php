@@ -55,13 +55,13 @@ $user = $_SESSION['user'];
 
     <!-- Nav Item - Tables -->
     <?php
-    if ($user[5] === 'admin'):
+    if ($user[5] === 'admin') :
     ?>
-    <li class="nav-item">
-        <a class="nav-link" href="/users">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Users</span></a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/users">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Users</span></a>
+        </li>
     <?php endif; ?>
     <li class="nav-item">
         <a class="nav-link" href="/reports">
@@ -78,8 +78,8 @@ $user = $_SESSION['user'];
 
     <!-- Nav Item - logout -->
     <li class="nav-item">
-        <a class="nav-link" href="/logout">
-            <i class="fas fa-fw fa fa-sign-out" aria-hidden="true"></i>
+        <a class="nav-link" href="" data-toggle="modal" data-target="#logout">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-400"></i>
             <span>Logout</span></a>
     </li>
 
@@ -262,7 +262,7 @@ $user = $_SESSION['user'];
                             Activity Log
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/logout">
+                        <a class="dropdown-item" href="" data-toggle="modal" data-target="#logout">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
                         </a>
@@ -272,4 +272,23 @@ $user = $_SESSION['user'];
             </ul>
 
         </nav>
+        <!-- Modal -->
+        <div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <p><?= $user['1']?> are you sure do you want to logout ? </p> 
+                    <div class="modal-footer">
+                        <a type="button" href="/logout" class="badge badge-danger">Logout</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- End of Topbar -->

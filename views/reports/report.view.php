@@ -7,8 +7,8 @@ require "layouts/navbar.php";
             <div class="card-header py-3 d-flex justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Reports</h6>
                   <div class="select-product ">
-                  <input type="date" name="date" id="date" />
-                        
+                        <input type="date" name="date" id="date" />
+
                         <div class="btn">
                               <a href="/reports" class="btn btn-primary">Filter</a>
                               <a href="/reports" class="btn btn-danger">Reset</a>
@@ -30,21 +30,21 @@ require "layouts/navbar.php";
                               </thead>
                               <tbody>
                                     <?php
-                                    foreach ($orders as $key => $order):
+                                    foreach ($orders as $key => $order) :
                                     ?>
-                                    <tr>
-                                          <td><?=$key+1?></td>
-                                          <td><?php echo $order[6]. ' '. $order[7]; ?></td>
-                                          <td><?=$order[4]?></td>
-                                          <td><?=$order[2]?></td>
-                                          <td>
-                                                <a href="/reportView?id=<?=$order[0]?>" class="btn btn-primary">View</a>
-                                                <a href="/reportPrint?id=<?=$order[0]?>" class="btn btn-primary">Print</a>
-                                          </td>
-                                    </tr>
+                                          <tr>
+                                                <td><?= $key + 1 ?></td>
+                                                <td><?php echo $order[6] . ' ' . $order[7]; ?></td>
+                                                <td><?= $order[4] ?></td>
+                                                <td><?= $order[2] ?></td>
+                                                <td>
+                                                      <a href="/reportView?id=<?= $order[0] ?>" class="btn btn-primary">View</a>
+                                                      <a href="/reportPrint?id=<?= $order[0] ?>" class="btn btn-primary">Print</a>
+                                                </td>
+                                          </tr>
                                     <?php
-                                     endforeach;
-                                     ?>
+                                    endforeach;
+                                    ?>
                               </tbody>
 
                         </table>
@@ -55,4 +55,4 @@ require "layouts/navbar.php";
 
 <?php
 require "layouts/footer.php"
-      ?>
+?>
