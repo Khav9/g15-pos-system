@@ -108,3 +108,15 @@ foreach ($products as $key => $product) {
 return $total;
 }
 
+//update qty admin
+
+function updateQty(int $qty,int $code) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("UPDATE products SET qty = :qty  where code = :code");
+    $statement->execute([
+        ':qty' => $qty,
+        ':code' => $code
+    ]);
+    return $statement->rowCount() > 0;
+}
