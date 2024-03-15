@@ -34,7 +34,7 @@ require "layouts/navbar.php";
                                     ?>
                                           <tr>
                                                 <td><?= $key + 1 ?></td>
-                                                <td><?php echo $order[6] . ' ' . $order[7]; ?></td>
+                                                <td><?php echo  $order[7]; ?></td>
                                                 <td><?= $order[4] ?></td>
                                                 <td><?= $order[2] ?></td>
                                                 <td>
