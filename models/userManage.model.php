@@ -19,7 +19,7 @@ function createAccount(string $name, string $email, string $phone, string $passw
 
 function getUsers(): array {
     global $connection;
-    $statement = $connection->prepare("SELECT * FROM users WHERE role = :role ORDER BY id DESC ");
+    $statement = $connection->prepare("SELECT * FROM users WHERE role = :role and isDelete = 0 ORDER BY id DESC ");
     $statement->execute([
         ':role' => 'user'
     ]);
@@ -116,7 +116,7 @@ function getPin(string $email) : array
 function deleteUser(int $id) : bool
 {
     global $connection;
-    $statement = $connection->prepare("delete from users where id = :id");
+    $statement = $connection->prepare("update users set isDelete = 1 where id = :id");
     $statement->execute([':id' => $id]);
     return $statement->rowCount() > 0;
 }

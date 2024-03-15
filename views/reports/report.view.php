@@ -25,6 +25,7 @@ require "layouts/navbar.php";
                                           <th>Customer</th>
                                           <th>Items</th>
                                           <th>Total</th>
+                                          <th>Status</th>
                                           <th>Action</th>
                                     </tr>
                               </thead>
@@ -37,9 +38,11 @@ require "layouts/navbar.php";
                                                 <td><?php echo  $order[7]; ?></td>
                                                 <td><?= $order[4] ?></td>
                                                 <td><?= $order[2] ?></td>
-                                                <td>
-                                                      <a href="/reportView?id=<?= $order[0] ?>" class="btn btn-primary">View</a>
-                                                      <a href="/reportPrint?id=<?= $order[0] ?>" class="btn btn-primary">Print</a>
+                                                <td>Status</td>
+                                                <td class=" text-center">
+                                                      <a href="/reportView?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-dark"><i class="fa fa-eye"></i></a>
+                                                      <a href="/reportPrint?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-dark"><i class="fa fa-print" aria-hidden="true"></i></a>
+                                                      <a href="?id=<?= $order[0] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                 </td>
                                           </tr>
                                     <?php
