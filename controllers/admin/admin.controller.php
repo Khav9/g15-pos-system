@@ -39,4 +39,18 @@ $ordersAdmin = count(getOrderToday($dateToday));
 //user
 $ordersUser = count(getOrderTodayUser($dateToday,$user[0]));
 
+//earning admin
+$earningAmin = 0;
+$orderToday = getOrderToday($dateToday);
+foreach ($orderToday as $key => $value) {
+      $earningAmin += $value[2];
+}
+
+//earning user
+$earningUser = 0;
+$orderTodayUser = getOrderTodayUser($dateToday,$user[0]);
+foreach ($orderTodayUser as $key => $valu) {
+      $earningUser += $valu[2];
+}
+
 require "views/admin/admin.view.php";
