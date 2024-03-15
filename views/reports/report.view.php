@@ -30,6 +30,12 @@ require "layouts/navbar.php";
                               </thead>
                               <tbody>
                                     <?php
+                                    $orders = [];
+                                    if ($user[5] === 'admin') {
+                                          $orders = $ordersAdmin;
+                                    } else {
+                                          $orders = $ordersUser;
+                                    }
                                     foreach ($orders as $key => $order) :
                                     ?>
                                           <tr>

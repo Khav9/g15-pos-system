@@ -29,6 +29,14 @@ function getOrders() : array
     $statement->execute();
     return $statement->fetchAll();
 }
+//order user
+function getOrdersUser(int $id) : array
+{
+    global $connection;
+    $statement = $connection->prepare("SELECT * FROM orders INNER JOIN users ON orders.userId = users.id WHERE orders.userId = :id ORDER BY orders.id DESC");
+    $statement->execute([':id' => $id]);
+    return $statement->fetchAll();
+}
 
 function getOrderOne(int $id)
 {
