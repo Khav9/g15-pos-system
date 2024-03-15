@@ -1,24 +1,23 @@
 <?php
-function createOrder(int $cus_id ,int $totalPrice, int $items,string $date) : bool
+function createOrder(int $userId ,int $totalPrice, int $items,string $status) : bool
 {
     global $connection;
-    $statement = $connection->prepare("INSERT INTO orders(cus_id,totalPrice,qty,date) values (:cus_id,:totalPrice,:qty,:date)");
+    $statement = $connection->prepare("INSERT INTO orders(userId,totalPrice,qty,status) values (:userId,:totalPrice,:qty,:status)");
     $statement->execute([
-        ':cus_id' => $cus_id,
+        ':userId' => $userId,
         ':totalPrice' => $totalPrice,
         ':qty' => $items,
-        ':date' => $date,
-
+    
+        ':status' => $status,
     ]);
 
     return $statement->rowCount() > 0;
 }
 
-
 function getOrder() : array
 {
     global $connection;
-    $statement = $connection->prepare("SELECT * FROM orders order by id desc limit 1");
+    $statement = $connection->prepare("SELECT * FROM orders ORDER BY id DESC LIMIT 1");
     $statement->execute();
     return $statement->fetch();
 }
@@ -26,14 +25,15 @@ function getOrder() : array
 function getOrders() : array
 {
     global $connection;
-    $statement = $connection->prepare("SELECT * FROM orders inner join customers on orders.cus_id = customers.cus_id order by orders.id desc");
+    $statement = $connection->prepare("SELECT * FROM orders INNER JOIN users ON orders.userId = users.id ORDER BY orders.id DESC");
     $statement->execute();
     return $statement->fetchAll();
 }
 
-function getOrderOne(int $id){
+function getOrderOne(int $id)
+{
     global $connection;
-    $statement = $connection->prepare("SELECT * FROM orders inner join customers on orders.cus_id = customers.cus_id where orders.id = :id order by orders.id desc limit 1");
+    $statement = $connection->prepare("SELECT * FROM orders INNER JOIN users ON orders.userId = users.id WHERE orders.id = :id ORDER BY orders.id DESC LIMIT 1");
     $statement->execute([
         ':id' => $id,
     ]);
@@ -54,7 +54,7 @@ function getOrderToday(string $today) : array
 function getOrderTodayUser(string $today,int $id) : array
 {
     global $connection;
-    $statement = $connection->prepare("SELECT * FROM orders WHERE date = :today and cus_id = :id");
+    $statement = $connection->prepare("SELECT * FROM orders WHERE date = :today and userId = :id");
     $statement->execute([':today' => $today, ':id' => $id]);
     return $statement->fetchAll();
 }

@@ -5,20 +5,14 @@ require_once('../../models/product.model.php');
 require_once('../../models/order.model.php');
 require_once('../../models/orderdetail.model.php');
 session_start();
-$customerIds = getCustomers();
+// $customerIds = getCustomers();
 $products = getProducts($_SESSION['today']);
-
+$status = $_POST['userId'];
+$user = $_SESSION['user'];
+$userId = $user[0];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //note : $_SESSION['orders'] = $_SESSION['productData']
-    $customerOder = $_POST['cus_id'];
-    if (!empty($customerOder) &&  isset($_SESSION['productData'])) {
-        // Catch the customer's ID
-        $cus_id = $_POST['cus_id'];
-        // $payment = $_POST['paymentMethod']; 
-        // var_dump($payment);
-        
-        
+    if (isset($_SESSION['user']) &&  isset($_SESSION['productData'])) {
         $totalPrice = 0;
         $item = 0;
         foreach ($_SESSION['productData'] as $product) {
@@ -28,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $totalPrice += $qty * $price;
         }
         // Insert the order into the database
-        $query = createOrder($customerOder, $totalPrice,$item,$_SESSION['today']);
+        $query = createOrder($userId, $totalPrice,$item,$_SESSION['today']);
 
         $lastOrder = getOrder();
         $subprice=0;
