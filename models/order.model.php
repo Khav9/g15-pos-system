@@ -1,13 +1,13 @@
 <?php
-function createOrder(int $userId ,int $totalPrice, int $items,string $status) : bool
+function createOrder(int $userId ,int $totalPrice, int $items,$date,string $status) : bool
 {
     global $connection;
-    $statement = $connection->prepare("INSERT INTO orders(userId,totalPrice,qty,status) values (:userId,:totalPrice,:qty,:status)");
+    $statement = $connection->prepare("INSERT INTO orders(userId,totalPrice,date,qty,status) values (:userId,:totalPrice,:date,:qty,:status)");
     $statement->execute([
         ':userId' => $userId,
         ':totalPrice' => $totalPrice,
         ':qty' => $items,
-    
+        ':date'=>$date,
         ':status' => $status,
     ]);
 
