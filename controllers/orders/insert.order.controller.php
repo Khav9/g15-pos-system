@@ -6,7 +6,7 @@ require_once('../../models/order.model.php');
 require_once('../../models/orderdetail.model.php');
 session_start();
 $customerIds = getCustomers();
-// $products = getProducts();
+$products = getProducts($_SESSION['today']);
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,23 +26,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $price = $product['price'];
             $item += 1;
             $totalPrice += $qty * $price;
-            // Insert the order into the database
-            
         }
+        // Insert the order into the database
         $query = createOrder($customerOder, $totalPrice,$item);
 
         $lastOrder = getOrder();
         $subprice=0;
         $orderID = $lastOrder[0];
         foreach ($_SESSION['productData'] as $product) {
-            
-            $productName = $product['name'];
+            // $productName = $product['name'];
+            $productCode = $product['code'];
             $quantity = $product['quantity'];
             $unitprice = $product['price'];
            
             $subprice = $quantity * $unitprice;
             // Insert the order into the database
-            createOrderDetail($orderID,$productName,$quantity,$unitprice,$subprice);
+            createOrderDetail($orderID,$productCode,$quantity,$unitprice,$subprice);
+
+            foreach ($products as $key => $value) {
+                if ($value['code'] == $productCode){
+                    $qty = $value[3] - $quantity;
+                    updateQty($qty,$productCode);
+                }
+            }
         }
         // Order successfully inserted
         unset($_SESSION['productData']);
