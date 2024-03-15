@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $totalPrice += $qty * $price;
         }
         // Insert the order into the database
-        $query = createOrder($customerOder, $totalPrice,$item);
+        $query = createOrder($customerOder, $totalPrice,$item,$_SESSION['today']);
 
         $lastOrder = getOrder();
         $subprice=0;

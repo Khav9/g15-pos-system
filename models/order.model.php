@@ -1,12 +1,13 @@
 <?php
-function createOrder(int $cus_id ,int $totalPrice, int $items) : bool
+function createOrder(int $cus_id ,int $totalPrice, int $items,string $date) : bool
 {
     global $connection;
-    $statement = $connection->prepare("INSERT INTO orders(cus_id,totalPrice,qty) values (:cus_id,:totalPrice,:qty)");
+    $statement = $connection->prepare("INSERT INTO orders(cus_id,totalPrice,qty,date) values (:cus_id,:totalPrice,:qty,:date)");
     $statement->execute([
         ':cus_id' => $cus_id,
         ':totalPrice' => $totalPrice,
         ':qty' => $items,
+        ':date' => $date,
 
     ]);
 
@@ -39,11 +40,21 @@ function getOrderOne(int $id){
     return $statement->fetch();
 }
 
-//order in today
-function getOrderToday(string $yesterday) : array
+//order in today (admin)
+function getOrderToday(string $today) : array
 {
     global $connection;
-    $statement = $connection->prepare("SELECT * FROM orders WHERE date > :yesterday");
-    $statement->execute([':yesterday' => $yesterday]);
+    $statement = $connection->prepare("SELECT * FROM orders WHERE date = :today");
+    $statement->execute([':today' => $today]);
+    return $statement->fetchAll();
+}
+
+//(user)
+//need correct for member
+function getOrderTodayUser(string $today,int $id) : array
+{
+    global $connection;
+    $statement = $connection->prepare("SELECT * FROM orders WHERE date = :today and cus_id = :id");
+    $statement->execute([':today' => $today, ':id' => $id]);
     return $statement->fetchAll();
 }
