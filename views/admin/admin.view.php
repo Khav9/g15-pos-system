@@ -201,7 +201,15 @@ require "layouts/navbar.php";
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Earnings</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <?php
+                                if ($user[5] === 'admin') {
+                                    echo '$ ' .$earningAmin;
+                                } else {
+                                    echo '$ '. $earningUser;
+                                }
+                                ?>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
