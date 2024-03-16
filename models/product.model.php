@@ -1,6 +1,6 @@
 <?php
 
-function createProduct(string $name, int $code, int $price, int $quantity, string $category, string $asign, $date, string $image) : bool
+function createProduct(string $name, int $code, int $price, int $quantity, string $category, string $asign, $date, string $image): bool
 {
     global $connection;
     $statement = $connection->prepare("insert into  products(name, code, price, qty, categoryID, userID, expire, isDelete, image) values (:name, :code, :price, :qty, :categoryID, :userID, :expire , :isDelete, :image)");
@@ -19,8 +19,14 @@ function createProduct(string $name, int $code, int $price, int $quantity, strin
 
     return $statement->rowCount() > 0;
 }
-
-function getProduct(int $id) : array
+function getProductAll()
+{
+    global $connection;
+    $statement = $connection->prepare('SELECT * FROM products');
+    $statement->execute();
+    $orders = $statement->fetchAll();
+}
+function getProduct(int $id): array
 {
     global $connection;
     $statement = $connection->prepare("select products.id, products.name,products.code, products.price, products.qty,products.expire, products.image, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.id = :id");
@@ -28,7 +34,7 @@ function getProduct(int $id) : array
     return $statement->fetch();
 }
 
-function getProducts(string $date) : array
+function getProducts(string $date): array
 {
     global $connection;
     $statement = $connection->prepare("select products.id, products.name, products.price, products.qty, products.image, products.code,products.categoryID,products.userID, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.isDelete = 0 and products.expire > :date order by products.id desc");
@@ -36,7 +42,7 @@ function getProducts(string $date) : array
     return $statement->fetchAll();
 }
 
-function updateProduct(string $name, int $code, int $price, int $quantity, string $category, string $asign, string $date, string $image, int $id) : bool
+function updateProduct(string $name, int $code, int $price, int $quantity, string $category, string $asign, string $date, string $image, int $id): bool
 {
     global $connection;
     $statement = $connection->prepare("update products set name = :name, code = :code, price = :price, qty = :quantity, categoryID = :category, userID = :asign, image = :image, expire = :date where id = :id");
@@ -56,7 +62,7 @@ function updateProduct(string $name, int $code, int $price, int $quantity, strin
 }
 
 // by don't update image
-function updateProNotImage(string $name,string $code, int $price, int $quantity, string $category, string $asign, string $date, int $id) : bool
+function updateProNotImage(string $name, string $code, int $price, int $quantity, string $category, string $asign, string $date, int $id): bool
 {
     global $connection;
     $statement = $connection->prepare("update products set name = :name, code = :code, price = :price, qty = :quantity, categoryID = :category, userID = :asign, expire = :date where id = :id");
@@ -74,7 +80,7 @@ function updateProNotImage(string $name,string $code, int $price, int $quantity,
     return $statement->rowCount() > 0;
 }
 
-function deleteProduct(int $id) : bool
+function deleteProduct(int $id): bool
 {
     global $connection;
     $statement = $connection->prepare("UPDATE products SET isDelete = :isDelete  where id = :id");
@@ -88,7 +94,7 @@ function deleteProduct(int $id) : bool
 
 //get products by using name login
 
-function getProductsByUser(int $id,string $date) : array
+function getProductsByUser(int $id, string $date): array
 {
     global $connection;
     $statement = $connection->prepare("select products.id, products.name, products.price, products.qty, products.image, products.code, category.categoryName, users.userName from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.isDelete = 0 and products.expire > :date and users.id = :id order by products.id desc");
@@ -99,18 +105,18 @@ function getProductsByUser(int $id,string $date) : array
     return $statement->fetchAll();
 }
 
-function sum(array $products) 
+function sum(array $products)
 {
-$total = 0;
-foreach ($products as $key => $product) {
-    $total += $product['qty'];
-}
-return $total;
+    $total = 0;
+    foreach ($products as $key => $product) {
+        $total += $product['qty'];
+    }
+    return $total;
 }
 
 //update qty admin
 
-function updateQty(int $qty,int $code) : bool
+function updateQty(int $qty, int $code): bool
 {
     global $connection;
     $statement = $connection->prepare("UPDATE products SET qty = :qty  where code = :code");
