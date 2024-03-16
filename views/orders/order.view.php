@@ -23,10 +23,14 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
     $productqty = $_POST['quantity'];
     $isProductFound = false;
     // increase quantity
+
     foreach ($productData as $key => $order) {
+        // $total = $order['price'];
         if (isset($order['code']) && $order['code'] == $productcode) {
             $newQuantity = $productData[$key]['quantity'] + intval($productqty);
             $productData[$key]['quantity'] = $newQuantity;
+            // $orderTotal = $order['quantity'] * $order['price'];
+            // $total += $orderTotal;
             $isProductFound = true;
         }
     }
@@ -68,7 +72,7 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
         $productqty = $_POST['quantity'];
         $availableQty = $product[$key]['qty'];
         if ($productqty > $availableQty) {
-
+            $isProductFound = true;
             // Handle the case when the entered quantity exceeds the available quantity
             $_SESSION['status'] = "Cannot order more than the available quantity.";
             if (isset($_SESSION['status'])) {
@@ -139,9 +143,11 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
                 </tr>
                 <?php
                 $orders = [];
+                $total=0;
                 foreach ($productData as $key => $order) :
                     array_push($orders, $order);
                     $_SESSION['orders'] = $orders;
+                    // $total = $total + ($product['quantity'] * $product['price']);
                 ?>
                     <tr>
                         <td><?php echo $key + 1; ?></td>
@@ -155,9 +161,11 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
                             </a>
                         </td>
                     </tr>
-
-                <?php endforeach; ?>
-
+                    <?php
+                        $total = $total + ($order['quantity'] * $order['price']); ;
+                      endforeach;
+                    ?>
+                    
             </table>
             <div class="col-md-4 mb-3">
                 <label for="payment"></label>
@@ -169,7 +177,7 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
                 <div class="input-group-prepend">
                     <label class="input-group-text bg-primary text-light" for="total">Total</label>
                 </div>
-                <input type="number" placeholder="$" class="text-center" name="totalGood" value="<?php echo $total += ($order['quantity'] * $order['price']); ?>">
+                <input type="number" placeholder="$" class="text-center" name="totalGood" value="<?php echo $total; ?>">
             </div>
             <div class="col-md-4 mb-2 ">
                 <br>
