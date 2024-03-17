@@ -1,6 +1,8 @@
 <?php
 require 'database/database.php';
 require 'models/order.model.php';
-$orders = getOrders();
+$ordersAdmin = getOrders();
+
+$ordersUser = getOrdersUser($_SESSION['user'][0]);
 
 require "views/reports/report.view.php";
