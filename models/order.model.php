@@ -22,11 +22,20 @@ function getOrder() : array
     return $statement->fetch();
 }
 
+//orders admin
 function getOrders() : array
 {
     global $connection;
     $statement = $connection->prepare("SELECT * FROM orders INNER JOIN users ON orders.userId = users.id ORDER BY orders.id DESC");
     $statement->execute();
+    return $statement->fetchAll();
+}
+//orders user
+function getOrdersUser(int $id) : array
+{
+    global $connection;
+    $statement = $connection->prepare("SELECT * FROM orders INNER JOIN users ON orders.userId = users.id WHERE users.id = :id ORDER BY orders.id DESC");
+    $statement->execute([':id' => $id]);
     return $statement->fetchAll();
 }
 
