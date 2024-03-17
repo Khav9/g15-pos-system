@@ -12,86 +12,70 @@ require_once("models/customer.model.php");
 require_once("database/database.php");
 
 $products = [];
-
-if (!empty($_POST['code'])) {
-    $barcode = $_POST['code'];
-    // $products = getProducts();
-}
 $productData = $_SESSION['productData'] ?? [];
 if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
     $productcode = $_POST['code'];
     $productqty = $_POST['quantity'];
-    $isProductFound = false;
-    // increase quantity
-
-    foreach ($productData as $key => $order) {
-        // $total = $order['price'];
-        if (isset($order['code']) && $order['code'] == $productcode) {
-            $newQuantity = $productData[$key]['quantity'] + intval($productqty);
-            $productData[$key]['quantity'] = $newQuantity;
-            // $orderTotal = $order['quantity'] * $order['price'];
-            // $total += $orderTotal;
-            $isProductFound = true;
-        }
-    }
-    // find barcode of product
-    if (!$isProductFound) {
-        $checkProduct = $connection->prepare("SELECT * FROM products WHERE code = :code LIMIT 1");
-        $checkProduct->bindValue(':code', $productcode);
-
-        if ($checkProduct->execute()) {
-            $row = $checkProduct->fetch();
-
-            if ($row) {
-                $productData[] = [
-                    "code" => $row['code'],
-                    "name" => $row['name'],
-                    "quantity" => $productqty,
-                    "price" => intval($row['price']),
-                ];
-            } else { // check condition if no product
-                $_SESSION['status'] = "No product with the entered name found. Please enter a valid product name.";
-                if (isset($_SESSION['status'])) {
-?>
-                    <div class="alert alert-warning alert-dismissible fade show m-2 " role="alert">
-                        <strong class="text-danger"><?= $_SESSION['status']; ?></strong>
-                        <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                <?php
-                    unset($_SESSION['status']);
+    $statement = $connection->prepare("SELECT qty FROM products WHERE code = :code LIMIT 1");
+    $statement->bindValue(':code', $productcode);
+    if ($statement->execute()) {
+        $row = $statement->fetch();
+        if ($row !== false && isset($row['qty'])) {
+            $availableQty = $row['qty'];
+            $productData = $_SESSION['productData'] ?? [];
+            $isProductFound = false;
+            foreach ($productData as $key => $order) {
+                if (isset($order['code']) && $order['code'] == $productcode) {
+                    $totalQuantity = $order['quantity'] + $productqty;
+                    if ($totalQuantity > $availableQty) {
+                        $_SESSION['status'] = "Cannot order more than the available quantity of $availableQty.";
+                        break;
+                    } else {
+                        $productData[$key]['quantity'] = $totalQuantity;
+                        $isProductFound = true;
+                        $_SESSION['productData'] = $productData;
+                    }
                 }
             }
-        }
-        $_SESSION['productData'] = $productData;
-    } else { // check condition if available
+            if (!$isProductFound && !isset($_SESSION['status'])) {
+                $statement = $connection->prepare("SELECT * FROM products WHERE code = :code LIMIT 1");
+                $statement->bindValue(':code', $productcode);
 
-        $_SESSION['productData'] = $productData;
-        $product = getProducts($productcode);
-        $productqty = $_POST['quantity'];
-        $availableQty = $product[$key]['qty'];
-        if ($productqty > $availableQty) {
-            $isProductFound = true;
-            // Handle the case when the entered quantity exceeds the available quantity
-            $_SESSION['status'] = "Cannot order more than the available quantity.";
-            if (isset($_SESSION['status'])) {
-                ?>
-                <div class="alert alert-warning alert-dismissible fade show m-2 " role="alert">
-                    <strong class="text-danger"><?= $_SESSION['status']; ?></strong>
-                    <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-<?php
+                if ($statement->execute()) {
+                    $row = $statement->fetch();
+
+                    if ($row) {
+                        $productData[] = [
+                            "code" => $row['code'],
+                            "name" => $row['name'],
+                            "quantity" => $productqty,
+                            "price" => intval($row['price']),
+                        ];
+                        $_SESSION['productData'] = $productData;
+                    } else {
+                        $_SESSION['status'] = "No product with the entered name found. Please enter a valid product name.";
+                    }
+                }
             }
-            if (isset($_SESSION['status'])) {
-                unset($_SESSION['status']);
-            }
+        } else {
+            $_SESSION['status'] = "Product with Barcode of product $productcode is not found.";
         }
     }
-};
+}
+// Display status message if set
+if (isset($_SESSION['status'])) {
 ?>
+    <div class="alert alert-warning alert-dismissible fade show m-2 " role="alert">
+        <strong class="text-danger"><?= $_SESSION['status']; ?></strong>
+        <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php
+    unset($_SESSION['status']);
+}
+?>
+
 <div class="container-fluid px-4">
     <div class="card shadow-sm mt-4">
         <div class="card-body">
@@ -143,7 +127,7 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
                 </tr>
                 <?php
                 $orders = [];
-                $total=0;
+                $total = 0;
                 foreach ($productData as $key => $order) :
                     array_push($orders, $order);
                     $_SESSION['orders'] = $orders;
@@ -161,11 +145,11 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
                             </a>
                         </td>
                     </tr>
-                    <?php
-                        $total = $total + ($order['quantity'] * $order['price']); ;
-                      endforeach;
-                    ?>
-                    
+                <?php
+                    $total = $total + ($order['quantity'] * $order['price']);;
+                endforeach;
+                ?>
+
             </table>
             <div class="col-md-4 mb-3">
                 <label for="payment"></label>
