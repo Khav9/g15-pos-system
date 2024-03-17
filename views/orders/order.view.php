@@ -16,28 +16,38 @@ $productData = $_SESSION['productData'] ?? [];
 if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
     $productcode = $_POST['code'];
     $productqty = $_POST['quantity'];
-    $statement = $connection->prepare("SELECT qty FROM products WHERE code = :code LIMIT 1");
-    $statement->bindValue(':code', $productcode);
-    if ($statement->execute()) {
-        $row = $statement->fetch();
-        if ($row !== false && isset($row['qty'])) {
-            $availableQty = $row['qty'];
+
+    // Fetch the available quantity from the database
+    $availableQty = getProductQuantity($connection, $productcode);
+   
+    if ($availableQty !== false) {
+        // Check if quantity in input is greater than available quantity
+        if ($productqty > $availableQty) {
+            $_SESSION['status'] = "Cannot order more than the available quantity  $availableQty.";
+        } else {
+            // Proceed with adding the product to the table
             $productData = $_SESSION['productData'] ?? [];
             $isProductFound = false;
-            foreach ($productData as $key => $order) {
+            foreach ($productData as $key => $order){
                 if (isset($order['code']) && $order['code'] == $productcode) {
+                    // Calculate the total quantity (current quantity + quantity to add)
                     $totalQuantity = $order['quantity'] + $productqty;
+            
+                    // Check if the total quantity exceeds the available quantity
                     if ($totalQuantity > $availableQty) {
-                        $_SESSION['status'] = "Cannot order more than the available quantity of $availableQty.";
-                        break;
+                        $_SESSION['status'] = "Cannot increase quantity beyond the available quantity.";
+                        $isProductFound = true; // Set flag to prevent quantity increase
+                        
                     } else {
+                        // Update the quantity in the table
                         $productData[$key]['quantity'] = $totalQuantity;
                         $isProductFound = true;
-                        $_SESSION['productData'] = $productData;
                     }
+                   
                 }
             }
-            if (!$isProductFound && !isset($_SESSION['status'])) {
+
+            if (!$isProductFound) {
                 $statement = $connection->prepare("SELECT * FROM products WHERE code = :code LIMIT 1");
                 $statement->bindValue(':code', $productcode);
 
@@ -51,21 +61,21 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
                             "quantity" => $productqty,
                             "price" => intval($row['price']),
                         ];
-                        $_SESSION['productData'] = $productData;
-                    } else {
-                        $_SESSION['status'] = "No product with the entered name found. Please enter a valid product name.";
                     }
                 }
             }
-        } else {
-            $_SESSION['status'] = "Product with Barcode of product $productcode is not found.";
+
+            $_SESSION['productData'] = $productData;
         }
+    } else {
+        $_SESSION['status'] = "No product with the entered  barcord $productcode. Please enter a valid product code.";
     }
 }
+
 // Display status message if set
 if (isset($_SESSION['status'])) {
 ?>
-    <div class="alert alert-warning alert-dismissible fade show m-2 " role="alert">
+    <div class="alert alert-warning alert-dismissible fade show m-2" role="alert">
         <strong class="text-danger"><?= $_SESSION['status']; ?></strong>
         <button type="button" class="close text-danger" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -75,7 +85,6 @@ if (isset($_SESSION['status'])) {
     unset($_SESSION['status']);
 }
 ?>
-
 <div class="container-fluid px-4">
     <div class="card shadow-sm mt-4">
         <div class="card-body">
