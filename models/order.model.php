@@ -38,6 +38,12 @@ function getOrdersUser(int $id) : array
     $statement->execute([':id' => $id]);
     return $statement->fetchAll();
 }
+function deleteOrder(int $id):bool{
+    global $connection;
+    $statement = $connection->prepare("delete FROM orders where id = :id");
+    $statement->execute([':id' => $id]);
+    return $statement->rowCount() > 0;
+}
 
 function getOrderOne(int $id)
 {

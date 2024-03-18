@@ -32,9 +32,9 @@ require "layouts/navbar.php";
                               <tbody>
                                     <?php
                                     $nbOrders = [];
-                                    if ($_SESSION['user']['role'] === 'admin'){
+                                    if ($_SESSION['user']['role'] === 'admin') {
                                           $orders = $ordersAdmin;
-                                    }else{
+                                    } else {
                                           $orders = $ordersUser;
                                     }
                                     foreach ($orders as $key => $order) :
@@ -44,13 +44,35 @@ require "layouts/navbar.php";
                                                 <td><?php echo  $order[7]; ?></td>
                                                 <td><?= $order[4] ?></td>
                                                 <td><?= $order[2] ?></td>
-                                                <td><?=$order['status']?></td>
+                                                <td><?= $order['status'] ?></td>
                                                 <td class=" text-center">
                                                       <a href="/reportView?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-dark"><i class="fa fa-eye"></i></a>
                                                       <a href="/reportPrint?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-dark"><i class="fa fa-print" aria-hidden="true"></i></a>
-                                                      <a href="?id=<?= $order[0] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                      <a href="?id=<?= $order[0] ?>" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteOrder<?= $order[0] ?>"><i class="fa fa-trash"></i></a>
                                                 </td>
                                           </tr>
+                                          <!-- Modal delete-->
+                                          <div class="modal fade" id="deleteOrder<?= $order[0] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                  <h5 class="modal-title text-danger" id="exampleModalLabel">Delete</h5>
+                                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                  </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                  <p>Are you sure you want to delete product order by "<span class="text-primary font-weight-bold"><?=  $order[7]?></span> " ?</p>
+                                                                  <div class="modal-footer">
+                                                                        <form action="controllers/reports/report.delete.controller.php" class="" method="post">
+                                                                              <input type="hidden" name="id" value="<?= $order[0] ?>">
+                                                                              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                                        </form>
+                                                                  </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                          </div>
                                     <?php
                                     endforeach;
                                     ?>
