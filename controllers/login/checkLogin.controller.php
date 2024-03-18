@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Get data from database
         $user = accountExist($email);
-        echo $user[4];
+
         // Check if user exists
         if (count($user) > 0) {
             // Check if password is correct

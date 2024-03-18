@@ -9,8 +9,8 @@ require "layouts/navbar.php";
 				<tbody>
 					<tr>
 						<td class="text-align:center" align="start">
-							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Customer Name : <?php echo ' '.$orders[6].' '.$orders[7];?></h4>
-							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Customer Phone : <?=$orders[8]?></h4>
+							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Seller Name : <?php echo ' '.$orders[7];?></h4>
+							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Seller Email : <?=$orders[8]?></h4>
 						</td>
 						<td align="end">
 							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Transaction #2345678</h4>
@@ -38,7 +38,7 @@ require "layouts/navbar.php";
 							?>
 							<tr>
 								<th><?=$key + 1?></th>
-								<td><?=$value[2]?></td>
+								<td><?=$value[13]?></td>
 								<td><?=$value[3]?></td>
 								<td><?php echo '$ '.$value[4]?></td>
 								<td><?php echo '$ '.$value[3]*$value[4]?></td>
