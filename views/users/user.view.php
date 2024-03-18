@@ -88,9 +88,9 @@ $user = $_SESSION['user'];
                                     <td><img width="30px" height="30px" class="rounded-circle" src="assets/profiles/<?= $user['image'] ?>" alt=""></td>
                                     <td><?= $user['role'] ?></td>
                                     <td class="d-flex justify-content-between">
-                                        <a href="/userUpdate?id=<?= $user['id'] ?>" class="text-info p-2" data-toggle="modal" data-target="#editUser<?= $user['id'] ?>"><i class="fa fa-pen"></i></a>
-                                        <a href="/user?id=<?= $user['id'] ?>" class="text-info p-2" data-toggle="modal" data-target="#detailInfo<?= $user['id'] ?>"><i class="fa fa-eye"></i></a>
-                                        <a href="controllers/users/user.delete.controller.php?id=<?= $user['id'] ?>" class="text-danger p-2" data-toggle="modal" data-target="#deleteUser<?= $user['id'] ?>"><i class="fa fa-trash"></i></a>
+                                        <a href="/userUpdate?id=<?= $user['id'] ?>" class="btn btn-info btn-sm text-white" data-toggle="modal" data-target="#editUser<?= $user['id'] ?>"><i class="fa fa-pen"></i></a>
+                                        <a href="/user?id=<?= $user['id'] ?>" class="btn btn-primary btn-sm text-white" data-toggle="modal" data-target="#detailInfo<?= $user['id'] ?>"><i class="fa fa-eye"></i></a>
+                                        <a href="controllers/users/user.delete.controller.php?id=<?= $user['id'] ?>" class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#deleteUser<?= $user['id'] ?>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
 

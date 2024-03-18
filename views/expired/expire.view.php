@@ -119,9 +119,9 @@ require "layouts/navbar.php";
                                 <td><?= $productExpire['qty'] ?></td>
                                 <td><?= $productExpire['expire'] ?></td>
                                 <td><?= $productExpire['code'] ?></td>
-                                <td>
+                                <td class="d-flex justify-content-center">
                                     <?php if ($user[5] === 'admin') : ?>
-                                        <a href="/controllers/expired/expire.controller.delete.php?id=<?= $productExpire['id'] ?>" class="text-danger p-2" data-toggle="modal" data-target="#delete<?= $productExpire['id'] ?>"><i class="fa fa-trash ml-3"></i></a>
+                                        <a href="/controllers/expired/expire.controller.delete.php?id=<?= $productExpire['id'] ?>" class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#delete<?= $productExpire['id'] ?>"><i class="fa fa-trash"></i></a>
                                     <?php endif; ?>
                                 </td>
                             </tr>

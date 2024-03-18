@@ -46,8 +46,8 @@ require "layouts/navbar.php";
                                                 <td><?= $order[2] ?></td>
                                                 <td><?= $order['status'] ?></td>
                                                 <td class=" text-center">
-                                                      <a href="/reportView?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-dark"><i class="fa fa-eye"></i></a>
-                                                      <a href="/reportPrint?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-dark"><i class="fa fa-print" aria-hidden="true"></i></a>
+                                                      <a href="/reportView?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-white"><i class="fa fa-eye"></i></a>
+                                                      <a href="/reportPrint?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-white"><i class="fa fa-print" aria-hidden="true"></i></a>
                                                       <a href="?id=<?= $order[0] ?>" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteOrder<?= $order[0] ?>"><i class="fa fa-trash"></i></a>
                                                 </td>
                                           </tr>
