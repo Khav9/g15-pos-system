@@ -4,14 +4,14 @@ require "../../database/database.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       require "../../models/product.model.php";
-      $name = $_POST['name'];
-      $price =  $_POST['price'];
-      $quantity =  $_POST['qty'];
-      $category = $_POST['category'];
-      $asign = $_POST['asign'];
-      $date = $_POST['date'];
-      $id = $_POST['id'];
-      $code = $_POST['code'];
+      $name = htmlspecialchars($_POST['name']);
+      $price = htmlspecialchars($_POST['price']);
+      $quantity = htmlspecialchars($_POST['qty']);
+      $category = htmlspecialchars($_POST['category']);
+      $asign = htmlspecialchars($_POST['asign']);
+      $date = htmlspecialchars($_POST['date']);
+      $id = htmlspecialchars($_POST['id']);
+      $code = htmlspecialchars($_POST['code']);
 
       $_SESSION['products'] = [
             "success" => "",

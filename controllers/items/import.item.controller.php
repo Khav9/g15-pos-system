@@ -27,13 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             foreach ($reader as $key => $row) {
                   if (count($row) ===8) {
                         $image = '../../assets/products/65ee567c9ad28.png' ;
-                        $name = $row[0];
-                        $code = $row[1];
-                        $price = $row[2];
-                        $qty = $row[7];
-                        $categoryName = $row[3];
-                        $userName = $row[4];
-                        $date = $row[6];
+                        $name = htmlspecialchars($row[0]);
+                        $code = htmlspecialchars($row[1]);
+                        $price = htmlspecialchars($row[2]);
+                        $qty = htmlspecialchars($row[7]);
+                        $categoryName = htmlspecialchars($row[3]);
+                        $userName = htmlspecialchars($row[4]);
+                        $date = htmlspecialchars($row[6]);
 
                         if(!empty($name) && !empty($qty) && !empty($price) && !empty($date) && !empty($code) && !empty($categoryName) && !empty($userName)){
 

@@ -268,17 +268,17 @@ require "layouts/navbar.php";
                             <div class="row">
                                 <div class="col">
                                     <label for="">Product Name</label>
-                                    <input type="text" class="form-control" placeholder="Product Name" name="name">
+                                    <input type="text" class="form-control" name="name">
                                 </div>
                                 <div class="col">
                                     <label for="">Code of Product</label>
-                                    <input type="number" class="form-control" placeholder="112233" name="code">
+                                    <input type="number" class="form-control" name="code">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="">Price</label>
-                                    <input type="number" class="form-control" placeholder="$" name="price">
+                                    <input type="number" class="form-control" name="price">
                                 </div>
                                 <div class="col">
                                     <label for="">Expire of Product</label>
@@ -289,11 +289,11 @@ require "layouts/navbar.php";
                             <div class="row">
                                 <div class="col">
                                     <label for="">Quantity</label>
-                                    <input type="number" class="form-control" placeholder="qty" name="qty">
+                                    <input type="number" class="form-control" name="qty">
                                 </div>
                                 <div class="col">
                                     <label for="">Image of Product</label>
-                                    <input type="file" class="form-control" placeholder="Last name" name="image">
+                                    <input type="file" class="form-control" name="image">
                                 </div>
                             </div>
 

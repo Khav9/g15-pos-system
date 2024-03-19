@@ -34,19 +34,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $isName = false;
       }
 
-      if (preg_match($regexEmail, secureData($_POST['email']))) {
+      if (!empty($email)) {
             $_SESSION['errors']['borderEmail'] = 'is-valid';
             $isEmail = true;
       } else {
             $_SESSION['errors']['borderEmail'] = 'is-invalid';
             $isEmail = false;
-            $_SESSION['errors']['email'] = 'Ex: khav.saroeun@gmail.org';
+            $_SESSION['errors']['email'] = 'Please fill Email account';
       }
 
+      $name = htmlspecialchars($_POST['name']);
+      $email = htmlspecialchars($_POST['email']);
+      $phone = htmlspecialchars($_POST['phone']);
 
-      if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['phone'])) {
+
+      if (!empty($name) && !empty($email) && !empty($phone)) {
             if ($isEmail && $isPhone && $isName) {
-                  $isUpdate = updateUser($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['id']);
+                  $isUpdate = updateUser($name, $email, $phone, $_POST['id']);
                   header('location: /users');
                   $_SESSION['errors']['success'] = "Account successfully updated";
             } else {
