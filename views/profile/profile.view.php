@@ -17,7 +17,7 @@ $user = $_SESSION['user'];
                   <div class="col-md-4">
                         <div class="profile-img">
                               <img width="30px" height="30px" class="rounded-circle" src="assets/profiles/<?= $user['image'] ?>" alt="">
-                              <div class="file btn btn-lg btn-primary" data-toggle="modal" data-target="#editImage">
+                              <div class="file btn btn-lg btn-primary btn-sm" data-toggle="modal" data-target="#editImage">
                                     <i class="fa fa-camera" aria-hidden="true"></i>
                               </div>
                         </div>
@@ -28,7 +28,7 @@ $user = $_SESSION['user'];
                                     <h5>
                                           POS SYSTEM
                                     </h5>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdrop">
                                           Edit information
                                     </button>
                               </div>

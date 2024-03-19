@@ -104,10 +104,12 @@ require "layouts/navbar.php";
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>Product</th>
+                            <th>BarCode</th>
                             <th>Stock QTY</th>
                             <th>Expiry Date</th>
-                            <th>BarCode</th>
-                            <th>Action</th>
+                            <?php if ($user[5] === 'admin') : ?>
+                                <th>Action</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,14 +118,14 @@ require "layouts/navbar.php";
                         ?>
                             <tr class="table-danger">
                                 <td><?= $productExpire['name'] ?></td>
+                                <td><?= $productExpire['code'] ?></td>
                                 <td><?= $productExpire['qty'] ?></td>
                                 <td><?= $productExpire['expire'] ?></td>
-                                <td><?= $productExpire['code'] ?></td>
-                                <td class="d-flex justify-content-center">
-                                    <?php if ($user[5] === 'admin') : ?>
+                                <?php if ($user[5] === 'admin') : ?>
+                                    <td class="d-flex justify-content-center">
                                         <a href="/controllers/expired/expire.controller.delete.php?id=<?= $productExpire['id'] ?>" class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#delete<?= $productExpire['id'] ?>"><i class="fa fa-trash"></i></a>
-                                    <?php endif; ?>
-                                </td>
+                                    </td>
+                                <?php endif; ?>
                             </tr>
                             <!-- Modal delete-->
                             <div class="modal fade" id="delete<?= $productExpire['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
