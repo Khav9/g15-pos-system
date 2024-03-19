@@ -97,9 +97,9 @@ $user = $_SESSION['user'];
                                     <td><?= $category['categoryName'] ?></td>
                                     <td><?= $category['description']; ?></td>
                                     <?php if ($user[5] === 'admin') : ?>
-                                        <td class="d-flex justify-content-between align-items-center pt-0">
-                                            <a href="/categoryUpdate?id=<?= $category['id'] ?>" data-toggle="modal" data-target="#editCategory<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
-                                            <a href="controllers/categories/category.delete.controller.php?id=<?= $category['id'] ?>" class="text-danger p-2" data-toggle="modal" data-target="#deleteCategory<?= $category['id'] ?>"><i class="fa fa-trash"></i></a>
+                                        <td class="d-flex justify-content-between align-items-center">
+                                            <a href="/categoryUpdate?id=<?= $category['id'] ?>" class="btn btn-info btn-sm text-white" data-toggle="modal" data-target="#editCategory<?= $category['id'] ?>"><i class="fa fa-pen"></i></a>
+                                            <a href="controllers/categories/category.delete.controller.php?id=<?= $category['id'] ?>" class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#deleteCategory<?= $category['id'] ?>"><i class="fa fa-trash"></i></a>
                                         </td>
                                     <?php endif; ?>
                                 </tr>

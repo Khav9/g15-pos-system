@@ -6,37 +6,52 @@ require '../../excelReader/SpreadsheetReader.php';
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
       if (isset($_FILES['excel']) && $_FILES['excel']['error'] !== UPLOAD_ERR_NO_FILE) {
-            echo "hello file";
-            // $fileName = $_FILES["excel"]["name"];
-            // $fileExtension = explode('.', $fileName);
-            // $fileExtension = strtolower(end($fileExtension));
-            // $newFileName = "category" . date("Y.m.d") . "." . $fileExtension;
+            $fileName = $_FILES["excel"]["name"];
+            $fileExtension = explode('.', $fileName);
+            $fileExtension = strtolower(end($fileExtension));
+            $newFileName = "products" . date("Y.m.d") . "." . $fileExtension;
 
-            // $targetDirectory = "../../assets/files/" . $newFileName;
-            // move_uploaded_file($_FILES['excel']['tmp_name'], $targetDirectory);
+            $targetDirectory = "../../assets/files/" . $newFileName;
+            move_uploaded_file($_FILES['excel']['tmp_name'], $targetDirectory);
 
-            // error_reporting(0);
-            // ini_set('display_errors', 0);
+            error_reporting(0);
+            ini_set('display_errors', 0);
 
             // require 'excelReader/excel_reader2.php';
             // require 'excelReader/SpreadsheetReader.php';
 
-            //me
-            // require '../../models/category.model.php';
-            // if ($fileExtension === 'xlsx') {
-      //       $reader = new SpreadsheetReader($targetDirectory);
-      //       $message = '';
-      //       foreach ($reader as $key => $row) {
-                  
-      //             if (count($row) === 8) {
+            require '../../models/product.model.php';
+            if ($fileExtension === 'xlsx') {
+            $reader = new SpreadsheetReader($targetDirectory);
+            $message = '';
+            foreach ($reader as $key => $row) {
+                  if (count($row) ===8) {
+                        $image = '../../assets/products/65ee567c9ad28.png' ;
+                        $name = $row[0];
+                        $code = $row[1];
+                        $price = $row[2];
+                        $qty = $row[7];
+                        $categoryName = $row[3];
+                        $userName = $row[4];
+                        $date = $row[6];
 
-      //             } else {
-      //                   $message = "Data don't match ";
-      //             }
-      //       }
-      // } else {
-      //       header('location: /items');
-      // }
-      // header('location: /items');
-}
-}
+                        if(!empty($name) && !empty($qty) && !empty($price) && !empty($date) && !empty($code) && !empty($categoryName) && !empty($userName)){
+
+                          $isCreate = createProduct($name, $code, $price, $qty, $categoryName, $userName,$date,$image);
+                        }
+                        if ($isCreate) {
+                              echo 'Import data is successfully';
+                              header('location: /items');
+                        } else {
+                              echo 'Data having the problem';
+                              header('location: /items');
+                        }
+                  } else {
+                        $message = "Data don't match ";
+                        header('location: /items');
+                  }
+            }
+      } else {
+            header('location: /items');
+      }
+}}

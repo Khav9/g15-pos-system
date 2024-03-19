@@ -120,8 +120,8 @@ require "layouts/navbar.php";
                                 <?php if ($user[5] === 'admin') : ?>
                                     <td><?= $product['userName'] ?></td>
                                     <td class="d-5">
-                                        <a href="/productUpdate?id=<?= $product['id'] ?>" class="text-info p-2" data-toggle="modal" data-target="#updateProduct<?= $product['id'] ?>"><i class="fa fa-pen"></i></a>
-                                        <a href="/controllers/items/item.delete.controller.php?id=<?= $product['id'] ?>" class="text-danger p-2" data-toggle="modal" data-target="#deleteProduct<?= $product['id'] ?>"><i class="fa fa-trash"></i></a>
+                                        <a href="/productUpdate?id=<?= $product['id'] ?>" class="btn btn-info btn-sm text-white" data-toggle="modal" data-target="#updateProduct<?= $product['id'] ?>"><i class="fa fa-pen"></i></a>
+                                        <a href="/controllers/items/item.delete.controller.php?id=<?= $product['id'] ?>" class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#deleteProduct<?= $product['id'] ?>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 <?php endif; ?>
                             </tr>
