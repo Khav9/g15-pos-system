@@ -1,24 +1,44 @@
 <?php
 require "layouts/header.php";
 require "layouts/navbar.php";
+
+// Check if the date filter form is submitted
+if ($_SESSION['user']['role'] === 'admin') {
+      $orders = $ordersAdmin;
+} else {
+      $orders = $ordersUser;
+}
+
+$filteredOrders = $orders;
+if (isset($_POST['filter'])) {
+      $filteredOrders = [];
+      // Get the input date
+      $inputDate = $_POST['date'];
+      foreach ($orders as $order) {
+            if ($order['date'] == $inputDate) {
+                  $filteredOrders[] = $order;
+            }
+      }
+} 
 ?>
+
 <div class="container-fluid">
       <div class="card-shadow ">
             <div class="card-header py-3 d-flex justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Reports</h6>
-                  <div class="select-product ">
-                        <input type="date" name="date" id="date" />
-
-                        <div class="btn">
-                              <a href="/reports" class="btn btn-primary">Filter</a>
-                              <a href="/reports" class="btn btn-danger">Reset</a>
+                  <form method="post">
+                        <div class="select-product">
+                              <input type="date" name="date" id="date" />
+                              <div class="btn">
+                                    <button type="submit" name="filter" class="btn btn-primary">Filter</button>
+                                    <a href="/reports" class="btn btn-danger">Reset</a>
+                              </div>
                         </div>
-                  </div>
+                  </form>
             </div>
             <div class="card-body">
                   <div class="table-responsive">
                         <table id="dataTable" class="table table-bordered mt-2 mb-2">
-
                               <thead class="bg-primary text-white">
                                     <tr>
                                           <th scope="col">SI No.</th>
@@ -30,15 +50,7 @@ require "layouts/navbar.php";
                                     </tr>
                               </thead>
                               <tbody>
-                                    <?php
-                                    $nbOrders = [];
-                                    if ($_SESSION['user']['role'] === 'admin') {
-                                          $orders = $ordersAdmin;
-                                    } else {
-                                          $orders = $ordersUser;
-                                    }
-                                    foreach ($orders as $key => $order) :
-                                    ?>
+                                    <?php foreach ($filteredOrders as $key => $order) : ?>
                                           <tr>
                                                 <th scope="row"><?= $key + 1 ?></th>
                                                 <td><?php echo  $order[7]; ?></td>
@@ -46,8 +58,8 @@ require "layouts/navbar.php";
                                                 <td><?= $order[2] ?></td>
                                                 <td><?= $order['status'] ?></td>
                                                 <td class=" text-center">
-                                                      <a href="/reportView?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-dark"><i class="fa fa-eye"></i></a>
-                                                      <a href="/reportPrint?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-dark"><i class="fa fa-print" aria-hidden="true"></i></a>
+                                                      <a href="/reportView?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-white"><i class="fa fa-eye"></i></a>
+                                                      <a href="/reportPrint?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-white"><i class="fa fa-print" aria-hidden="true"></i></a>
                                                       <a href="?id=<?= $order[0] ?>" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteOrder<?= $order[0] ?>"><i class="fa fa-trash"></i></a>
                                                 </td>
                                           </tr>
@@ -62,7 +74,7 @@ require "layouts/navbar.php";
                                                                   </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                  <p>Are you sure you want to delete product order by "<span class="text-primary font-weight-bold"><?=  $order[7]?></span> " ?</p>
+                                                                  <p>Are you sure you want to delete product order by "<span class="text-primary font-weight-bold"><?= $order[7] ?></span> " ?</p>
                                                                   <div class="modal-footer">
                                                                         <form action="controllers/reports/report.delete.controller.php" class="" method="post">
                                                                               <input type="hidden" name="id" value="<?= $order[0] ?>">
@@ -73,11 +85,8 @@ require "layouts/navbar.php";
                                                       </div>
                                                 </div>
                                           </div>
-                                    <?php
-                                    endforeach;
-                                    ?>
+                                    <?php endforeach; ?>
                               </tbody>
-
                         </table>
                   </div>
             </div>
