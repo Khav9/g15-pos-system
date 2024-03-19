@@ -285,7 +285,7 @@ $user = $_SESSION['user'];
                     <div class="modal-body">
                     <p><?= $user['1']?> are you sure do you want to logout ? </p> 
                     <div class="modal-footer">
-                        <a type="button" href="/logout" class="badge badge-danger">Logout</a>
+                        <a type="button" href="/logout" class="btn btn-danger btn-sm">Logout</a>
                     </div>
                     </div>
                 </div>
