@@ -9,11 +9,16 @@ require "layouts/navbar.php";
 				<tbody>
 					<tr>
 						<td class="text-align:center" align="start">
-							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Customer Name : <?php echo ' '.$orders[6].' '.$orders[7];?></h4>
-							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Customer Phone : <?=$orders[8]?></h4>
+							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Customer Name :
+								<?php echo ' ' . $orders[6] . ' ' . $orders[7]; ?>
+							</h4>
+							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Customer Phone :
+								<?= $orders[8] ?>
+							</h4>
 						</td>
 						<td align="end">
-							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Transaction #2345678</h4>
+							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Transaction #2345678
+							</h4>
 							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Encoder: 123</h4>
 						</td>
 					</tr>
@@ -33,24 +38,41 @@ require "layouts/navbar.php";
 							</tr>
 						</thead>
 						<tbody>
-							<?php 
+							<?php
 							foreach ($orderDetails as $key => $value):
-							?>
-							<tr>
-								<th><?=$key + 1?></th>
-								<td><?=$value[2]?></td>
-								<td><?=$value[3]?></td>
-								<td><?php echo '$ '.$value[4]?></td>
-								<td><?php echo '$ '.$value[3]*$value[4]?></td>
-							</tr>
-						    <?php endforeach;?>
+								?>
+								<tr>
+									<th>
+										<?= $key + 1 ?>
+									</th>
+									<td>
+										<?= $value[2] ?>
+									</td>
+									<td>
+										<?= $value[3] ?>
+									</td>
+									<td>
+										<?php echo '$ ' . $value[4] ?>
+									</td>
+									<td>
+										<?php echo '$ ' . $value[3] * $value[4] ?>
+									</td>
+								</tr>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</form>
 				<div style="text-align:left;margin-left:70%" class="">
-					<h5 style="font-size:15px">Items: <?=$orders[4]?></h5>
-					<h5 style="font-size:15px">Total : <?php echo '$ '.$orders[2]?></h5>
+					<h5 style="font-size:15px">Items:
+						<?= $orders[4] ?>
+					</h5>
+					<h5 style="font-size:15px">Total :
+						<?php echo '$ ' . $orders[2] ?>
+					</h5>
 				</div>
+			</div>
+			<div class="back-button d-flex justify-content-between">
+				<a href="/reports" type="" class="btn btn-danger btn-sm">Back</a>
 			</div>
 		</div>
 	</div>

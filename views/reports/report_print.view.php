@@ -77,10 +77,17 @@ require "layouts/header.php";
 					</h5>
 				</div>
 			</div>
-			<div class="d-flex justify-content-end">
-				<button type="button" class="btn btn-primary btn-sm " onclick="GetPrint()">Print</button>
+			<!-- <div class="back-button">
+				<a href="/reports" type="" class="btn btn-danger btn-sm ">Back</a>
+			</div> -->
+			<div class="d-flex justify-content-between">
+				<button  href="/reports" type="button" class="btn btn-danger btn-sm" onclick="history.back()">Back</button>
+				<button type="button" class="btn btn-primary btn-sm" onclick="GetPrint()">Print</button>
 			</div>
 
+
+
 		</div>
+
 	</div>
 </div>
