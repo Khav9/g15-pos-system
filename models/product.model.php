@@ -115,11 +115,10 @@ function sum(array $products)
 }
 
 //update qty admin
-
 function updateQty(int $qty, int $code): bool
 {
     global $connection;
-    $statement = $connection->prepare("UPDATE products SET qty = :qty  where code = :code");
+    $statement = $connection->prepare("UPDATE products SET qty = :qty  where code = :code" );
     $statement->execute([
         ':qty' => $qty,
         ':code' => $code
@@ -128,13 +127,23 @@ function updateQty(int $qty, int $code): bool
 }
 function getProductQuantity($connection, $productcode)
 {
-    $statement = $connection->prepare("SELECT qty FROM products WHERE code = :code LIMIT 1");
+    $statement = $connection->prepare("SELECT qty FROM products WHERE code = :code and isDelete=0 LIMIT 1");
     $statement->bindValue(':code', $productcode);
     if ($statement->execute()) {
         $row = $statement->fetch();
         if ($row !== false && isset($row['qty'])) {
-            return $row['qty']; // Return the product quantity if found
+            return $row['qty'];
         }
     }
-    return false; // Return false if product code not found or quantity not available
+    return false; 
+}
+function getBarcode($connection, $productcode){
+    global $connection;
+    $statement= $connection->prepare("SELECT * FROM products WHERE code = :code and isDelete=0 LIMIT 1");
+    $statement->bindValue(':code',$productcode);
+    if ($statement->execute()) {
+        $row = $statement->fetch();
+        
+    }
+    return $row;
 }
