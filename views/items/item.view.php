@@ -75,7 +75,7 @@ require "layouts/navbar.php";
             <div>
                 <?php if ($user[5] === 'admin') : ?>
                 <div class="col-md-12 mt-4 mr-2">
-                    <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#importTo"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#importTo"><i class="fa-arrow-circle-down fas"></i> Import</a>
                 </div>
                 <?php endif ?>
             </div>
@@ -111,7 +111,7 @@ require "layouts/navbar.php";
                         foreach ($products as $key => $product) {
                         ?>
                             <tr>
-                                <td><img width="39px" height="39px" class="rounded-circle" src="assets/products/<?= $product['image'] ?>" alt=""></td>
+                                <td><img width="39px" height="39px" class="" src="assets/products/<?= $product['image'] ?>" alt=""></td>
                                 <td><?= $product['name'] ?></td>
                                 <td><?= $product['code'] ?></td>
                                 <td><?= $product['price'] ?></td>

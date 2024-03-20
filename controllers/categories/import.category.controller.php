@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $message = '';
             foreach ($reader as $key => $row) {
                   if (count($row) === 2) {
-                        $name = $row[0];
-                        $description = $row[1];
+                        $name = htmlspecialchars($row[0]);
+                        $description = htmlspecialchars($row[1]);
                         if (!empty($name)){
                               $isCreate = createCategory($name, $description);
                         }

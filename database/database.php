@@ -1,7 +1,7 @@
 <?php
 
 $hostname = "localhost";
-$database = "possystem_db";
+$database = "pos_db";
 $username = "root";
 $password = "";
 

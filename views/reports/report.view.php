@@ -30,8 +30,8 @@ if (isset($_POST['filter'])) {
                         <div class="select-product">
                               <input type="date" name="date" id="date" />
                               <div class="btn">
-                                    <button type="submit" name="filter" class="btn btn-primary">Filter</button>
-                                    <a href="/reports" class="btn btn-danger">Reset</a>
+                                    <button type="submit" name="filter" class="btn btn-primary btn-sm">Filter</button>
+                                    <a href="/reports" class="btn btn-danger btn-sm">Reset</a>
                               </div>
                         </div>
                   </form>

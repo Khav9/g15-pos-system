@@ -54,20 +54,17 @@ $user = $_SESSION['user'];
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1> -->
-
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-4">
                     <?php if ($user[5] === 'admin') : ?>
                         <div>
-                            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square mr-3"></i>Create Category</a>
+                            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square mr-3"></i>ADD</a>
                         </div>
                         <div>
                             <div class="">
-                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#importCategory"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                                <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#importCategory"><i class="fa-arrow-circle-down fas"></i> Import</a>
                             </div>
                         </div>
                     <?php endif; ?>
