@@ -4,32 +4,33 @@ require "layouts/navbar.php";
 ?>
 <div class="container px-4">
 	<div class="card mt-4">
+		<h4 class="d-flex justify-content-center mt-3">SALES RECEIPT</h4>
 		<div class="card-body">
-			<table style="width:100%; margin-bottom:20px;">
-				<tbody>
-					<tr>
-						<td class="text-align:center" align="start">
-							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Seller Name : <?php echo ' '.$orders[7];?></h4>
-							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Seller Email : <?=$orders[8]?></h4>
-						</td>
-						<td align="end">
-							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Transaction #2345678</h4>
-							<h4 style="font-size:13px; line-height:30px; margin:0px; padding:0;">Encoder: 123</h4>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<table class="table table-bordered table-sendary">
+                <thead>
+                    <tr>
+                        <td scope="col" class="bg-light"><b>Order Number:</b></td>
+                        <td scope="col" class="bg-light"><b>Cashier:</b></tdz>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">Date:</td>
+                        <td>Time:</td>
+                    </tr> 
+                </tbody>
+            </table>
 
 			<div class="form-table">
 				<form action="">
-					<table class="table table-bordered">
+					<table class="table table-bordered table-sendary">
 						<thead>
 							<tr>
-								<th scope="col">ID</th>
-								<th scope="col">Product</th>
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-								<th scope="col">Subtotal</th>
+								<th scope="col" class="bg-primary text-white">ID</th>
+								<th scope="col" class="bg-primary text-white">Product</th>
+								<th scope="col" class="bg-primary text-white">Qty</th>
+								<th scope="col" class="bg-primary text-white">Price</th>
+								<th scope="col" class="bg-primary text-white">Subtotal</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -45,12 +46,19 @@ require "layouts/navbar.php";
 							</tr>
 						    <?php endforeach;?>
 						</tbody>
+						<tr class="bg-primary" style="text-align:left;margin-left:70%">
+                            <td class="bg-white"></td>
+                            <td class="bg-white"></td>
+                            <td class="bg-white"></td>
+                            <td class="text-white">
+                                <b>Items:</b> <?= $orders[4]?>
+                            </td>
+                            <td class="text-white">
+                                <b>Total:</b> <?php echo '$ '. $orders[2] ?>
+                            </td>
+                        </tr>
 					</table>
 				</form>
-				<div style="text-align:left;margin-left:70%" class="">
-					<h5 style="font-size:15px">Items: <?=$orders[4]?></h5>
-					<h5 style="font-size:15px">Total : <?php echo '$ '.$orders[2]?></h5>
-				</div>
 			</div>
 		</div>
 	</div>
