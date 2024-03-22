@@ -9,14 +9,14 @@ require "layouts/navbar.php";
 			<table class="table table-bordered table-sendary">
                 <thead>
                     <tr>
-                        <td scope="col" class="bg-light"><b>Order Number:</b></td>
-                        <td scope="col" class="bg-light"><b>Cashier:</b></tdz>
+                        <td scope="col" class="bg-light"><b>Order Number: <?=$orders[0]?></b></td>
+                        <td scope="col" class="bg-light"><b>Cashier: <?=$orders['userName']?></b></tdz>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td scope="row">Date:</td>
-                        <td>Time:</td>
+                        <td scope="row">Date: <?=$orders['date']?></td>
+                        <td>Time: <?=$time?></td>
                     </tr> 
                 </tbody>
             </table>
