@@ -3,6 +3,7 @@
 require '../../database/database.php';
 require '../../excelReader/excel_reader2.php';
 require '../../excelReader/SpreadsheetReader.php';
+$today = $_SESSION['today'];
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
       if (isset($_FILES['excel']) && $_FILES['excel']['error'] !== UPLOAD_ERR_NO_FILE) {
@@ -37,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
                         if(!empty($name) && !empty($qty) && !empty($price) && !empty($date) && !empty($code) && !empty($categoryName) && !empty($userName)){
 
-                          $isCreate = createProduct($name, $code, $price, $qty, $categoryName, $userName,$date,$image);
+                          $isCreate = createProduct($name, $code, $price, $qty, $categoryName, $userName,$date,$image,$today);
                         }
                         if ($isCreate) {
                               echo 'Import data is successfully';

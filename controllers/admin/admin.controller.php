@@ -1,26 +1,27 @@
 <?php
 
 $heading = "Home Page";
+
 require "database/database.php";
 require 'models/product.model.php';
 require 'models/category.model.php';
 require 'models/userManage.model.php';
 require 'models/order.model.php';
+require 'models/expired.model.php';
 
 $user = $_SESSION['user'];
+$today = $_SESSION['today'];
 
-date_default_timezone_get();
-date_default_timezone_set('Asia/Phnom_Penh');
-$dateToday = date("Y-m-d ");
+
 
 //product in stock admin and user
-$products = getProducts($dateToday);
+$products = getProducts($today);
 $productInStock = 0;
-$productInStock += sum($products);
+$productInStock += sumNumber($products);
 
-$productsUser = getProductsByUser($user[0],$dateToday);
+$productsUser = getProductsByUser($user[0],$today);
 $productInStockUser = 0;
-$productInStockUser += sum($productsUser);
+$productInStockUser += sumNumber($productsUser);
 
 $countProducts = count($products);
 
@@ -35,22 +36,32 @@ $users = getUsers();
 $amounUsers = count($users);
 
 //count oders for admin
-$ordersAdmin = count(getOrderToday($dateToday));
+$ordersAdmin = count(getOrderToday($today));
 //user
-$ordersUser = count(getOrderTodayUser($dateToday,$user[0]));
+$ordersUser = count(getOrderTodayUser($today,$user[0]));
 
 //earning admin
 $earningAmin = 0;
-$orderToday = getOrderToday($dateToday);
+$orderToday = getOrderToday($today);
 foreach ($orderToday as $key => $value) {
       $earningAmin += $value[2];
 }
 
 //earning user
 $earningUser = 0;
-$orderTodayUser = getOrderTodayUser($dateToday,$user[0]);
+$orderTodayUser = getOrderTodayUser($today,$user[0]);
 foreach ($orderTodayUser as $key => $valu) {
       $earningUser += $valu[2];
 }
+
+//
+
+$allProduct = count($products);
+$productExpires = count(getExpireToday($today));
+$newProducts = count(geNewtProducts($user[0],$today));
+
+$PercentNewProducts = number_format(($newProducts * 100)/$allProduct);
+$PercentExpireProduct = number_format(($productExpires * 100)/$allProduct);
+
 
 require "views/admin/admin.view.php";
