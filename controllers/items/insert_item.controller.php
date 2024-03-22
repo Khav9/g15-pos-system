@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       date_default_timezone_get();
       date_default_timezone_set('Asia/Phnom_Penh');
       $registration_date = date("Y-m-d H:i:s");
+      $today = $_SESSION['today'];
 
 
       if (!empty($name) && !empty($price) && !empty($code) && !empty($quantity) && !empty($category) && !empty($date)) {
@@ -40,13 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               $nameInDB = $newFileName . '.' . $imageExtension;
                               move_uploaded_file($_FILES["image"]["tmp_name"], $nameInDirectory);
 
-                              $isCreate = createProduct($name, $code, $price, $quantity, $category, $asign, $date, $nameInDB);
+                              $isCreate = createProduct($name, $code, $price, $quantity, $category, $asign, $date, $nameInDB, $today);
                               header('Location: /items');
                               $_SESSION['products']['success'] = 'Product successfully created';
                         }
                   } else {
                         $imageProduct = '../../assets/products/65ee567c9ad28.png';
-                        $isCreate = createProduct($name, $code, $price, $quantity, $category, $asign, $date, $imageProduct);
+                        $isCreate = createProduct($name, $code, $price, $quantity, $category, $asign, $date, $imageProduct,$today);
                         header('location: /items');
                         $_SESSION['products']['success'] = 'Product successfully created';
                   }

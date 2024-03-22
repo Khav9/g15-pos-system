@@ -1,9 +1,9 @@
 <?php
 
-function createProduct(string $name, int $code, int $price, int $quantity, string $category, string $asign, $date, string $image): bool
+function createProduct(string $name, int $code, int $price, int $quantity, string $category, string $asign, $date, string $image,string $create): bool
 {
     global $connection;
-    $statement = $connection->prepare("insert into  products(name, code, price, qty, categoryID, userID, expire, isDelete, image) values (:name, :code, :price, :qty, :categoryID, :userID, :expire , :isDelete, :image)");
+    $statement = $connection->prepare("insert into  products(name, code, price, qty, categoryID, userID, expire, isDelete, image,createAt) values (:name, :code, :price, :qty, :categoryID, :userID, :expire , :isDelete, :image, :create)");
     $statement->execute([
         ':name' => $name,
         ':code' => $code,
@@ -14,6 +14,7 @@ function createProduct(string $name, int $code, int $price, int $quantity, strin
         ':expire' => $date,
         ':isDelete' => 0,
         ':image' => $image,
+        ':create' => $create,
 
     ]);
 
@@ -105,7 +106,7 @@ function getProductsByUser(int $id, string $date): array
     return $statement->fetchAll();
 }
 
-function sum(array $products)
+function sumNumber(array $products)
 {
     $total = 0;
     foreach ($products as $key => $product) {
@@ -146,4 +147,16 @@ function getBarcode($connection, $productcode){
         
     }
     return $row;
+}
+
+//get new product
+function geNewtProducts(int $id, string $date): array
+{
+    global $connection;
+    $statement = $connection->prepare("select * from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.isDelete = 0 and products.CreateAt = :date");
+    $statement->execute([
+        // ':id' => $id,
+        ':date' => $date,
+    ]);
+    return $statement->fetchAll();
 }

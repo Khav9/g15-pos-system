@@ -238,25 +238,30 @@ require "layouts/navbar.php";
                     </div>
                 </div>
             </div>
+        </div>
+
+        <?php
+        if ($user[5] === 'admin') :
+        ?>
             <div class="col-xl-8 col-lg-4">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Product Summary Today</h6>
                     </div>
                     <div class="card-body">
-                        <h4 class="small font-weight-bold">New Product <span class="float-right">90%</span></h4>
+                        <h4 class="small font-weight-bold">New Product <span class="float-right"><?= $PercentNewProducts ?>%</span></h4>
                         <div class="progress mb-4">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 9%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-success" role="progressbar" style="width: <?= $PercentNewProducts ?>%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <h4 class="small font-weight-bold">Expire Product<span class="float-right">40%</span></h4>
+                        <h4 class="small font-weight-bold">Expire Product<span class="float-right"><?= $PercentExpireProduct ?>%</span></h4>
                         <div class="progress mb-4">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?= $PercentExpireProduct ?>%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-    
+
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 
 </div>
