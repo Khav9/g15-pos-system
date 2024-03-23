@@ -1,4 +1,8 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<?php
+require_once("../../layouts/header.php");
+require_once("../../controllers/reports/generate.controller.php");
+?>
 <style>
     *::after,
     *::before {
@@ -232,7 +236,9 @@
 
     function Download() {
         var content = document.documentElement.outerHTML;
-        var blob = new Blob([content], { type: 'text/html' });
+        var blob = new Blob([content], {
+            type: 'text/html'
+        });
         var url = window.URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
@@ -246,15 +252,14 @@
 </head>
 
 <body>
-
     <div class="invoice-wrapper" id="print-area">
         <div class="invoice">
             <div class="invoice-container">
                 <div class="invoice-head">
                     <div class="invoice-head-to-left text-start">
-                        <p><span class="text-bold">Date</span>: 22/07/2024</p>
+                        <p><span class="text-bold">Date</span>: <?php echo $_SESSION['today'] ?></p>
                     </div>
-                    <div class="invoice-head-middle-right text-end">
+                    <div class="invoice-head-middle-right text-center">
                         <h3>GENERATE REPORT</h3>
                     </div>
                 </div>
@@ -264,7 +269,7 @@
                         <ul>
                             <li class="text-bold">Invoice To:</li>
                             <li>Posystem</li>
-                            <li>0884321539</li>
+                            <li>100 250 337</li>
                             <li>Phnom Penh</li>
                             <li>Cambodia</li>
                         </ul>
@@ -280,61 +285,95 @@
                     </div>
                 </div>
             </div>
+            <div class="py-3">
+                <form action="#" method="post">
+                    <div class="py-3 d-flex justify-content-between">
+                        <div id="customDatesInputContainer  ">
+                            <div>
+                                <label for="startDate">Start Date:</label>
+                                <input type="date" id="startDate" name="startDate" class="form-control">
+                            </div>
+                            <div>
+                                <label for="dueDate">Due Date:</label>
+                                <input type="date" id="dueDate" name="dueDate" class="form-control">
+                            </div>
+                        </div>
+                        <div class="btn">
+                            <button type="submit" name="report" class="btn btn-primary btn-sm">Get Report</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="overflow-view">
                 <div class="invoice-body">
-                    <table>
+                    <table id="filteredTable">
                         <thead>
                             <tr>
-                                <th scope="col">BARCODE</th>
+                                <th scope="col">NO .</th>
                                 <th scope="col">PRODUCT</th>
-                                <th scope="col">CATEGORY</th>
-                                <th scope="col">PROFIT</th>
-                                <th scope="col">EXPENSES</th>
-                                <th scope="col">USERS</th>
-                                <th scope="col">IN STOCK</th>
-
-
+                                <th scope="col">QUANTITY</th>
+                                <th scope="col">TOTAL</th>
+                                <th scope="col">DATE</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>445</td>
-                                <td> Computer</td>
-                                <td>1</td>
-                                <td>$500</td>
-                                <td>$1000</td>
-                                <td>510</td>
-                                <td class="text-end">10</td>
-                            </tr>
+                            <?php
+                           
+                            $subTotal = 0;
+                            $total = 0;
+                            $taxRate = 0.08;
+                            foreach ($reports as $report) : ?>
+                                <tr>
+                                    <td><?= $report[0] ?></td>
+                                    <td><?= $report['name'] ?></td>
+                                    <td><?= $report['quantity'] ?></td>
+                                    <td><?php echo '$' . $report['totalPrice'] ?></td>
+                                    <td><?= $report['date'] ?></td>
+                                    <td><?php ?></td>
+                                </tr>
+                            <?php
+                                $subTotal += $report['totalPrice']; // Fixed subTotal calculation
+                            endforeach;
+                            $taxAmong = $subTotal * $taxRate; // Moved tax calculation out of loop
+                            $total = $subTotal + $taxAmong;
+                            ?>
 
                         </tbody>
                     </table>
-                    <div class="invoice-body-bottom">
-                        <div class="invoice-body-info-item border-bottom">
-                            <div class="info-item-td text-end text-bold">
-                                <div class="info-item-ts text-end">Sub Total:$5000</div>
-                            </div>
-                        </div>
-                        <div class="invoice-body-info-item border-bottom">
-                            <div class="info-item-td text-end text-bold">
-                                <div class="info-item-ts text-end">Tax:$500</div>
-                            </div>
-
-                        </div>
-                        <div class="invoice-body-info-item border-bottom">
-                            <div class="info-item-td text-end text-bold">
-                                <div class="info-item-ts text-end">Total:$5500</div>
+                    <canvas id="myChart" width="990" height="495" style="display: block; height: 396px; width: 792px;" class="chartjs-render-monitor"></canvas>
+                    <div class="invoice-body-bottom mt-4 text-right">
+                        <div class="row justify-content-end">
+                            <div class="col-8">
+                                <div class="invoice-body-info-item">
+                                    <div class="info-item-td text-end text-bold">
+                                        <div class="info-item-ts">Sub Total : <span class="text-bold">$<?php echo $subTotal ?></span></div>
+                                    </div>
+                                </div>
+                                <div class="invoice-body-info-item">
+                                    <div class="info-item-td text-end text-bold">
+                                        <div class="info-item-ts">Tax : <span class="text-bold"><?php echo $taxRate * 100 . "%" ?></span></div>
+                                    </div>
+                                </div>
+                                <div class="invoice-body-info-item">
+                                    <div class="info-item-td text-end text-bold">
+                                        <div class="info-item-ts">Tax Among : <span class="text-bold">$<?php echo $taxAmong ?></span></div>
+                                    </div>
+                                </div>
+                                <div class="invoice-body-info-item">
+                                    <div class="info-item-td text-end text-bold">
+                                        <div class="info-item-ts">Total : <span class="text-bold">$<?php echo $total ?></span></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="invoice-foot text-center">
-                    <p><span class="text-bold text-center">NOTE:</span>Lorem ipsum dolor sit amet, consectetur
-                        adipisicing elit. Expedita, magni.</p>
+
                     <div class="invoice-btns">
                         <button type="button" class="invoice-btn" onclick="GetPrint()">
                             <span>
-                                <i class="fas fa-print"></i>
+                                <i class="fa fa-print" aria-hidden="true"></i>
                             </span>
                             <span>Print</span>
                         </button>
@@ -349,3 +388,26 @@
             </div>
         </div>
     </div>
+</body>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var total = <?php echo $total; ?>;
+    var data = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Agust', 'September', 'Octorber', 'November', 'December'],
+        datasets: [{
+            label: 'Result Report ',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, <?php echo $total; ?>, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }]
+
+    };
+    var chartType = 'line';
+    var myChart = new Chart(ctx, {
+        type: chartType,
+        data: data,
+        options: {
+            responsive: true
+        }
+    });
+</script>

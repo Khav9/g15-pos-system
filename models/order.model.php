@@ -83,3 +83,22 @@ function filterDate(string $date)
     $statement->execute();
     $orders = $statement->fetchAll();
 }
+function reportDate(string $date)
+{
+    global $connection;
+    $statement = $connection->prepare("SELECT * FROM orders WHERE date = :date ORDER BY orders.id DESC");
+    $statement->bindValue(':date', $date);
+    $statement->execute();
+    return $statement->fetchAll();
+}
+
+//report on dashboard
+function getReports(string $startDate,string $endDate): array
+{
+    global $connection;
+    $statement = $connection->prepare("SELECT *,products.name FROM orderDetails inner join orders on orderDetails.orderID = orders.id  inner join products on orderDetails.productName = products.code WHERE date > :start and date < :end");
+    $statement->execute([':start' => $startDate, ':end' => $endDate]);
+    return $statement->fetchAll();
+}
+
+//  inner join products on orderDetails.productName = products.code where orderDetails.orderID = orders.id and orderDetails.orderID = :id 
