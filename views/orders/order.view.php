@@ -100,15 +100,15 @@ if (isset($_SESSION['status'])) {
     </div>
     <div class="card shadow p-4 mt-4">
         <form action="../../controllers/orders/insert.order.controller.php" method="post" id="orderform">
-            <table class="table table-bordered" width="100%" cellspacing="0">
+            <table class="table table-bordered text-center" width="100%" cellspacing="0">
                 <tr>
                     <th width="5%">ID</th>
                     <th width="15%">Image</th>
                     <th width="15%">Product Name</th>
-                    <th width="10%">Quantity</th>
-                    <th width="10%">Price</th>
-                    <th width="10%">Total</th>
-                    <th width="3%">Action</th>
+                    <th width="15%">Quantity</th>
+                    <th width="15%">Price</th>
+                    <th width="15%">Total</th>
+                    <th width="5%">Action</th>
                 </tr>
                 <?php
                 $orders = [];
@@ -122,8 +122,8 @@ if (isset($_SESSION['status'])) {
                         <td><img src="../../assets/products/<?php echo $order['image']; ?>" style="width: 80px;"></td>
                         <td><?php echo $order['name']; ?></td>
                         <td><?php echo $order['quantity']; ?></td>
-                        <td><?php echo ($order['price']); ?></td>
-                        <td><?php echo ($order['quantity'] * $order['price']); ?></td>
+                        <td><?php echo "$".number_format($order['price'],2); ?></td>
+                        <td><?php echo  "$".number_format($order['quantity']* $order['price'], 2); ?></td>
                         <td>
                             <a href="/order_delete?action=delete&id=<?php echo $key; ?>">
                                 <div class="btn bg-gradient-danger btn-danger"><i class="fas fa-fw fa-trash"></i></div>
@@ -131,8 +131,9 @@ if (isset($_SESSION['status'])) {
                         </td>
                     </tr>
                 <?php
-                    $total = $total + ($order['quantity'] * $order['price']);;
+                    $total =($total + ($order['quantity'] * $order['price']));
                 endforeach;
+                
                 ?>
             </table>
             <div class="col-md-4 mb-3">
@@ -145,7 +146,7 @@ if (isset($_SESSION['status'])) {
                 <div class="input-group-prepend">
                     <label class="input-group-text bg-primary text-light" for="total">Total</label>
                 </div>
-                <input type="number" placeholder="$" class="text-center" name="totalGood" value="<?php echo $total; ?>">
+                <input type="number" placeholder="$" class="text-center" name="totalGood" value="<?php echo ($total); ?>">
             </div>
             <div class="col-md-4 mb-2 ">
                 <br>
