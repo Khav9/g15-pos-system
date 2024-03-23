@@ -8,7 +8,6 @@ session_start();
 // $customerIds = getCustomers();
 $products = getProducts($_SESSION['today']);
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_SESSION['user']) &&  isset($_SESSION['productData'])) {
@@ -52,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         unset($_SESSION['orders']);
         header('location: /orders');
     } else {
-        $_SESSION['error_order'] = "No product or No custumer. Please enter a valid all the fill.";
+        $_SESSION['error_order'] = "No product. Please enter a valid all the fill.";
         header('location: /orders');
     }
 }

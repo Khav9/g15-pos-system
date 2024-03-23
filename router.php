@@ -15,8 +15,6 @@ $routes = [
     '/orders' => 'controllers/orders/order.controller.php',
     '/insert_order' => 'controllers/orders/insert.order.controller.php',
     '/order_delete' => 'controllers/orders/order.delete.controller.php',
-    //customer
-    '/customers' => 'controllers/customers/customer.controller.php',
     
     '/items' => 'controllers/items/item.controller.php',
 
