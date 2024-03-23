@@ -59,9 +59,13 @@ foreach ($orderTodayUser as $key => $valu) {
 $allProduct = count($products);
 $productExpires = count(getExpireToday($today));
 $newProducts = count(geNewtProducts($user[0],$today));
+$PercentNewProducts=0;
+$PercentExpireProduct=0;
+if($allProduct >0){
+      $PercentNewProducts = number_format(($newProducts * 100)/$allProduct);
+      $PercentExpireProduct = number_format(($productExpires * 100)/$allProduct);
 
-$PercentNewProducts = number_format(($newProducts * 100)/$allProduct);
-$PercentExpireProduct = number_format(($productExpires * 100)/$allProduct);
+}
 
 
 require "views/admin/admin.view.php";
