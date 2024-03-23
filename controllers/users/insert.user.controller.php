@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       $regexPassword = "/^(?=.*[!@#$%&])(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$%&]{8,}$/";
       $regexPhone = "/^\(\d{3}\)\s?\d{3}-\d{3}-\d{3}$/";
-      $regexEmail = "/^[a-z]{1,10}\.[a-z]{1,10}\@[a-z]{1,10}\.[a-z]{1,3}$/";
 
       $isPassword = false;
       $isPhone = false;
@@ -59,13 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $isName = false;
       }
 
-      if (preg_match($regexEmail, secureData($_POST['email']))) {
+      if (!empty($email)) {
             $_SESSION['errors']['borderEmail'] = 'is-valid';
             $isEmail = true;
       } else {
             $_SESSION['errors']['borderEmail'] = 'is-invalid';
             $isEmail = false;
-            $_SESSION['errors']['email'] = 'Ex: khav.saroeun@gmail.org';
+            $_SESSION['errors']['email'] = 'Please fill Email account';
       }
 
       if (!empty($name) && !empty($email) && !empty($password) && !empty($phone)) {

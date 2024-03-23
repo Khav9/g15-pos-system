@@ -228,7 +228,7 @@ $user = $_SESSION['user'];
                                     echo $_SESSION['errors']['borderName'];
                                 }
                                 ?>
-                                " id="inputAddress" Name="name">
+                                " id="inputAddress" Name="name" placeholder="Username">
                                 <small class="text-danger">
                                     <?php
                                     if (isset($_SESSION['errors']['username'])) {
@@ -245,7 +245,7 @@ $user = $_SESSION['user'];
                                         echo $_SESSION['errors']['borderEmail'];
                                     }
                                     ?>
-                                    " id="inputEmail4" name="email">
+                                    " id="inputEmail4" name="email" placeholder="Email">
                                     <small class="text-danger">
                                         <?php
                                         if (isset($_SESSION['errors']['email'])) {
@@ -261,7 +261,7 @@ $user = $_SESSION['user'];
                                         echo $_SESSION['errors']['borderPassword'];
                                     }
                                     ?>
-                                    " id="inputPassword4" name="password">
+                                    " id="inputPassword4" name="password" placeholder="Password">
                                     <small class="text-danger">
                                         <?php
                                         if (isset($_SESSION['errors']['password'])) {
@@ -279,7 +279,7 @@ $user = $_SESSION['user'];
                                         echo $_SESSION['errors']['borderPhone'];
                                     }
                                     ?>
-                                    " id="inputCity" name="phone">
+                                    " id="inputCity" name="phone" placeholder="Phone Number">
                                     <small class="text-danger">
                                         <?php
                                         if (isset($_SESSION['errors']['phone'])) {
