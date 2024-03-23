@@ -24,7 +24,7 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
                     $totalQuantity = $order['quantity'] + $productqty;
                     if ($totalQuantity > $availableQty) {
                         $_SESSION['status'] = "Cannot increase quantity beyond the available quantity.";
-                        $isProductFound = true; 
+                        $isProductFound = true;
                     } else {
                         $productData[$key]['quantity'] = $totalQuantity;
                         $isProductFound = true;
@@ -32,16 +32,17 @@ if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
                 }
             }
             if (!$isProductFound) {
-                $productBarcode=  getBarcode($connection, $productcode);
+                $productBarcode =  getBarcode($connection, $productcode);
                 if ($productBarcode) {
                     $productData[] = [
                         "code" => $productBarcode['code'],
                         "name" => $productBarcode['name'],
+                        "image" => $productBarcode['image'],
                         "quantity" => $productqty,
                         "price" => intval($productBarcode['price']),
-                        
+
                     ];
-                }              
+                }
             }
             $_SESSION['productData'] = $productData;
         };
@@ -101,12 +102,13 @@ if (isset($_SESSION['status'])) {
         <form action="../../controllers/orders/insert.order.controller.php" method="post" id="orderform">
             <table class="table table-bordered" width="100%" cellspacing="0">
                 <tr>
-                    <th>ID</th>
-                    <th width="55%">Product Name</th>
+                    <th width="5%">ID</th>
+                    <th width="15%">Image</th>
+                    <th width="15%">Product Name</th>
                     <th width="10%">Quantity</th>
-                    <th width="15%">Price</th>
-                    <th width="15%">Total</th>
-                    <th width="5%">Action</th>
+                    <th width="10%">Price</th>
+                    <th width="10%">Total</th>
+                    <th width="3%">Action</th>
                 </tr>
                 <?php
                 $orders = [];
@@ -117,6 +119,7 @@ if (isset($_SESSION['status'])) {
                 ?>
                     <tr>
                         <td><?php echo $key + 1; ?></td>
+                        <td><img src="../../assets/products/<?php echo $order['image']; ?>" style="width: 80px;"></td>
                         <td><?php echo $order['name']; ?></td>
                         <td><?php echo $order['quantity']; ?></td>
                         <td><?php echo ($order['price']); ?></td>
