@@ -1,9 +1,5 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="<KEY>" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
-</link>
 <script src="../../vendor/insert_order/insert.order.vendor.js" defer></script>
 <?php
-// session_start();
 require "layouts/header.php";
 require "layouts/navbar.php";
 require_once("models/product.model.php");
@@ -16,62 +12,43 @@ $productData = $_SESSION['productData'] ?? [];
 if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
     $productcode = $_POST['code'];
     $productqty = $_POST['quantity'];
-
-    // Fetch the available quantity from the database
     $availableQty = getProductQuantity($connection, $productcode);
-   
     if ($availableQty !== false) {
-        // Check if quantity in input is greater than available quantity
         if ($productqty > $availableQty) {
             $_SESSION['status'] = "Cannot order more than the available quantity  $availableQty.";
         } else {
-            // Proceed with adding the product to the table
             $productData = $_SESSION['productData'] ?? [];
             $isProductFound = false;
-            foreach ($productData as $key => $order){
+            foreach ($productData as $key => $order) {
                 if (isset($order['code']) && $order['code'] == $productcode) {
-                    // Calculate the total quantity (current quantity + quantity to add)
                     $totalQuantity = $order['quantity'] + $productqty;
-            
-                    // Check if the total quantity exceeds the available quantity
                     if ($totalQuantity > $availableQty) {
                         $_SESSION['status'] = "Cannot increase quantity beyond the available quantity.";
-                        $isProductFound = true; // Set flag to prevent quantity increase
-                        
+                        $isProductFound = true; 
                     } else {
-                        // Update the quantity in the table
                         $productData[$key]['quantity'] = $totalQuantity;
                         $isProductFound = true;
                     }
-                   
                 }
             }
-
             if (!$isProductFound) {
-                $statement = $connection->prepare("SELECT * FROM products WHERE code = :code LIMIT 1");
-                $statement->bindValue(':code', $productcode);
-
-                if ($statement->execute()) {
-                    $row = $statement->fetch();
-
-                    if ($row) {
-                        $productData[] = [
-                            "code" => $row['code'],
-                            "name" => $row['name'],
-                            "quantity" => $productqty,
-                            "price" => intval($row['price']),
-                        ];
-                    }
-                }
+                $productBarcode=  getBarcode($connection, $productcode);
+                if ($productBarcode) {
+                    $productData[] = [
+                        "code" => $productBarcode['code'],
+                        "name" => $productBarcode['name'],
+                        "quantity" => $productqty,
+                        "price" => intval($productBarcode['price']),
+                        
+                    ];
+                }              
             }
-
             $_SESSION['productData'] = $productData;
-        }
+        };
     } else {
         $_SESSION['status'] = "No product with the entered  barcord $productcode. Please enter a valid product code.";
     }
 }
-
 // Display status message if set
 if (isset($_SESSION['status'])) {
 ?>
@@ -113,15 +90,12 @@ if (isset($_SESSION['status'])) {
                                 <option value="" selected disabled>Choose Pyment</option>;
                                 <option value="cash">CASH</option>
                                 <option value="online">ONLINE</option>
-
                             </select>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
-
     </div>
     <div class="card shadow p-4 mt-4">
         <form action="../../controllers/orders/insert.order.controller.php" method="post" id="orderform">
@@ -140,7 +114,6 @@ if (isset($_SESSION['status'])) {
                 foreach ($productData as $key => $order) :
                     array_push($orders, $order);
                     $_SESSION['orders'] = $orders;
-                    // $total = $total + ($product['quantity'] * $product['price']);
                 ?>
                     <tr>
                         <td><?php echo $key + 1; ?></td>
@@ -158,7 +131,6 @@ if (isset($_SESSION['status'])) {
                     $total = $total + ($order['quantity'] * $order['price']);;
                 endforeach;
                 ?>
-
             </table>
             <div class="col-md-4 mb-3">
                 <label for="payment"></label>
@@ -187,7 +159,6 @@ if (isset($_SESSION['status'])) {
                 <?php endif;
                 unset($_SESSION['error_order']);
                 ?>
-
             </div>
             <div class="modal fade" id="paymentOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -200,7 +171,6 @@ if (isset($_SESSION['status'])) {
                         <div class="modal-body">
                             <form action="controllers/orders/insert.order.controller.php" method="post">
                                 <input type="hidden" id="payID" name="userId">
-
                                 <div class="form-group row text-left mb-2">
                                     <div class="col-md-12 text-center">
                                         <h3 class="py-0">
@@ -217,13 +187,9 @@ if (isset($_SESSION['status'])) {
                     </div>
                 </div>
             </div>
-
         </form>
-
     </div>
     <?php
     require 'layouts/footer.php';
     ?>
-
-
 </div>

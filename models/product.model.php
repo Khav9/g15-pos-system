@@ -1,9 +1,9 @@
 <?php
 
-function createProduct(string $name, int $code, int $price, int $quantity, string $category, string $asign, $date, string $image): bool
+function createProduct(string $name, int $code, int $price, int $quantity, string $category, string $asign, $date, string $image,string $create): bool
 {
     global $connection;
-    $statement = $connection->prepare("insert into  products(name, code, price, qty, categoryID, userID, expire, isDelete, image) values (:name, :code, :price, :qty, :categoryID, :userID, :expire , :isDelete, :image)");
+    $statement = $connection->prepare("insert into  products(name, code, price, qty, categoryID, userID, expire, isDelete, image,createAt) values (:name, :code, :price, :qty, :categoryID, :userID, :expire , :isDelete, :image, :create)");
     $statement->execute([
         ':name' => $name,
         ':code' => $code,
@@ -14,6 +14,7 @@ function createProduct(string $name, int $code, int $price, int $quantity, strin
         ':expire' => $date,
         ':isDelete' => 0,
         ':image' => $image,
+        ':create' => $create,
 
     ]);
 
@@ -105,7 +106,7 @@ function getProductsByUser(int $id, string $date): array
     return $statement->fetchAll();
 }
 
-function sum(array $products)
+function sumNumber(array $products)
 {
     $total = 0;
     foreach ($products as $key => $product) {
@@ -115,11 +116,10 @@ function sum(array $products)
 }
 
 //update qty admin
-
 function updateQty(int $qty, int $code): bool
 {
     global $connection;
-    $statement = $connection->prepare("UPDATE products SET qty = :qty  where code = :code");
+    $statement = $connection->prepare("UPDATE products SET qty = :qty  where code = :code" );
     $statement->execute([
         ':qty' => $qty,
         ':code' => $code
@@ -128,13 +128,35 @@ function updateQty(int $qty, int $code): bool
 }
 function getProductQuantity($connection, $productcode)
 {
-    $statement = $connection->prepare("SELECT qty FROM products WHERE code = :code LIMIT 1");
+    $statement = $connection->prepare("SELECT qty FROM products WHERE code = :code and isDelete=0 LIMIT 1");
     $statement->bindValue(':code', $productcode);
     if ($statement->execute()) {
         $row = $statement->fetch();
         if ($row !== false && isset($row['qty'])) {
-            return $row['qty']; // Return the product quantity if found
+            return $row['qty'];
         }
     }
-    return false; // Return false if product code not found or quantity not available
+    return false; 
+}
+function getBarcode($connection, $productcode){
+    global $connection;
+    $statement= $connection->prepare("SELECT * FROM products WHERE code = :code and isDelete=0 LIMIT 1");
+    $statement->bindValue(':code',$productcode);
+    if ($statement->execute()) {
+        $row = $statement->fetch();
+        
+    }
+    return $row;
+}
+
+//get new product
+function geNewtProducts(int $id, string $date): array
+{
+    global $connection;
+    $statement = $connection->prepare("select * from products inner join category on products.categoryID = category.id inner join users on products.userID = users.id where products.isDelete = 0 and products.CreateAt = :date");
+    $statement->execute([
+        // ':id' => $id,
+        ':date' => $date,
+    ]);
+    return $statement->fetchAll();
 }

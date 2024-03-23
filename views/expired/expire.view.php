@@ -35,7 +35,7 @@ require "layouts/navbar.php";
                             </div>
                         </div>
                         <div class=" col-auto">
-                            <i class="fa fa-cart-arrow-down fa-2x text-gray-300" aria-hidden="true"></i>
+                            <i class="fa fa-exclamation-circle fa-2x text-gray-300" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>

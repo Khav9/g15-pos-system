@@ -51,14 +51,12 @@ $user = $_SESSION['user'];
             endif;
             ?>
         </div>
-        <!-- Page Heading -->
-        <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1> -->
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between">
-                    <a href="/userCreate" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createUser"><i class="fa fa-plus-square mr-3"></i>Create New User</a>
+                    <a href="/userCreate" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createUser"><i class="fa fa-plus-square mr-3"></i>ADD</a>
                 </div>
             </div>
             <div class="card-body">
