@@ -65,7 +65,7 @@ require "layouts/header.php";
                                                 ?>
                                             </small>
                                         </div>
-                                        <button type="submit" class="form-control btn btn-primary  btn-block">new ...</button>
+                                        <button type="submit" class="form-control btn btn-primary  btn-block">Reset password</button>
                                     </form>
                                     <hr>
                                 </div>

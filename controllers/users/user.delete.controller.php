@@ -11,4 +11,6 @@ if (isset($id))
           header('Location: /users');
           exit();
     }
+}else{
+    header('Location: /users');
 }
