@@ -111,19 +111,19 @@ if (isset($_SESSION['status'])) {
                     <th width="5%">Action</th>
                 </tr>
                 <?php
-                $orders = [];
+                $orders = $_SESSION['productData'] ?? [];
                 $total = 0;
                 foreach ($productData as $key => $order) :
-                    array_push($orders, $order);
-                    $_SESSION['orders'] = $orders;
+                    $subtotal = $order['quantity'] * $order['price'];
+                    $total += $subtotal;
                 ?>
                     <tr>
                         <td><?php echo $key + 1; ?></td>
                         <td><img src="../../assets/products/<?php echo $order['image']; ?>" style="width: 80px;"></td>
                         <td><?php echo $order['name']; ?></td>
                         <td><?php echo $order['quantity']; ?></td>
-                        <td><?php echo "$".number_format($order['price'],2); ?></td>
-                        <td><?php echo  "$".number_format($order['quantity']* $order['price'], 2); ?></td>
+                        <td><?php echo "$" . number_format($order['price'], 2); ?></td>
+                        <td><?php echo  "$" . number_format($order['quantity'] * $order['price'], 2); ?></td>
                         <td>
                             <a href="/order_delete?action=delete&id=<?php echo $key; ?>">
                                 <div class="btn bg-gradient-danger btn-danger"><i class="fas fa-fw fa-trash"></i></div>
@@ -131,9 +131,7 @@ if (isset($_SESSION['status'])) {
                         </td>
                     </tr>
                 <?php
-                    $total =($total + ($order['quantity'] * $order['price']));
                 endforeach;
-                
                 ?>
             </table>
             <div class="col-md-4 mb-3">
@@ -146,7 +144,7 @@ if (isset($_SESSION['status'])) {
                 <div class="input-group-prepend">
                     <label class="input-group-text bg-primary text-light" for="total">Total</label>
                 </div>
-                <input type="number" placeholder="$" class="text-center" name="totalGood" value="<?php echo ($total); ?>">
+                <input type="number" placeholder="$" class="text-center" name="totalGood" value="<?php echo  ($total); ?>">
             </div>
             <div class="col-md-4 mb-2 ">
                 <br>
