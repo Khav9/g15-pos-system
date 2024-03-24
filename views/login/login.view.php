@@ -20,11 +20,11 @@ require "layouts/header.php";
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block "><img src="../../assets/images/pos.png" alt="" style="width: 920px;"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome to POS</h1>
+                                    <h1 class="h2 mb-4 text-dark" style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(5px); ">Welcome to POS</h1>
                                     </div>
                                     <form class="user" action="controllers/login/checkLogin.controller.php" method="post">
                                         <div class="form-group">
@@ -74,9 +74,9 @@ require "layouts/header.php";
                                         </a>
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="/signup">Create an Account!</a><br>
-                                        <a href="/forgotPassword" class="small">Forgot Password</a>
+                                    <div class="text-center ">
+                                        <a class="h6 text-primary" href="/signup"  >Create an Account!</a><br>
+                                        <a href="/forgotPassword" class="h6 text-dark">Forgot Password</a>
                                     </div>
                                 </div>
                             </div>
