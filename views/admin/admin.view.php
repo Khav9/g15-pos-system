@@ -13,11 +13,12 @@ require "layouts/navbar.php";
 <script src="vendor/chart.js/chat.test.js" defer></script>
 
 <!-- Begin Page Content -->
+
 <div class="container-fluid">
     <?php if (isset($_SESSION['success'])) : ?>
         <div class="alert alert-success alert-dismissible fade show" id="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?= $_SESSION['success'] ?>
+            <?= $_SESSION['success'] ?>. Welcome <?=$user['userName']?> to POS SYSTESM
         </div>
     <?php
         unset($_SESSION['success']);

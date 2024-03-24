@@ -24,18 +24,22 @@ require "layouts/header.php";
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome to POS</h1>
                                     </div>
                                     <form class="user" action="controllers/login/checkLogin.controller.php" method="post">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control <?php if (isset($_SESSION['borderEmail'])){echo $_SESSION['borderEmail'];}elseif(isset($_SESSION['isNotFill'])){echo 'is-invalid';}; unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <input type="email" name="email" class="form-control <?php if (isset($_SESSION['borderEmail'])) {
+                                                                                                        echo $_SESSION['borderEmail'];
+                                                                                                    } elseif (isset($_SESSION['isNotFill'])) {
+                                                                                                        echo 'is-invalid';
+                                                                                                    };
+                                                                                                    unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                             <small class="ml-3 text-danger">
                                                 <?php
                                                 if (isset($_SESSION['notFound'])) {
                                                     echo $_SESSION['notFound'];
-                                                }
-                                                elseif (isset($_SESSION['isNotFill'])){
-                                                    echo $_SESSION['isNotFill'].' email';
+                                                } elseif (isset($_SESSION['isNotFill'])) {
+                                                    echo $_SESSION['isNotFill'] . ' email';
                                                 }
                                                 unset($_SESSION['notFound']);
                                                 ?>
@@ -44,33 +48,24 @@ require "layouts/header.php";
                                         <div class="form-group">
                                             <input type="password" class="form-control 
                                             <?php
-                                            if (isset($_SESSION['borderPassword'])){
+                                            if (isset($_SESSION['borderPassword'])) {
                                                 echo $_SESSION['borderPassword'];
-                                            }elseif (isset($_SESSION['isNotFill'])){
+                                            } elseif (isset($_SESSION['isNotFill'])) {
                                                 echo 'is-invalid';
                                             }
                                             unset($_SESSION['borderPassword']);
-                                            ?>"
-                                            id="exampleInputPassword" placeholder="Password" name="password">
+                                            ?>" id="exampleInputPassword" placeholder="Password" name="password">
                                             <small class="ml-3 text-danger">
                                                 <?php
                                                 if (isset($_SESSION['error'])) {
                                                     echo $_SESSION['error'];
-                                                }
-                                                 elseif (isset($_SESSION['isNotFill'])){
-                                                    echo $_SESSION['isNotFill'].' password';
+                                                } elseif (isset($_SESSION['isNotFill'])) {
+                                                    echo $_SESSION['isNotFill'] . ' password';
                                                 }
                                                 unset($_SESSION['isNotFill']);
                                                 unset($_SESSION['error']);
                                                 ?>
                                             </small>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                         <hr>
