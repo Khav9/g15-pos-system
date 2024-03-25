@@ -46,8 +46,6 @@ require "layouts/navbar.php";
     ?>
 </div>
 <div class="container-fluid">
-
-
     <!-- DataTales Example -->
     <div class="card shadow ">
         <div class="d-flex justify-content-between align-items-center">
@@ -339,7 +337,7 @@ require "layouts/navbar.php";
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-download fa-sm text-50 mr-3"></i>Import data to system</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Import data to system</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

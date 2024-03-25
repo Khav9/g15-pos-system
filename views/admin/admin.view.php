@@ -39,7 +39,8 @@ require "layouts/navbar.php";
         <?php
         if ($user[5] === 'admin') :
         ?>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-upload text-white-50" aria-hidden="true"></i> Export Data</a>
         <?php endif; ?>
     </div>
     <!-- Modal -->
