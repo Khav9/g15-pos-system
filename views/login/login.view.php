@@ -7,7 +7,7 @@ if (isset($_SESSION['user'])) {
 require "layouts/header.php";
 ?>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary text-center">
 
     <div class="container">
 
@@ -20,11 +20,11 @@ require "layouts/header.php";
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block "><img src="../../assets/images/pos.png" alt="" style="width: 920px;"></div>
+                            <div class="col-lg-6 d-none d-lg-block "><img src="../../assets/images/pos-system-features.webp" alt="" style="width: 475px;height: 520px;"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                    <h1 class="h2 mb-4 text-dark" style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(5px); ">Welcome to POS</h1>
+                                    <h1 class="h2 mb-4 text-dark">Welcome to POS</h1>
                                     </div>
                                     <form class="user" action="controllers/login/checkLogin.controller.php" method="post">
                                         <div class="form-group">
@@ -75,8 +75,8 @@ require "layouts/header.php";
                                     </form>
                                     <hr>
                                     <div class="text-center ">
-                                        <a class="h6 text-primary" href="/signup"  >Create an Account!</a><br>
-                                        <a href="/forgotPassword" class="h6 text-dark">Forgot Password</a>
+                                        <a class="small text-primary" href="/signup"  >Create an Account!</a><br>
+                                        <a href="/forgotPassword" class="small text-dark">Forgot Password</a>
                                     </div>
                                 </div>
                             </div>
