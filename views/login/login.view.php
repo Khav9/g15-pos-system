@@ -24,7 +24,7 @@ require "layouts/header.php";
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                    <h1 class="h2 mb-4 text-dark">Welcome to POS</h1>
+                                        <h1 class="h2 mb-4 text-dark">Welcome to POS</h1>
                                     </div>
                                     <form class="user" action="controllers/login/checkLogin.controller.php" method="post">
                                         <div class="form-group">
@@ -33,8 +33,8 @@ require "layouts/header.php";
                                                                                                     } elseif (isset($_SESSION['isNotFill'])) {
                                                                                                         echo 'is-invalid';
                                                                                                     };
-                                                                                                    unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
-                                            <small class="ml-3 text-danger">
+                                                   unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <small class="text-danger">
                                                 <?php
                                                 if (isset($_SESSION['notFound'])) {
                                                     echo $_SESSION['notFound'];
@@ -68,14 +68,10 @@ require "layouts/header.php";
                                             </small>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
-                                        <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block btn-danger">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
                                     </form>
                                     <hr>
                                     <div class="text-center ">
-                                        <a class="small text-primary" href="/signup"  >Create an Account!</a><br>
+                                        <a class="small text-primary" href="/signup">Create an Account!</a><br>
                                         <a href="/forgotPassword" class="small text-dark">Forgot Password</a>
                                     </div>
                                 </div>
