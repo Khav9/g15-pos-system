@@ -105,10 +105,15 @@ require "layouts/navbar.php";
                         } else {
                             $products = getProductsByUser($user[0],$dateToday);
                         }
-
+                        // $bgColor = "table-warning";
                         foreach ($products as $key => $product) {
+                            if ($product['qty'] != 0){
+                                $bgColor = "";
+                            }else{
+                                $bgColor = "table-warning";
+                            }
                         ?>
-                            <tr>
+                            <tr class="<?=$bgColor?>">
                                 <td><img width="39px" height="39px" class="" src="assets/products/<?= $product['image'] ?>" alt=""></td>
                                 <td><?= $product['name'] ?></td>
                                 <td><?= $product['code'] ?></td>
