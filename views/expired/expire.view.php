@@ -8,8 +8,6 @@ require "layouts/navbar.php";
 
 ?>
 
-<!-- <script src="/vendor/search_product/search_product_vendor.js" defer></script> -->
-
 <form id="searchForm" class=" ml-3">
     <h2 class="ml-2">Expiration Notification</h2>
     <div class="row-3 d-flex mr-2">

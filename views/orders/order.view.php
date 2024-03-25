@@ -2,54 +2,7 @@
 <?php
 require "layouts/header.php";
 require "layouts/navbar.php";
-require_once("models/product.model.php");
-require_once("models/order.model.php");
-require_once("models/customer.model.php");
-require_once("database/database.php");
 
-$products = [];
-$productData = $_SESSION['productData'] ?? [];
-if (!empty($_POST['code']) && !empty($_POST['quantity'])) {
-    $productcode = $_POST['code'];
-    $productqty = $_POST['quantity'];
-    $availableQty = getProductQuantity($connection, $productcode);
-    if ($availableQty !== false) {
-        if ($productqty > $availableQty) {
-            $_SESSION['status'] = "Cannot order more than the available quantity  $availableQty.";
-        } else {
-            $productData = $_SESSION['productData'] ?? [];
-            $isProductFound = false;
-            foreach ($productData as $key => $order) {
-                if (isset($order['code']) && $order['code'] == $productcode) {
-                    $totalQuantity = $order['quantity'] + $productqty;
-                    if ($totalQuantity > $availableQty) {
-                        $_SESSION['status'] = "Cannot increase quantity beyond the available quantity.";
-                        $isProductFound = true;
-                    } else {
-                        $productData[$key]['quantity'] = $totalQuantity;
-                        $isProductFound = true;
-                    }
-                }
-            }
-            if (!$isProductFound) {
-                $productBarcode =  getBarcode($connection, $productcode);
-                if ($productBarcode) {
-                    $productData[] = [
-                        "code" => $productBarcode['code'],
-                        "name" => $productBarcode['name'],
-                        "image" => $productBarcode['image'],
-                        "quantity" => $productqty,
-                        "price" => intval($productBarcode['price']),
-
-                    ];
-                }
-            }
-            $_SESSION['productData'] = $productData;
-        };
-    } else {
-        $_SESSION['status'] = "No product with the entered  barcord $productcode. Please enter a valid product code.";
-    }
-}
 // Display status message if set
 if (isset($_SESSION['status'])) {
 ?>
@@ -66,7 +19,7 @@ if (isset($_SESSION['status'])) {
 <div class="container-fluid px-4">
     <div class="card shadow-sm mt-4">
         <div class="card-body">
-            <form action="#" method="post" class="form-group row ml-4">
+            <form action="#" method="post" class="form-group row ml-4 d-flex align-items-center ">
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="">Barcode</label>
@@ -77,9 +30,8 @@ if (isset($_SESSION['status'])) {
                         <input type="number" name="quantity" value="<?php echo isset($_POST['quantity']) ? $_POST['quantity'] : '1'; ?>" min="1" class="form-control">
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <br>
-                    <button id="addItemBtn" name="addItem" class="btn btn-primary">Add Item</button>
+                <div class="row mt-3">
+                    <button id="addItemBtn" name="addItem" class="btn btn-primary btn-sm">Add Item</button>
                 </div>
             </form>
             <div class="form-group row text-top	">

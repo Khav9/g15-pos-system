@@ -2,26 +2,7 @@
 require "layouts/header.php";
 require "layouts/navbar.php";
 
-// Check if the date filter form is submitted
-if ($_SESSION['user']['role'] === 'admin') {
-      $orders = $ordersAdmin;
-} else {
-      $orders = $ordersUser;
-}
-
-$filteredOrders = $orders;
-if (isset($_POST['filter'])) {
-      $filteredOrders = [];
-      // Get the input date
-      $inputDate = $_POST['date'];
-      foreach ($orders as $order) {
-            if ($order['date'] == $inputDate) {
-                  $filteredOrders[] = $order;
-            }
-      }
-} 
 ?>
-
 <div class="container-fluid">
       <div class="card-shadow ">
             <div class="card-header py-3 d-flex justify-content-between">
@@ -55,7 +36,7 @@ if (isset($_POST['filter'])) {
                                                 <th scope="row"><?= $key + 1 ?></th>
                                                 <td><?php echo  $order[7]; ?></td>
                                                 <td><?= $order[4] ?></td>
-                                                <td><?= $order[2] ?></td>
+                                                <td><?php echo '$ '. $order[2] ?></td>
                                                 <td><?= $order['status'] ?></td>
                                                 <td class=" text-center">
                                                       <a href="/reportView?id=<?= $order[0] ?>" class="btn btn-primary btn-sm text-white"><i class="fa fa-eye"></i></a>
