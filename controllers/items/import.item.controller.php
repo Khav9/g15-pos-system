@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require '../../database/database.php';
 require '../../excelReader/excel_reader2.php';
 require '../../excelReader/SpreadsheetReader.php';
