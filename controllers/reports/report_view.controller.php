@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION['user'])) {
+	header('Location: /');
+	die();
+}
 require 'database/database.php';
 require 'models/orderdetail.model.php';
 require 'models/order.model.php';

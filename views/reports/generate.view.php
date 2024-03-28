@@ -1,5 +1,6 @@
 
 <?php
+
 require_once("../../layouts/header.php");
 require_once("../../controllers/reports/generate.controller.php");
 ?>

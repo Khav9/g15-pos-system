@@ -51,9 +51,8 @@ if (array_key_exists($uri, $routes)) {
     require $page;
 } else {
     require "layouts/header.php";
-    require "layouts/navbar.php";
     http_response_code(404);
     $page = 'views/errors/404.php';
     require $page;
-    require "layouts/footer.php";
+
 }

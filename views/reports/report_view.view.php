@@ -1,4 +1,5 @@
 <?php
+
 require "layouts/header.php";
 require "layouts/navbar.php";
 ?>

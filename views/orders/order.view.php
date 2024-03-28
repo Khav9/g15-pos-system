@@ -1,5 +1,11 @@
 <script src="../../vendor/insert_order/insert.order.vendor.js" defer></script>
 <?php
+
+if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    die();
+}
+
 require "layouts/header.php";
 require "layouts/navbar.php";
 

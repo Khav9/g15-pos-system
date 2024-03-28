@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION['user'])) {
+      header('Location: /');
+      die();
+  }
 require "layouts/header.php";
 require "layouts/navbar.php";
 
