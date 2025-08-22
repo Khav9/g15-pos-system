@@ -26,12 +26,6 @@ require "layouts/navbar.php";
     ?>
     <script>
         const hideAlert = document.querySelector('#alert');
-
-        setTimeout(() => {
-            hideAlert.classList.remove('show');
-            hideAlert.classList.add('hide');
-            location.reload();
-        }, 2500);
     </script>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">

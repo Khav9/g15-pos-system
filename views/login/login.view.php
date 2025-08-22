@@ -33,7 +33,7 @@ require "layouts/header.php";
                                                                                                     } elseif (isset($_SESSION['isNotFill'])) {
                                                                                                         echo 'is-invalid';
                                                                                                     };
-                                                   unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                                   unset($_SESSION['borderEmail']); ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." value="pssamsung04@gmail.com">
                                             <small class="text-danger">
                                                 <?php
                                                 if (isset($_SESSION['notFound'])) {
@@ -46,7 +46,7 @@ require "layouts/header.php";
                                             </small>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control 
+                                            <input type="password" class="form-control" value="123456"
                                             <?php
                                             if (isset($_SESSION['borderPassword'])) {
                                                 echo $_SESSION['borderPassword'];
